@@ -64,7 +64,7 @@
                 <br>
                 => 입출력 예 설명 <br>
                 <br>
-                입출력 예 #1<br>
+                => 입출력 예 #1<br>
                 <br>
                 1번 스테이지에는 총 8명의 사용자가 도전했으며, <br> 이 중 1명의 사용자가 아직 클리어하지 못했다. 따라서 1번 스테이지의 실패율은 다음과 같다.<br>
 
@@ -108,7 +108,7 @@
 
     for(let i = 0; i < N; i++){
         let max_index = fall.indexOf(Math.max.apply(null,fall)); // 실패율이 가장 큰 인덱스를 찾기
-        answer.push(max_index + 1);
+        answer.push(max_index + 1); // 순서대로 푸쉬
         fall[max_index] = -1;
     }
     return answer;
@@ -117,7 +117,14 @@
             </div> 
             
             <h3 class="t_tit">리뷰</h3>
-            
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. reduce를 통해 각각의 스테이지에 몇명이 있는가를 구해서 count에 푸쉬 <br>
+                2. count원소 / 총인원수로 구하는 각 라운드의 실패율을 구해서 fall에 푸쉬 <br>
+                3. 실패율이 높은 순서로 리턴하면 되기때문에 max.apply를 사용해서 answer에 순서대로 푸쉬 <br>
+                <br>
+                총평 : 각 스테이지 몇명있는가 구하는 방법을 생각하기 어려웠다.
+            </p> 
         </div>
     </main>
 
