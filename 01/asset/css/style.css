@@ -6,7 +6,7 @@
     padding: 0;
     font-family: 'NexonLv1Gothic';
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.9;
 }
 
 /* 링크 초기화 */
@@ -162,7 +162,7 @@ body {
 .document hr{
     border: 0;
     border-top: 1px dashed #dcdcdc;
-    margin-top: 40px;
+    margin: 40px 0;
 }
 
 .document i::before {
@@ -188,6 +188,7 @@ body {
     border: 1px solid #dcdcdc;
     width: 100%;
     border-collapse: collapse;
+    margin: 20px 0;
 }
 .document .t_table tr th{
     background-color: #f9f9f9;
