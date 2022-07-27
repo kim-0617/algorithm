@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 문자열과 영단어</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 숫자 문자열과 영단어</h2>
+            <p>
+                코딩테스트 연습 > 2021 카카오 채용연계형 인턴십 > 숫자 문자열과 영단어
+            </p>
+            <p class="t_desc2">
+                문제 설명 <br>
+                네오와 프로도가 숫자놀이를 하고 있습니다. 네오가 프로도에게 숫자를 건넬 때 일부 자릿수를 영단어로 바꾼 카드를 건네주면 프로도는 원래 숫자를 찾는
+                게임입니다.<br><br>
+                다음은 숫자의 일부 자릿수를 영단어로 바꾸는 예시입니다. <br>
+                1478 → "one4seveneight" <br>
+                234567 → "23four5six7" <br>
+                10203 → "1zerotwozero3" <br>
+            </p>
+            <p class="t_desc">이렇게 숫자의 일부 자릿수가 영단어로 바뀌어졌거나, 혹은 바뀌지 않고 그대로인 문자열 <code>s</code>가 매개변수로 주어집니다. <code>s</code>가
+                의미하는 원래 숫자를 return 하도록 solution 함수를 완성해주세요.</p>
+
+            <p>참고로 각 숫자에 대응되는 영단어는 다음 표와 같습니다.</p>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>숫자</th>
+                        <th>영단어</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>zero</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>one</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>two</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>three</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>four</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>five</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>six</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>seven</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>eight</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>nine</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+
+            <p class="t_desc2">
+                <i>제한사항</i> <br>
+                1 ≤ s의 길이 ≤ 50 <br>
+                1 ≤ s의 길이 ≤ 50 <br>
+                s가 "zero" 또는 "0"으로 시작하는 경우는 주어지지 않습니다. <br>
+                return 값이 1 이상 2,000,000,000 이하의 정수가 되는 올바른 입력만 s로 주어집니다.
+            </p>
+            <hr>
+
+            <h5>입출력 예</h5>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce"><code>"one4seveneight"</code></td>
+                        <td class="ce">1478</td>
+                    </tr>
+                    <tr>
+                        <td class="ce"><code>"23four5six7"</code></td>
+                        <td class="ce">234567</td>
+                    </tr>
+                    <tr>
+                        <td class="ce"><code>"2three45sixseven"</code></td>
+                        <td class="ce">234567</td>
+                    </tr>
+                    <tr>
+                        <td class="ce"><code>"123"</code></td>
+                        <td class="ce">123</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+
+            <i>입출력 예 설명</i>
+
+            <p><strong>입출력 예 #1</strong></p>
+
+            <ul>
+                <li>문제 예시와 같습니다.</li>
+            </ul>
+
+            <p><strong>입출력 예 #2</strong></p>
+
+            <ul>
+                <li>문제 예시와 같습니다.</li>
+            </ul>
+
+            <p><strong>입출력 예 #3</strong></p>
+
+            <ul>
+                <li>"three"는 3, "six"는 6, "seven"은 7에 대응되기 때문에 정답은 입출력 예 #2와 같은 234567이 됩니다.</li>
+                <li>입출력 예 #2와 #3과 같이 같은 정답을 가리키는 문자열이 여러 가지가 나올 수 있습니다.</li>
+            </ul>
+
+            <p><strong>입출력 예 #4</strong></p>
+
+            <ul>
+                <li><code>s</code>에는 영단어로 바뀐 부분이 없습니다.</li>
+            </ul>
+
+            <hr>
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(s) {
+let answer = s;
+let obj = {
+    zero :	'0',
+    one :	'1',
+    two :	'2',
+    three :	'3',
+    four :	'4',
+    five :	'5',
+    six :	'6',
+    seven :	'7',
+    eight :	'8',
+    nine :	'9',
+}
+for( let j = 0; j&lt;s.length; j++){ // 같은 문자가 연속으로 나오면 차마 바꾸지 못해서 충분한 횟수로 반복한다.
+    for(let i in obj){
+        answer = answer.replace(i, obj[i]); // 영어를 숫자로
+    }
+}
+return Number(answer);
+}
+</code></pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. replace를 통해 바꿔줄 숫자와 문자 쌍을 만든다. <br>
+                2. 같은 문자 ("oneone41")가 여러번 나올 때를 대비해 배열을 충분히 순회해준다 <br>
+                만약 중복이 없다면, one~nine까지 한번만 돌면 모든 문자가 바뀌겠지만 그렇지 않을 때를 대비했다. <br>
+                3. 반목문을 돌면서 replace 메서드로 문자열을 숫자로 바꾸면 끝 <br>
+                <br>
+                총평 : replace메서드 안에 정규식을 썼다면 2중 for문을 사용하지 않아도 됐는데, 그 부분이 아쉬운 것 같다.
+            </p>
+            <p>출처 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/81301?language=javascript">https://school.programmers.co.kr/learn/courses/30/lessons/81301?language=javascript</a></p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
