@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신규 아이디 추천</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 크레인 인형뽑기 게임</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 2019 카카오 개발자 겨울 인턴십 > 크레인 인형뽑기 게임
+            </p>
+            <div style="background-color: #926d6d5c;">
+                avbcdeaf
+            </div>        
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(new_id) {
+    var answer = '';
+    new_id = new_id.toLowerCase(); // 1
+    
+    // 2
+    let pattern = /[a-zA-Z]/; //영어
+    let pattern2 = /[0-9]/;
+    let cond2 = '';
+    for(let n of new_id){  // 한글자씩 비교하면서 조건에 맞는 문자들만 추가
+        if(n === '.' || n === '_' || n === '-' || pattern.test(n) || pattern2.test(n)){
+            cond2 += n
+        }
+    }
+    // 3
+    let cond3 = '';
+    let prev = '';
+    for(let c of cond2){
+        if(c === prev && c === '.') continue; // .이 연속으로 나왔다면
+        cond3 += c;
+        prev = c;
+    }
+
+    // 4
+    if(cond3.charAt(0) === '.') cond3 = cond3.slice(1);
+    if(cond3.charAt(cond3.length-1) === '.') cond3 = cond3.slice(0,-1);
+    
+    // 5
+    if(cond3 === ''){
+        cond3 = 'a';
+    }
+    
+    // 6
+    if(cond3.length > 15){
+        cond3 = cond3.slice(0,15);
+        if(cond3.charAt(cond3.length-1) === '.') cond3 = cond3.slice(0,-1);
+    }
+    
+    // 7
+    while(cond3.length < 3){
+        cond3 += cond3.charAt(cond3.length-1);
+    }
+    answer = cond3;
+    return answer;
+}
+</code></pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 1~7번 까지 조건에 맞춰서 처리해 주면 된다. <br>
+                <br>
+                총평 : 정규식 체이닝을 이용해서 간단하게 풀 수 있는것 같다. 2번조건에서도 정규식을 사용하지 않는다면 난감한 경우가 있고, 정규식을 알고 모르고가 코드에 질이 달라지는 것 같다.
+            </p>
+            <p>출처 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/72410?language=javascript">https://school.programmers.co.kr/learn/courses/30/lessons/72410?language=javascript</a></p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
