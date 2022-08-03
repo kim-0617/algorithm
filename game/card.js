@@ -2,10 +2,11 @@ const wrapper = document.querySelector('#wrapper');
 const total = 12;
 const colors = ['red', 'blue', 'white', 'yellow', 'green', 'pink'];
 let colorCopy = colors.concat(colors);
-let shuffled = [];
-let clicked = [];
-let completed = [];
-let clickable = false;
+let shuffled = []; // 카드색 섞기
+let clicked = []; // 클릭된 카드
+let completed = []; // 짝이 맞추어진 카드
+let clickable = false; // 클릭 할 수 있나 없나 플래그변수
+let startTime; // 시간초 재기
 
 const shuffle = () => {
     while (colorCopy.length !== 0) {
@@ -43,17 +44,20 @@ const onClickCard = function () { // this로 사용하려면 function 키워드�
             clicked = [];
             if (completed.length === total) {
                 setTimeout(() => {
-                    alert("축하합니다!");
+                    let total = new Date() - startTime;
+                    alert(`축하합니다! ${total / 1000}초 걸렸습니다.`);
                     resetGame();
                     return;
                 }, 500);
             }
             return;
         }
+        clickable = false;
         setTimeout(() => {
             clicked[0].classList.remove('filpped');
             clicked[1].classList.remove('filpped');
             clicked = [];
+            clickable = true;
         }, 500);
     }
 }
@@ -74,6 +78,7 @@ const startGame = () => {
         setTimeout(() => {
             card.classList.remove('filpped');
             clickable = true;
+            startTime = new Date();
         }, 5000);
     })
 }
@@ -83,6 +88,7 @@ const resetGame = () => {
     colorCopy = colors.concat(colors);
     shuffled = [];
     completed = [];
+    clickable = false;
     startGame();
 }
 
