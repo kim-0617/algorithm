@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음양 더하기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 음양 더하기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > Summer/Winter Coding(~2018) > 소수 만들기
+            </p>
+
+            <i>문제 설명</i>
+            <p class="t_desc2">주어진 숫자 중 3개의 수를 더했을 때 소수가 되는 경우의 개수를 구하려고 합니다. 숫자들이 들어있는 배열 nums가 매개변수로 주어질 때, nums에 있는
+                숫자들 중 서로 다른 3개를 골라 더했을 때 소수가 되는 경우의 개수를 return 하도록 solution 함수를 완성해주세요.</p>
+
+            <hr>
+
+            <i>제한사항</i>
+            <ul>
+                <li>nums에 들어있는 숫자의 개수는 3개 이상 50개 이하입니다.</li>
+                <li>nums의 각 원소는 1 이상 1,000 이하의 자연수이며, 중복된 숫자가 들어있지 않습니다.</li>
+            </ul>
+
+            <hr>
+
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>nums</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">[1,2,3,4]</td>
+                        <td class="ce">1</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">[1,2,7,6,4]</td>
+                        <td class="ce">4</td>
+                    </tr>
+                </tbody>
+            </table>
+            <i>입출력 예 설명</i>
+
+            <p class="t_box">
+                <strong>입출력 예 #1</strong><br>
+                [1,2,4]를 이용해서 7을 만들 수 있습니다. <br>
+
+                <strong>입출력 예 #2</strong><br>
+                [1,2,4]를 이용해서 7을 만들 수 있습니다.<br>
+                [1,4,6]을 이용해서 11을 만들 수 있습니다.<br>
+                [2,4,7]을 이용해서 13을 만들 수 있습니다.<br>
+                [4,6,7]을 이용해서 17을 만들 수 있습니다.
+            </p>
+            <hr>
+
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(nums) {
+        let answer = 0;
+        let sum = [];
+        for(let i = 0; i &lt; nums.length; i++){
+            for(let j = i+1; j &lt; nums.length; j++){
+                for(let k = j+1; k &lt; nums.length; k++){
+                    sum.push(nums[i]+nums[j]+nums[k]);
+                }
+            }
+        } // 겹치지 않게 배열중에서 3개의 수의 경우의 수 배열을 구한다.
+        for(let s of sum){
+            let is_prime = true;
+            for(let x = 3; x &lt; s; x++){
+                if(s%x === 0){
+                    is_prime = false
+                }
+            }
+            if(is_prime) answer++; // 소수이면 +
+        }
+        return answer;
+    }
+    </code></pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 주어진 nums 배열에서 겹치지 않는 3가지 수를 뽑는 후, 더해서 sum 배열을 만들었다.<br>
+                2. sum 배열을 순회하면서, is_prime 플래그 변수를 두어서, 나누어지면 false 이고, 소수이면 true가 되서 answer count를 추가한다. <br>
+                3. answer return. <br>
+                <br>
+                총평 : for문의 중첩이 많이 됐다. 그런데 다른 사람의 풀이에서도 중첩 반복문을 사용하여서 다른 풀이는 없을까 생각이 든다... 재귀를 이용할 순 없을까?
+            </p>
+            <p>출처 :
+                <a
+                    href="https://school.programmers.co.kr/learn/courses/30/lessons/12977?language=javascript">https://school.programmers.co.kr/learn/courses/30/lessons/12977?language=javascript</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
