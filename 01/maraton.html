@@ -19,9 +19,64 @@
             </p>
             <hr>
 
+
+            <i>문제 설명</i><br>
+            수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다.
+            마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return
+            하도록 solution 함수를 작성해주세요.
+
+            <hr>
+            <i>제한사항</i>
+            마라톤 경기에 참여한 선수의 수는 1명 이상 100,000명 이하입니다.
+            completion의 길이는 participant의 길이보다 1 작습니다.
+            참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.
+            참가자 중에는 동명이인이 있을 수 있습니다.
+
+            <i>입출력 예</i> <br>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>participant</th>
+                        <th>completion</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">["leo", "kiki", "eden"]</td>
+                        <td class="ce">["eden", "kiki"]</td>
+                        <td class="ce">"leo"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">["marina", "josipa", "nikola", "vinko", "filipa"]</td>
+                        <td class="ce">["josipa", "filipa", "marina", "nikola"]</td>
+                        <td class="ce">"vinko"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">["mislav", "stanko", "mislav", "ana"]</td>
+                        <td class="ce">["stanko", "ana", "mislav"]</td>
+                        <td class="ce">"mislav"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i> <br>
+            <strong>예제 #1</strong><br>
+            "leo"는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다. <br>
+
+            <strong>예제 #2</strong> <br>
+            "vinko"는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다. <br>
+
+            <strong>예제 #3</strong> <br>
+            "mislav"는 참여자 명단에는 두 명이 있지만, 완주자 명단에는 한 명밖에 없기 때문에 한명은 완주하지 못했습니다. <br>
+            <p><a href="http://hsin.hr/coci/archive/2014_2015/contest2_tasks.pdf" target="_blank"
+                    rel="noopener">출처</a></p>
+
+            <hr>
             <h3 class="t_tit2">코드</h3>
             <div class="t_code">
-<pre><code class="language-js">function solution(participant, completion) {
+                <pre><code class="language-js">function solution(participant, completion) {
     participant.sort();
     completion.sort(); // 정렬을 해줘야 순서를 비교할 수 있다.
     
@@ -30,6 +85,8 @@
         // 참가자 배열의 인덱스와 다른 completion 배열의 원소가 있으면 그 때의 원소가 완주하지 못한 선수이다.
     }
     return participant[participant.length-1]; // 만약 끝까지 돌았는데 못찾았으면 마지막 선수가 완주하지 못한 선수이다.
+
+    // 밑에는 성능이 안좋은 코드
     // for(let i in participant) {
     //     if(completion.includes(participant[i]) == false) return participant[i];
     //     completion.splice(completion.indexOf(participant[i]), 1);
