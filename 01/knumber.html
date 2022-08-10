@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K번째 수</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : K번째 수</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 정렬 > K번째 수
+            </p>
+
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다. <br>
+                예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면    
+                array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.
+                1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다. <br>
+                2에서 나온 배열의 3번째 숫자는 5입니다. <br>
+                배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, 
+                commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를
+                배열에 담아 return 하도록 solution 함수를 작성해주세요. <br>
+            </p>
+            
+            <hr style="margin-bottom: 30px;">
+            <i>제한사항</i> <br>
+            array의 길이는 1 이상 100 이하입니다.
+            array의 각 원소는 1 이상 100 이하입니다.
+            commands의 길이는 1 이상 50 이하입니다.
+            commands의 각 원소는 길이가 3입니다. 
+            
+            <hr style="">
+            <br><i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>array</th>
+                        <th>commands</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">[1, 5, 2, 6, 3, 7, 4]</td>
+                        <td class="ce">[[2, 5, 3], [4, 4, 1], [1, 7, 3]]</td>
+                        <td class="ce">[5, 6, 3]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr style="">
+            <br><i>입출력 예 설명</i><br>
+            <p class="t_box">
+                [1, 5, 2, 6, 3, 7, 4]를 2번째부터 5번째까지 자른 후 정렬합니다. [2, 3, 5, 6]의 세 번째 숫자는 5입니다.<br>
+                [1, 5, 2, 6, 3, 7, 4]를 4번째부터 4번째까지 자른 후 정렬합니다. [6]의 첫 번째 숫자는 6입니다.<br>
+                [1, 5, 2, 6, 3, 7, 4]를 1번째부터 7번째까지 자릅니다. [1, 2, 3, 4, 5, 6, 7]의 세 번째 숫자는 3입니다.
+            </p>
+            <p><a href="https://neerc.ifmo.ru/subregions/northern.html" target="_blank" rel="noopener">출처</a></p>
+
+            <hr style="">
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(array, commands) {
+        let answer = []; // 문제 그대로 하면 됩니다.
+        let sortFunc = (a,b) => a-b;
+        for(let c of commands){
+            let newArray = array.slice(c[0]-1,c[1]); // i~j까지 자르고
+            newArray.sort(sortFunc); // 정렬한 다음에
+            answer.push(newArray[c[2]-1]); // k번째 숫자를 구해서 answer 에 push
+        }
+        return answer; // return
+        }rn answer;
+        }
+</code></pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. i~j 인덱스 까지 잘라주고 (인덱스니까 2번째 수면 인덱스가 1이니까 -1 해주고, slice니까 뒤에는 해줄 필요 없습니다.)<br>
+                2. 정렬해줍니다. <br>
+                3. k번째 수를 answer에 push. <br>
+                3. answer 배열 return. <br>
+                <br>
+                총평 : 문제에 적힌 그대로의 동작을 순차적으로 실행합니다.
+            </p>
+            <p>출처 :
+                <a
+                    href="https://school.programmers.co.kr/learn/courses/30/lessons/42748?language=javascript">https://school.programmers.co.kr/learn/courses/30/lessons/42748?language=javascript</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
