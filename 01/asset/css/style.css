@@ -159,7 +159,7 @@ body {
     position: relative;
 }
 
-.document hr{
+.document hr {
     border: 0;
     border-top: 1px dashed #dcdcdc;
     margin: 40px 0;
@@ -176,23 +176,25 @@ body {
     border-radius: 10px;
 }
 
-.document .t_box{
+.document .t_box {
     padding: 20px !important;
     background-color: #f9f9f9;
     margin-bottom: 10px;
-    color : #666;
+    color: #666;
     border-radius: 5px;
 }
 
-.document .t_table{
+.document .t_table {
     border: 1px solid #dcdcdc;
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
 }
-.document .t_table tr th{
+
+.document .t_table tr th {
     background-color: #f9f9f9;
 }
+
 .document .t_table tr th,
 .document .t_table tr td {
     border: 1px solid #dcdcdc;
@@ -200,8 +202,36 @@ body {
     padding: 8px 10px;
     color: #666;
 }
-.document .t_table .ce{
+
+.document .t_table .ce {
     text-align: center;
+}
+
+.document .t_frame {
+    position: relative;
+    padding-top: 56%;
+    width: 100%;
+    height: 0;
+}
+
+.document .t_frame iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.document .t_link a {
+    width: 200px;
+    background-color: #f5f5f5;
+    margin: 40px auto;
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    padding: 10px;
+    transition: all 0.3s;
 }
 
 @media(max-width : 800px) {
