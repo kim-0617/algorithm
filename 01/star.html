@@ -17,15 +17,93 @@
             <p class="t_desc">
                 내맘대로 해보는 > 별찍기 > 시작합니다.
             </p>
+
+            <hr>
             <div class="t_frame" style="min-height: 1000px; padding-top: 0;">
-                <iframe src="https://kim-0617.github.io/coding/javascript/effect/searchEffect01.html" frameborder="0"></iframe>
+                <iframe width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2Fpm3ghQhBqbBolleXCZYmYa%2F%25EC%2582%25AC%25EC%259D%25B4%25ED%258A%25B8-%25EB%25A7%258C%25EB%2593%25A4%25EA%25B8%25B0%3Fnode-id%3D1146%253A100" allowfullscreen></iframe>
             </div>
 
-            <h3 class="t_tit2">1. 사각형</h3>
+            <hr>
+            <h3 class="t_tit2">01. 사각형</h3>
             <div class="t_code">
-<pre><code class="language-js">
+<pre><code class="language-js">//01. 사각형
+for(let i = 1; i <= 5; i++){
+    console.log('*'.repeat(5));
+}
 </code></pre>
             </div>
+
+            <h3 class="t_tit2">02. 직각삼각형</h3>
+            <div class="t_code">
+<pre><code class="language-js">// 02. 직각 삼각형
+for(let i = 1; i <= 5; i++){
+    console.log('*'.repeat(i));
+}
+</code></pre>
+            </div>
+
+            <h3 class="t_tit2">03. 역 직각 삼각형</h3>
+            <div class="t_code">
+<pre><code class="language-js">// 03. 역직각 삼각형
+for(let i = 1; i <= 5; i++){
+    console.log('*'.repeat(6-i));
+}
+</code></pre>
+            </div>
+
+            <h3 class="t_tit2">04. 피라미드 만들기</h3>
+            <div class="t_code">
+<pre><code class="language-js">// 04. 피라미드 만들기
+for (let i = 1; i <= 9; i++) {
+    if (i % 2 === 0) continue;
+    console.log(' '.repeat((9 - i) / 2) + '*'.repeat(i) + ' '.repeat((9 - i) / 2));
+}
+</code></pre>
+            </div>
+
+            <h3 class="t_tit2">05. 역 피라미드</h3>
+            <div class="t_code">
+<pre><code class="language-js">// 05. 역 피라미드
+for (let i = 9; i >= 1; i--) {
+    if (i % 2 === 0) continue;
+    console.log(' '.repeat((9 - i) / 2) + '*'.repeat(i) + ' '.repeat((9 - i) / 2));
+}
+</code></pre>
+            </div>
+
+            <h3 class="t_tit2">06. 다이아몬드 (피라미드 두개 합치기)</h3>
+            <div class="t_code">
+<pre><code class="language-js">// 06. 다이아몬드 (피라미드 두개 합치기)
+for (let i = 1; i <= 9; i++) {
+    if (i % 2 === 0) continue;
+    console.log(' '.repeat((9 - i) / 2) + '*'.repeat(i) + ' '.repeat((9 - i) / 2));
+}
+for (let i = 9; i >= 1; i--) {
+    if (i % 2 === 0) continue;
+    console.log(' '.repeat((9 - i) / 2) + '*'.repeat(i) + ' '.repeat((9 - i) / 2));
+}
+</code></pre>
+            </div>
+
+            <h3 class="t_tit2">07. 모래시계</h3>
+            <div class="t_code">
+<pre><code class="language-js">// 07. 모래시계 
+for (let i = 9; i >= 1; i--) {
+    if (i % 2 === 0) continue;
+    console.log(' '.repeat((9 - i) / 2) + '*'.repeat(i) + ' '.repeat((9 - i) / 2));
+}
+for (let i = 1; i <= 9; i++) {
+    if (i % 2 === 0) continue;
+    console.log(' '.repeat((9 - i) / 2) + '*'.repeat(i) + ' '.repeat((9 - i) / 2));
+}
+</code></pre>
+            </div>
+
+            <hr>
+            <p class="t_desc">
+                <i>마치면서..</i> <br>
+                더 도전해볼 별찍기가 있다면 알려주세요!
+            </p>
         </div>
     </main>
 
