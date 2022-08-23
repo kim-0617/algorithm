@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최소직사각형</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 체육복</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 완전탐색 > 최소직사각형
+            </p>
+
+            <hr style="margin-bottom: 30px;">
+            <h6 class="guide-section-title">문제 설명</h6>
+            <p class="t_desc2">
+                명함 지갑을 만드는 회사에서 지갑의 크기를 정하려고 합니다. 다양한 모양과 크기의 명함들을 모두 수납할 수 있으면서, 작아서 들고 다니기 편한 지갑을 만들어야 합니다. 이러한
+                요건을 만족하는 지갑을 만들기 위해 디자인팀은 모든 명함의 가로 길이와 세로 길이를 조사했습니다.
+            </p>
+
+            <i>아래 표는 4가지 명함의 가로 길이와 세로 길이를 나타냅니다.</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>명함 번호</th>
+                        <th>가로 길이</th>
+                        <th>세로 길이</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">1</td>
+                        <td class="ce">60</td>
+                        <td class="ce">50</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">2</td>
+                        <td class="ce">30</td>
+                        <td class="ce">70</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">3</td>
+                        <td class="ce">60</td>
+                        <td class="ce">30</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">4</td>
+                        <td class="ce">80</td>
+                        <td class="ce">40</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="t_desc">
+                가장 긴 가로 길이와 세로 길이가 각각 80, 70이기 때문에 80(가로) x 70(세로) 크기의 지갑을 만들면 모든 명함들을 수납할 수 있습니다. 하지만 2번 명함을 가로로
+                눕혀 수납한다면 80(가로) x 50(세로) 크기의 지갑으로 모든 명함들을 수납할 수 있습니다. 이때의 지갑 크기는 4000(=80 x 50)입니다.
+                모든 명함의 가로 길이와 세로 길이를 나타내는 2차원 배열 sizes가 매개변수로 주어집니다. 모든 명함을 수납할 수 있는 가장 작은 지갑을 만들 때, 지갑의 크기를
+                return 하도록 solution 함수를 완성해주세요.
+            </p>
+
+            <hr style="margin-bottom: 30px;">
+            <i>제한사항</i> <br>
+            sizes의 길이는 1 이상 10,000 이하입니다.
+            sizes의 원소는 [w, h] 형식입니다.
+            w는 명함의 가로 길이를 나타냅니다.
+            h는 명함의 세로 길이를 나타냅니다.
+            w와 h는 1 이상 1,000 이하인 자연수입니다.
+
+            <hr style="margin-bottom: 30px;">
+            <i>입출력 예</i> <br>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>sizes</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">[[60, 50], [30, 70], [60, 30], [80, 40]]</td>
+                        <td class="ce">4000</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">[[10, 7], [12, 3], [8, 15], [14, 7], [5, 15]]</td>
+                        <td class="ce">120</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">[[14, 4], [19, 6], [6, 16], [18, 7], [7, 11]]</td>
+                        <td class="ce">133</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+
+            <p class="t_box">
+                <i>입출력 예 설명</i> <br>
+                <strong>입출력 예 #1</strong><br>
+                문제 예시와 같습니다. <br>
+
+                <strong>입출력 예 #2</strong> <br>
+                명함들을 적절히 회전시켜 겹쳤을 때, 3번째 명함(가로: 8, 세로: 15)이 다른 모든 명함보다 크기가 큽니다. 따라서 지갑의 크기는 3번째 명함의 크기와 같으며,
+                120(=8 x 15)을 return 합니다. <br>
+
+                <strong>입출력 예 #3</strong> <br>
+                명함들을 적절히 회전시켜 겹쳤을 때, 모든 명함을 포함하는 가장 작은 지갑의 크기는 133(=19 x 7)입니다.
+            </p>
+
+
+            <hr style="margin-bottom: 30px;">
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(sizes) {  
+    sizes.map((el) => { // 가로세로중 더 큰 사이즈를 가로랑 바꿔서 큰 값은 모두 가로로 오게 할겁니다.
+        if(el[0] < el[1]){
+            [el[0], el[1]] = [el[1], el[0]];
+        }
+    });
+    row = sizes.map(el => el[0]); // 그렇게 다 몰았으면 가로값중에서 max
+    col = sizes.map(el => el[1]); // 세로값 중에서 max 찾아서 곱하면 answer
+    return Math.max(...row) * Math.max(...col);
+}
+</code></pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 명함 가로 세로중 큰 값을 가로로 몰겁니다.<br>
+                2. 가로 값 세로 값 각각 둘로 나눈다음.<br>
+                3. 각각의 배열에서 큰 값을 찾아서 곱하면 그게 최소 필요한 명함 사이즈겠죠?<br>
+                <br>
+                총평 : 아.. 명함을 한쪽으로 몬다는 생각을 하면 뻘짓을 안해도 됩니다.
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/86491?language=javascript">https://school.programmers.co.kr/learn/courses/30/lessons/86491?language=javascript</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
