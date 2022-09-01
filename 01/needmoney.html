@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부족한 금액 계산하기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 부족한 금액 계산하기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 위클리 챌린지 > 부족한 금액 계산하기
+            </p>
+
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                새로 생긴 놀이기구는 인기가 매우 많아 줄이 끊이질 않습니다. 이 놀이기구의 원래 이용료는 price원 인데, 놀이기구를 N 번 째 이용한다면 원래 이용료의 N배를
+                받기로 하였습니다. 즉, 처음 이용료가 100이었다면 2번째에는 200, 3번째에는 300으로 요금이 인상됩니다.<br>
+                놀이기구를 count번 타게 되면 현재 자신이 가지고 있는 금액에서 얼마가 모자라는지를 return 하도록 solution 함수를 완성하세요.<br>
+                단, 금액이 부족하지 않으면 0을 return 하세요.
+            </p>
+
+            <hr>
+            <p class="t_box">
+                <i>제한사항</i> <br>
+                놀이기구의 이용료 price : 1 ≤ price ≤ 2,500, price는 자연수
+                처음 가지고 있던 금액 money : 1 ≤ money ≤ 1,000,000,000, money는 자연수
+                놀이기구의 이용 횟수 count : 1 ≤ count ≤ 2,500, count는 자연수
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>price</th>
+                        <th>money</th>
+                        <th>count</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">3</td>
+                        <td class="ce">20</td>
+                        <td class="ce">4</td>
+                        <td class="ce">10</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p>
+                입출력 예 #1<br>
+                이용금액이 3인 놀이기구를 4번 타고 싶은 고객이 현재 가진 금액이 20이라면, 총 필요한 놀이기구의 이용 금액은 30 <strong>(=
+                3+6+9+12)</strong> 이 되어 10만큼 부족하므로 10을 return 합니다.
+            </p>
+
+            <hr>
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(price, money, count) {
+    let total = 0
+    for(let i = 1; i <= count; i++){ // 내가 원하는 만큼 타려면  얼마 나오는가?
+        total += price * i;
+    }
+    
+    return money - total >= 0 ? 0 : total - money; // 부족하지 않으면 0을 return 부족하면 부족한 값만큼 return
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 내가 원하는 놀이기구를 타려면 총 얼마가 필요한가?<br>
+                2. 내가 가진 금액에서 앞서 계산한 총금액을 빼서 부족하지 않으면 0, 그렇지않으면 부족한 금액만큼 return 합니다.<br>
+                <br>
+                총평 .: 
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/82612?language=javascript">https://school.programmers.co.kr/learn/courses/30/lessons/82612?language=javascript</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
