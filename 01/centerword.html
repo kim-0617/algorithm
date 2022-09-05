@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가운데 글자 가져오기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 가운데 글자 가져오기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 가운데 글자 가져오기
+            </p>
+
+            <hr/>
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                단어 s의 가운데 글자를 반환하는 함수, solution을 만들어 보세요. 단어의 길이가 짝수라면 가운데 두글자를 반환하면 됩니다.
+            </p>
+
+            <hr/>
+            <i>제한사항</i>
+            <p class="t_box">
+                s는 길이가 1 이상, 100이하인 스트링입니다.
+            </p>
+
+            <hr/>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">"abcde"</td>
+                        <td class="ce">"c"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">"qwer"</td>
+                        <td class="ce">"we"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+            <hr/>
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(s) {
+    let len = s.length
+    if(len % 2){ // 홀수일 때
+        return s.slice(len/2, len/2 +1);
+    }   
+    else{ // 짝수일 때
+        return s.slice(len/2 - 1, len/2 + 1)
+    }
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 짝수일때 홀수일때 나눠서 지문에 적힌대로 처리해줍니다. 그냥 가운데 글자만 찾아서 보내버리세요<br>
+                <br>
+                총평 : .
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12903?language=javascript">https://school.programmers.co.kr/learn/courses/30/lessons/12903?language=javascript</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
