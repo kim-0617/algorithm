@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두 정수 사이의 합</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 두 정수 사이의 합</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 두 정수 사이의 합
+            </p>
+
+            <hr />
+            <p class="t_desc2">
+                두 정수 a, b가 주어졌을 때 a와 b 사이에 속한 모든 정수의 합을 리턴하는 함수, solution을 완성하세요. <br>
+                예를 들어 a = 3, b = 5인 경우, 3 + 4 + 5 = 12이므로 12를 리턴합니다.
+            </p>
+
+            <hr>
+            <i>제한 조건</i>
+            <p class="t_box">
+                a와 b가 같은 경우는 둘 중 아무 수나 리턴하세요.
+                a와 b는 -10,000,000 이상 10,000,000 이하인 정수입니다.
+                a와 b의 대소관계는 정해져있지 않습니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>a</th>
+                        <th>b</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>12</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(a, b) {
+    let answer = 0;
+    let start, end;
+    a >= b ? [start,end] = [b, a] : [start,end] = [a, b];
+    return Array.from(Array(end-start+1).keys(), x => x+start).reduce((prev, curr) => {
+       return prev += curr; 
+    },0);
+    
+    // Array.from("배열(예를들어[1,2,3])", mapfn(원소에 적용할 함수))
+    // Array(number(숫자)) => 숫자길이의 비어있는 
+    // Array(number(숫자)).keys() => 숫자길이의 비어있는 배열의 인덱스 배열이 나오죠 
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. a,b 의 순서가 바뀔 수 도 있으니까 순서를 바로잡아야겠죠?<br>
+                2. 그럼 이제 Array.from으로 배열을 생성할 텐데, 길이는 b-a+1 시작 원소는 start부터 만들면 되겠죠?<br>
+                3. 자 마지막으로 합을 구할텐데 reduce로 쉽게 구할 수가 있겠죠?<br>
+                <br>
+                총평 : 합을 구할 데이터셋을 만드는게 중요하겠죠?
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12912">https://school.programmers.co.kr/learn/courses/30/lessons/12912</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
