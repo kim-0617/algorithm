@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핸드폰 번호 가리기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 핸드폰 번호 가리기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 핸드폰 번호 가리기
+            </p>
+
+            <hr />
+            <p class="t_desc2">
+                프로그래머스 모바일은 개인정보 보호를 위해 고지서를 보낼 때 고객들의 전화번호의 일부를 가립니다.<br>
+                전화번호가 문자열 phone_number로 주어졌을 때, 전화번호의 뒷 4자리를 제외한 나머지 숫자를 전부 *으로 가린 문자열을 리턴하는 함수,
+                solution을 완성해주세요.
+            </p>
+
+            <hr>
+            <i>제한 조건</i>
+            <p class="t_box">
+                phone_number는 길이 4 이상, 20이하인 문자열입니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>phone_number</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"01033334444"</td>
+                        <td>"*******4444"</td>
+                    </tr>
+                    <tr>
+                        <td>"027778888"</td>
+                        <td>"*****8888"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(phone_number) {
+    let answer = '*'.repeat(phone_number.length-4);
+    return answer += phone_number.slice(-4);
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 11자리면 7자리까지 *을 만들고<br>
+                2. 4자리는 원래 숫자로 slice 해서 answer에 붙여서 return 하면 되죠?<br>
+                <br>
+                총평 : .
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12948">https://school.programmers.co.kr/learn/courses/30/lessons/12948</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
