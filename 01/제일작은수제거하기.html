@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제일 작은 수 제거하기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 제일 작은 수 제거하기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 제일 작은 수 제거하기
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                정수를 저장한 배열, arr 에서 가장 작은 수를 제거한 배열을 리턴하는 함수, solution을 완성해주세요. 단, 리턴하려는 배열이 빈 배열인 경우엔 배열에 -1을 채워 리턴하세요.
+                예를들어 arr이 [4,3,2,1]인 경우는 [4,3,2]를 리턴 하고, [10]면 [-1]을 리턴 합니다.
+            </p>
+
+            <hr>
+            <i>제한 조건</i>
+            <p class="t_box">
+                arr은 길이 1 이상인 배열입니다.
+                인덱스 i, j에 대해 i ≠ j이면 arr[i] ≠ arr[j] 입니다.
+            </p>
+            
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>arr</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">[4,3,2,1]</td>
+                        <td class="ce">[4,3,2]</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">[10]</td>
+                        <td class="ce">[-1]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(arr) {
+    // arr.splice(시작위치, 삭제갯수, 추가원소)
+    arr.splice(arr.indexOf(Math.min.apply(null, arr)),1)
+    return arr.length !== 0 ? arr: [-1];
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. arr.splice(시작위치, 삭제갯수, 추가원소)<br>
+                2. 삭제갯수 : 제일 작은 값 한개, 추가 원소는 없죠?<br>
+                3. 시작위치 : array.indexOf(제일작은 값)<br>
+                4. 제일 작은 값 : Math.min() 하는데 배열을 인자로 전달하려면 apply 써야겠죠?<br>
+                5. 자 이제 삭제했으면 return 할건데 빈배열이면 [-1] return 해주도록 합시다.<br>
+                <br>
+                총평 : 여러가지 메서드의 향연
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12935">https://school.programmers.co.kr/learn/courses/30/lessons/12935</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
