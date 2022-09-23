@@ -30,7 +30,7 @@ body::before{
     z-index: -1;
 }
 
-#wrapper {
+.wrapper {
     @include center;
     width: 369px;
     height: 547px;
@@ -61,5 +61,57 @@ body::before{
         bottom: -15px;
         z-index: -1;
         filter: blur(15px);
+        background-size: 100% 30px;
+        border-radius: 100px;
+    }
+
+    .eye, .eye::before {
+        width: 70px;
+        height: 70px;
+        position: absolute;
+        top: 175px;
+        left: 120px;
+        z-index: -1;
+        background: url(http://www.supah.it/dribbble/006/eye.png) no-repeat center;;
+    }
+
+    .eye::before {
+        content: '';
+        top: -2px;
+        left: 97px;
+    }
+}
+
+.text {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    width: 390px;
+    height: 595px;
+    transform: translateZ(150px) translateX(-11px) translateY(-26px) scale(.55);
+    border: 3px solid rgba(255,255,255,1);
+    text-align: center;
+    font-size: 35px;
+    line-height: 1000px;
+    color: rgba(255,255,255,1);
+    background: linear-gradient(135deg, rgba(255,255,255,1) 0%,rgba(255,255,255,0.36) 39%,rgba(255,255,255,0.07) 41%,rgba(255,255,255,0) 51%,rgba(0,0,0,1) 100%);
+    opacity: 0.3;
+    border-radius: 15px;
+
+    &::after {
+        content: 'eye moving';
+        width: 100%;
+        position: absolute;
+        bottom: 22px;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+        line-height: 1;
+        font-size: 18px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 20px;
+        text-indent: 20px;
     }
 }
