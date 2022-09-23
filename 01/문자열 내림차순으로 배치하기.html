@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 내림차순으로 배치하기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 문자열 내림차순으로 배치하기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 문자열 내림차순으로 배치하기
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                문자열 s에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 문자열을 리턴하는 함수,
+                solution을 완성해주세요.<br>
+                s는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자보다 작은 것으로 간주합니다.
+            </p>
+
+            <hr>
+            <i>제한 사항</i>
+            <p class="t_box">
+                str은 길이 1 이상인 문자열입니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">"Zbcdefg"</td>
+                        <td class="ce">"gfedcbZ"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(s) {
+    // 01
+    // 너무 이상하게 풀었네요
+    // 처음에 떠올린 방법으로 풀려다보니
+    // let answer = '';
+    // let obj = {}
+    // let overlap = []; // 중복이 될 때
+    // s.split('').forEach((el) => {
+    //     if(obj[el.charCodeAt()]) overlap.push(el); // 중복처리
+    //     obj[el.charCodeAt()] = el; // 각각의 문자마다 90 : Z 이런식으로 객체에 저장
+    // });
+    // 
+    // let target = Object.keys(obj); // key를 뽑아서
+    // 
+    // // 중복되는게 있다면 담기겠죠 "Zbbcdefg"
+    // /*
+    // 	[
+    //       '90',  '98',  '99',
+    //       '100', '101', '102',
+    //       '103', 98
+    //     ]
+    // */
+    // // 이렇게요. 그 후 내림차순 정렬해서 answer에 push 해줄게요
+    // for(let val of overlap) target.push(val.charCodeAt()); // 중복처리해준다.
+    // target.sort((a,b) => b-a).forEach((el) => { 
+    // // 내림차순 정렬해서 그대로 push (charCodeAt()은 대문자가 소문자보다 더 작다
+    //     answer += obj[el];
+    // });
+    // return answer;
+    
+    // 02
+    return s
+    .split("")
+    .sort()
+    .reverse()
+    .join("");
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. answer은 return 할 배열, obj는 인자로 들어온 s 에 대한 아스키코드 : 알파벳 객체, overlap은 중복이 될 때 따로 빼 놓을 배열<br>
+                2. obj를 구성하기 위해 s.split('')(배열).forEach(el) 해서 obj[el.charCodeAt()] = el<br>
+                3. forEach 돌 때 중복된게 있다면 overlap에 빼줍니다.<br>
+                4. obj의 key를 빼서 이 key 배열에 중복된 원소를 넣어줍니다.<br>
+                5. target.sort((a,b) => b-a) 내림차순으로 return 할 거라서 내림차순 정렬하고 forEach<br>
+                6. answer에 그대로 push 하시면 끝<br>
+                <br>
+                총평 : 1번과 2번 풀이가 있는데 여러분은 어떤걸로 푸실래요?
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12917">https://school.programmers.co.kr/learn/courses/30/lessons/12917</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>

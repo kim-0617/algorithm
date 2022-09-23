@@ -29,3 +29,37 @@ body::before{
     background-attachment: fixed;
     z-index: -1;
 }
+
+#wrapper {
+    @include center;
+    width: 369px;
+    height: 547px;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) perspective(600px) rotateY(20deg) rotateX(10deg);
+}
+
+.me {
+    position: absolute;
+    width: 369px;
+    height: 547px;
+    transform: translateZ(80px) scale(.8);
+
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 10px;
+        background: url('http://www.supah.it/dribbble/006/profile.png') no-repeat 0 0;
+    }
+
+    &::after {
+        height: 30px;
+        top: auto;
+        bottom: -15px;
+        z-index: -1;
+        filter: blur(15px);
+    }
+}
