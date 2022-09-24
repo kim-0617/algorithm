@@ -24,10 +24,9 @@ body::before{
     position: fixed;
     left: 0;
     top: 0;
-    opacity: 0.9;
     background: url('../img/fire.jpg') no-repeat center / cover;
     background-attachment: fixed;
-    z-index: -1;
+    z-index: -3;
 }
 
 .wrapper {
@@ -52,34 +51,37 @@ body::before{
         top: 0;
         left: 0;
         border-radius: 10px;
-        background: url('http://www.supah.it/dribbble/006/profile.png') no-repeat 0 0;
+        // background: url('http://www.supah.it/dribbble/006/profile.png') no-repeat 0 0;
+        background: url('../img/dog.png') no-repeat 0 0;
     }
 
     &::after {
         height: 30px;
         top: auto;
         bottom: -15px;
-        z-index: -1;
         filter: blur(15px);
         background-size: 100% 30px;
         border-radius: 100px;
     }
 
-    .eye, .eye::before {
-        width: 70px;
-        height: 70px;
+    .eye{
+        width: 200px;
+        height: 199px;
         position: absolute;
-        top: 175px;
-        left: 120px;
+        top: 172px;
+        left: 83px;
+        // top: 175px;
+        // left: 120px;
         z-index: -1;
-        background: url(http://www.supah.it/dribbble/006/eye.png) no-repeat center;;
+        // background: url(http://www.supah.it/dribbble/006/eye.png) no-repeat center;
+        background: url('../img/eye.png') no-repeat center;
     }
 
-    .eye::before {
-        content: '';
-        top: -2px;
-        left: 97px;
-    }
+    // .eye::before {
+    //     content: '';
+    //     top: -2px;
+    //     left: 97px;
+    // }
 }
 
 .text {
