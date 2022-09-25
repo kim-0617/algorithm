@@ -26,8 +26,8 @@ window.addEventListener('mousemove', function (e) {
     let mouseY = Math.max(-100, Math.min(100, window.innerHeight / 2 - e.clientY));
     currentMouseX = mouseX;
     currentMouseY = mouseY;
-    followX = (6 * mouseX) / 100; // -12 ~ 12 사이
-    followY = (5 * mouseY) / 100; // -10 ~ 10 사이
+    followX = (12 * mouseX) / 100; // -12 ~ 12 사이
+    followY = (10 * mouseY) / 100; // -10 ~ 10 사이
 });
 
 window.addEventListener("keydown", e => {
