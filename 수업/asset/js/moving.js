@@ -5,8 +5,6 @@ let followX = 0;
 let followY = 0;
 let x = 0;
 let y = 0;
-let currentMouseX = 0;
-let currentMouseY = 0;
 
 // followX = 왼쪽 영역에서는 12 오른쪽에서는 -12 인데
 // x = 0 부터 시작해서 x = x + (followX - x) * 속도 이다. 왼쪽 영역에 있다 가정해보면,
@@ -24,8 +22,6 @@ window.addEventListener('mousemove', function (e) {
     // mouseX,Y는 -100 ~ 100 사이에서 움직인다.
     let mouseX = Math.max(-100, Math.min(100, window.innerWidth / 2 - e.clientX));
     let mouseY = Math.max(-100, Math.min(100, window.innerHeight / 2 - e.clientY));
-    currentMouseX = mouseX;
-    currentMouseY = mouseY;
     followX = (12 * mouseX) / 100; // -12 ~ 12 사이
     followY = (10 * mouseY) / 100; // -10 ~ 10 사이
 });
