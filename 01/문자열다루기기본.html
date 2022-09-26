@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 다루기 기본</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 문자열 다루기 기본</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 문자열 다루기 기본
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                문자열 s의 길이가 4 혹은 6이고, 숫자로만 구성돼있는지 확인해주는 함수, solution을 완성하세요. 예를 들어 s가 "a234"이면 False를 리턴하고
+                "1234"라면 True를 리턴하면 됩니다.
+            </p>
+
+            <hr>
+            <i>제한 사항</i>
+            <p class="t_box">
+                s는 길이 1 이상, 길이 8 이하인 문자열입니다.
+                s는 영문 알파벳 대소문자 또는 0부터 9까지 숫자로 이루어져 있습니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">"a234"</td>
+                        <td class="ce">false</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">"1234"</td>
+                        <td class="ce">true</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(s) {
+    let len = s.length;
+    // 이거 왜 안돼요?
+    // let cond = [4,6];
+    // if(isNaN(parseInt(s)) || String(parseInt(s)).length !== len || cond.indexOf(len) === -1) return false;
+    // return true;
+    if(s.length === 4 || s.length === 6){
+        return s.split('').every(str => !isNaN(str)); 
+        // 각각의 원소가 숫자인지 아닌지, 모든 원소가 !isNan() 즉 숫자여야 함
+    }
+    else{
+        return false;
+    }
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 일단 s의 길이가 4이거나 6인지 살펴봐야 한다.<br>
+                2. array.every(() => {}) 조건에 다 하나라도 안맞으면 false 반환 다 !isNaN의 결과가 true이면, 즉 숫자이면 true 반환하면 되겠죠<br>
+                <br>
+                총평 : 주석 쳐 놓은거 왜 안되는지 아시면 멘트 부탁드립니다.
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12918">https://school.programmers.co.kr/learn/courses/30/lessons/12918</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
