@@ -33,33 +33,3 @@
 // console.log(name1)
 // console.log(name2)
 // console.log(name3)
-
-function solution(arr) {
-    let dummy = {};
-    let concat = [];
-    for(let i = 0; i < arr.length; i++) {
-        let lcm = [];
-        for(let j = 1; j <= 100; j++) {
-            lcm.push(arr[i] * j);
-        }
-        dummy[arr[i]] = lcm;
-    }
-    
-    for(let key in dummy) {
-        concat = concat.concat(dummy[key]);
-    }
-    concat.sort((a, b) => a - b);
-    console.log(concat)
-    let abcd = [];
-    for(let i = 0; i < concat.length; i++) {
-        if(abcd.length === 0) abcd.push(concat[i]);
-        else if(abcd.at(-1) === concat[i]) abcd.push(concat[i]);
-        else abcd = [concat[i]];
-        
-        if(i >= 140 && i <= 144) console.log(i, concat[i], abcd)
-        if(abcd.length === arr.length) break;
-    }
-    return abcd[0];
-}
-
-console.log(solution([1,2,3]))
