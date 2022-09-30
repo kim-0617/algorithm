@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하샤드 수</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 하샤드 수</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 하샤드 수
+            </p>
+
+            <hr />
+            <p class="t_desc2">
+                양의 정수 x가 하샤드 수이려면 x의 자릿수의 합으로 x가 나누어져야 합니다. 예를 들어 18의 자릿수 합은 1+8=9이고, 18은 9로 나누어 떨어지므로 18은 하샤드 수입니다. 자연수
+                x를 입력받아 x가 하샤드 수인지 아닌지 검사하는 함수, solution을 완성해주세요.
+            </p>
+
+            <hr>
+            <i>제한 조건</i>
+            <p class="t_box">
+                x는 1 이상, 10000 이하인 정수입니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>arr</th>
+                        <th style="text-align: center">return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10</td>
+                        <td style="text-align: center">true</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td style="text-align: center">true</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td style="text-align: center">false</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td style="text-align: center">false</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+
+            <p><strong>입출력 예 #1</strong><br>
+                10의 모든 자릿수의 합은 1입니다. 10은 1로 나누어 떨어지므로 10은 하샤드 수입니다.</p>
+
+            <p><strong>입출력 예 #2</strong><br>
+                12의 모든 자릿수의 합은 3입니다. 12는 3으로 나누어 떨어지므로 12는 하샤드 수입니다.</p>
+
+            <p><strong>입출력 예 #3</strong><br>
+                11의 모든 자릿수의 합은 2입니다. 11은 2로 나누어 떨어지지 않으므로 11는 하샤드 수가 아닙니다.</p>
+
+            <p><strong>입출력 예 #4</strong><br>
+                13의 모든 자릿수의 합은 4입니다. 13은 4로 나누어 떨어지지 않으므로 13은 하샤드 수가 아닙니다.</p>
+
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(x) {
+    // split해서 자리수 합 구하고, 그걸 x % 자릿수합 한게 나누어떨어지면 true, 아니면 false return
+    return x % String(x).split('').reduce((prev, cur) => prev += Number(cur), 0) === 0 ? true : false;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. String.split('') 하면 ['1', '0']  이렇게 되겠죠? (10이면) 거기서 reduce 분여서 합구해줄게요<br>
+                2. 그 과정에서 Number(cur) 해줘서 감쪽같이 바꿔줍니다. 합이 나오면 그 수를 다시 10으로 나눠 봐야 겠죠?<br>
+                3. 나머지가 0이면 true, 아니면 false<br>
+                총평 : 이렇게 한줄로 써질 때가 제일 기분 좋습니다.<br>
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12947">https://school.programmers.co.kr/learn/courses/30/lessons/12947</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
