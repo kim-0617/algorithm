@@ -218,15 +218,25 @@ code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shad
     <div id="sample1" class="sample">
         <h2>01. 결괏값을 작성하시오.<span class="dot"></span></h2>
         <div class="code">
-<pre class="line-numbers"><code class="language-js">function q1() {
-    let num = Math.max(100, Math.min(-100, Math.random() * 1000));
+<pre class="line-numbers"><code class="language-js">
+</code></pre>
+        </div>
+    </div>
+    <script>
+        while(true) {
+            var youBirth = prompt("당신의 출생연도를 입력해 주세요 -> 예) 2001 or 011203");
+            if(!isNaN(youBirth)) break;
+        }
+        const str = `function q1() {
+    let num = Math.max(100, Math.min(-100, ${Number(youBirth)}));
     return num;
 }
 
 console.log(q1());
-</code></pre>
-        </div>
-    </div>
+        `;
+
+        document.querySelector('#sample1 code').innerHTML = str;
+    </script>
 
     <hr>
 
