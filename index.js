@@ -36,8 +36,8 @@
 
 
 function q1() {
-    let maxVal = Math.max(100, Math.min(-100, Math.random() * 1000));
-    return maxVal;
+    let num = Math.max(100, Math.min(-100, Math.random() * 1000));
+    return num;
 }
 
 console.log(q1());
@@ -64,7 +64,71 @@ function q4() {
 console.log(q4());
 
 function q5() {
-    return ""
+    return "abcdefghijklmnop".match(/[d-f]/g);
 }
 
-console.log(q4());
+console.log(q5());
+
+function q6(a,b,c,d) {
+    const array = [...arguments];
+    return array.reduceRight((prev, curr) => {
+        return prev += curr;
+    }, 0);
+}
+
+console.log(q6(1,2,3,4));
+
+function q7() {
+    const str = "taraeaea";
+    return str.split('').map(word => {
+        if(word !== "a") return word;
+    }).join('');
+}
+
+console.log(q7());
+
+function q8() {
+    let answer = 0;
+    const array = [1,2,3,4,5];
+    for(let i = 3; i < 8; i++) {
+        if(array.includes(i) || 0) {
+            answer++;
+        }
+    }
+    return answer;
+}
+
+console.log(q8());
+
+function q9() {
+    const obj = {
+        a : "가",
+        b : "나",
+        c : "다",
+    };
+
+    const { c : one, b : two, a : three } = obj;
+    return one + two + three;
+}
+
+console.log(q9());
+
+function q10(arr) {
+    let flag = false;
+    let n = 1;
+    while(!flag) {
+        n++;
+        for(let i = 1; i < arr.length; i++) {
+            if((arr[0] * n) % arr[i] === 0) {
+                flag = true;
+            }
+            else {
+                flag = false;
+                break;
+            }
+        }
+    }
+    return arr[0] * n
+}
+
+console.log(q10([2,6,8,14]));
