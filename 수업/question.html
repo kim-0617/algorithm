@@ -215,6 +215,16 @@ code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shad
 
     <h1>Javascript Test01</h1>
 
+    <div id="sample0" class="sample">
+        <h2>00. Intro.<span class="dot"></span></h2>
+        <div class="code">
+<pre class="line-numbers"><code class="language-js">parseInt(x) : x의 자료형을 숫자(정수)로 바꿔줌, 숫자가 아니면 NaN 반환
+String(x) : x의 자료형을 문자열로 바꿔줌.
+</code></pre>
+        </div>
+    </div>
+
+    <hr>
     <div id="sample1" class="sample">
         <h2>01. 결괏값을 작성하시오.<span class="dot"></span></h2>
         <div class="code">
@@ -224,15 +234,19 @@ code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shad
     </div>
     <script>
         while(true) {
-            var youBirth = prompt("당신의 출생연도를 입력해 주세요 -> 예) 2001 or 011203");
+            var youBirth = prompt("당신의 출생연도를 입력해 주세요 -> 예) 2001");
             if(!isNaN(youBirth)) break;
         }
-        const str = `function q1() {
-    let num = Math.max(100, Math.min(-100, ${Number(youBirth)}));
-    return num;
+        const str = `function q1(num) {
+    let answer = 0;
+    while(num) {
+        answer += num % 10;
+        num = parseInt(num / 10);
+    }
+    return answer;
 }
 
-console.log(q1());
+console.log(q1(1996));
         `;
 
         document.querySelector('#sample1 code').innerHTML = str;
@@ -260,7 +274,7 @@ console.log(q2());
         <div class="code">
 <pre class="line-numbers"><code class="language-js">function q3() {
     const array = [10, 31, 1, 2, 3 ,4, 32];
-    return array.filter(x => Number(String(x).length >= 2));
+    return array.filter(x => String(x).length >= 2);
 }
 
 console.log(q3());
