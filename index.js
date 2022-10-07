@@ -133,13 +133,28 @@
 
 // console.log(q10([2,6,8,14]));
 
-function q1(num) {
-    let answer = 0;
-    while(num) {
-        answer += num % 10;
-        num = parseInt(num / 10);
+// function q1(num) {
+//     let answer = 0;
+//     while(num) {
+//         answer += num % 10;
+//         num = parseInt(num / 10);
+//     }
+//     return answer;
+// }
+
+// console.log(q1(1996));
+
+function solution(s) {
+    let answer;
+    let stack = [];
+    for (let x of s) {
+        if (x === ')') {
+            while (stack.pop() !== '(');
+        }
+        else stack.push(x);
     }
+    answer = stack.join('');
     return answer;
 }
-
-console.log(q1(1996));
+let str = "(A(BC)D)EF(G(H)(IJ)K)LM(N)";
+console.log(solution(str));
