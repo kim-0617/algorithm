@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소수 찾기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 소수 찾기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 소수 찾기
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                1부터 입력받은 숫자 n 사이에 있는 소수의 개수를 반환하는 함수, solution을 만들어 보세요. </p>
+            소수는 1과 자기 자신으로만 나누어지는 수를 의미합니다.<br>
+            (1은 소수가 아닙니다.)
+            </p>
+
+            <hr>
+            <i>제한 조건</i>
+            <p class="t_box">
+                n은 2이상 1000000이하의 자연수입니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>n</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">10</td>
+                        <td class="ce">4</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">5</td>
+                        <td class="ce">3</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p>입출력 예 #1<br>
+                1부터 10 사이의 소수는 [2,3,5,7] 4개가 존재하므로 4를 반환</p>
+
+            <p>입출력 예 #2<br>
+                1부터 5 사이의 소수는 [2,3,5] 3개가 존재하므로 3를 반환</p>
+
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(n) {
+    const primes = []; // 소수 찾기 배열
+    
+    // 0~n까지의 소수 판별여부를 담은 (true, false) 배열
+    const toArr = Array.from(Array(n+1).keys(), x => {
+        if(x === 0 || x === 1) return false;
+        else return true;
+    });
+    
+    /** 
+    이부분은 판별여부를 담은 toArr에서 하나씩 꺼내와서 true이면 primes에 넣는다
+    다만 소수가 아닌 수를 거르기 위해서는 2부터 들어오는데 2의 배수를 다 거릅니다 (false로 만들어서)
+    3이 들어오면 3의 배수 거릅니다.
+    4가 들어오면 4의 배수 거릅니다... 이렇게 쭉 다 걸러서 n까지 도달하면 소수만 배열에 담기게 됩니다.
+    에라토스테네스의 체라고 했던가요?
+    */
+    for(let i = 0; i < toArr.length; i++){
+        if(toArr[i]) primes.push(i);
+        
+        if(i === 0 || i === 1) continue;
+        for(let j = i * 2; j <= n; j+=i){
+            toArr[j] = false;
+        }
+    }
+    return primes.length;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 에라토스테네스의 체를 설명드릴게요 n까지의 소수 판별여부를 담은 배열 toArr선언 합니다. (0~n)까지 입니다. 0,1은 false (소수가 아니죠)<br>
+                2. 로직은 들어보면 간단합니다. 2의배수 제외하고 3의배수 제외하고 4의 배수 제외하고 하면 배수가 아닌 수들만 남겠죠?<br>
+                3. toArr을 순회하면서 true(소수인것들)만 primes 배열에 추가합니다.<br>
+                4. 밑에서는 i의 배수를 지우는 과정입니다.<br>
+                <br>
+                총평 : 반복문을 돌아서 소수를 찾을 수 있겠으나, 효율성에서 안되서 눈물을 머금고 이방법을 썼습니다.
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12921">https://school.programmers.co.kr/learn/courses/30/lessons/12921</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
