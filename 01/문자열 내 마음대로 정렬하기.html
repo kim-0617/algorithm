@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 내 마음대로 정렬하기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 문자열 내 마음대로 정렬하기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 문자열 내 마음대로 정렬하기
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                문자열로 구성된 리스트 strings와, 정수 n이 주어졌을 때, 각 문자열의 인덱스 n번째 글자를 기준으로 오름차순 정렬하려 합니다. 예를 들어 strings가
+                ["sun", "bed", "car"]이고 n이 1이면 각 단어의 인덱스 1의 문자 "u", "e", "a"로 strings를 정렬합니다.
+            </p>
+
+            <hr>
+            <i>제한 조건</i>
+            <p class="t_box">
+                strings는 길이 1 이상, 50이하인 배열입니다.
+                strings의 원소는 소문자 알파벳으로 이루어져 있습니다.
+                strings의 원소는 길이 1 이상, 100이하인 문자열입니다.
+                모든 strings의 원소의 길이는 n보다 큽니다.
+                인덱스 1의 문자가 같은 문자열이 여럿 일 경우, 사전순으로 앞선 문자열이 앞쪽에 위치합니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>strings</th>
+                        <th>n</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">["sun", "bed", "car"]</td>
+                        <td class="ce">1</td>
+                        <td class="ce">["car", "bed", "sun"]</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">["abce", "abcd", "cdx"]</td>
+                        <td class="ce">2</td>
+                        <td class="ce">["abcd", "abce", "cdx"]</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <hr>
+            <i>입출력 예 설명</i>
+            <p><strong>입출력 예 1</strong><br>
+                "sun", "bed", "car"의 1번째 인덱스 값은 각각 "u", "e", "a" 입니다. 이를 기준으로 strings를 정렬하면 ["car", "bed",
+                "sun"] 입니다.</p>
+
+            <p><strong>입출력 예 2</strong><br>
+                "abce"와 "abcd", "cdx"의 2번째 인덱스 값은 "c", "c", "x"입니다. 따라서 정렬 후에는 "cdx"가 가장 뒤에 위치합니다. "abce"와
+                "abcd"는 사전순으로 정렬하면 "abcd"가 우선하므로, 답은 ["abcd", "abce", "cdx"] 입니다.</p>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(strings, n) {
+    let answer = [];
+    if(n === 0) return strings.sort(); // 0 일경우 밑에 할 필요없이 sort 해서 return
+    strings.forEach((el, index) => {
+        answer.push(strings[index][n] + el);
+        // n번째 인덱스에 있는 문자를 앞으로 빼는겁니다. [usun, ebed, acar] 이렇게 하고 정렬하면 n번째 인덱스 기준으로 정렬
+        // 정렬해서 앞에 있는문자를 날려서 return 하면 되겠죠?
+    });
+
+    answer = answer.sort().map((el, index) =>{
+        return el.slice(1)
+    });
+
+    return answer;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. n이 0이면 그대로 sort해서 뱉습니다.<br>
+                2. 아니면 n번째 문자를 맨앞으로 끌어올려서 정렬합니다.<br>
+                3. 반환할 때는 맨 앞글자를 날려서 return 하면 되겠죠?<br>
+                <br>
+                총평 : n번째 문자를 앞으로 빼서 정렬한다는 아이디어를 떠올리기가 쉽진 않네요.
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12915">https://school.programmers.co.kr/learn/courses/30/lessons/12915</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
