@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자연수 뒤집어 배열로 만들기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 자연수 뒤집어 배열로 만들기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 자연수 뒤집어 배열로 만들기
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                자연수 n을 뒤집어 각 자리 숫자를 원소로 가지는 배열 형태로 리턴해주세요.
+                예를들어 n이 12345이면 [5,4,3,2,1]을 리턴합니다.
+            </p>
+
+            <hr>
+            <i>제한 조건</i>
+            <p class="t_box">
+                n은 10,000,000,000이하인 자연수입니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>n</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">12345</td>
+                        <td class="ce">[5,4,3,2,1]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(n) {
+    // String(n).split('') => ['1', '2', '3', '4', '5']
+    // ['1', '2', '3', '4', '5'].reverse() 뒤집어서 number로 만들어서 return
+    return String(n).split('').reverse().map(x => Number(x));
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 자연수를 분리하기 위해서 문자열로 만들어서 split하면 배열로 반환되겠죠? <br>
+                2. 그렇게 되면 문제에서 요구하는 대로 reverse 메서드로 뒤집어서 map 씌워서 반환하면 되겠죠?<br>
+                3. map은 정수형으로 바꾸기 위해서 사용했습니다.<br>
+                <br>
+                총평 : .
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12932">https://school.programmers.co.kr/learn/courses/30/lessons/12932</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
