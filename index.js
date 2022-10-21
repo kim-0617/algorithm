@@ -159,25 +159,45 @@
 // let str = "(A(BC)D)EF(G(H)(IJ)K)LM(N)";
 // console.log(solution(str));
 
-function solution(arr1, arr2) {
-    let answer = [];
-    arr1.sort();
-    arr2.sort();
+// function solution(arr1, arr2) {
+//     let answer = [];
+//     arr1.sort();
+//     arr2.sort();
 
-    let p1 = p2 = 0;
-    while(p1 < arr1.length && p2 < arr2.length) {
-        console.log("1",p1, p2);
-        if(arr1[p1] === arr2[p2]) {
-            answer.push(arr1[p1++]);
-            p2++;
-            console.log("2",p1, p2);
+//     let p1 = p2 = 0;
+//     while(p1 < arr1.length && p2 < arr2.length) {
+//         console.log("1",p1, p2);
+//         if(arr1[p1] === arr2[p2]) {
+//             answer.push(arr1[p1++]);
+//             p2++;
+//             console.log("2",p1, p2);
+//         }
+//         else if(arr1[p1] < arr2[p2]) p1++;
+//         else p2++;
+//     }
+//     return answer;
+// }
+
+// let a = [1,3,9,5,2];
+// let b = [3,2,5,7,8];
+// console.log(solution(a,b));
+
+function solution(arr1, arr2) {
+    const [row, col] = [arr1.length, arr2[0].length];
+    // console.log(row, col); // 3,3
+    let answer = new Array(row);
+    for (let i = 0; i < row; i++) answer[i] = new Array(col);
+
+    //arr1의 열의 개수 = arr2의 행의 개수, arr1의 i번째 행과 arr2의 j번째 열의 원소들을 곱한 것들의 합이 answer[i][j] 값
+    for (let i = 0; i < row; i++) {
+        for (let j = 0; j < col; j++) {
+            answer[i][j] = arr1[i].reduce((sum, arr1Value, rowIndex) => {
+                console.log(sum, arr1Value, rowIndex);
+                return sum + (arr1Value * arr2[rowIndex][j]);
+            }, 0)
         }
-        else if(arr1[p1] < arr2[p2]) p1++;
-        else p2++;
     }
     return answer;
 }
 
-let a = [1,3,9,5,2];
-let b = [3,2,5,7,8];
-console.log(solution(a,b));
+solution([[2, 3, 2], [4, 2, 4], [3, 1, 4]], [[5, 4, 3], [2, 4, 1], [3, 1, 1]]);
