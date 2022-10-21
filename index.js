@@ -192,7 +192,7 @@ function solution(arr1, arr2) {
     for (let i = 0; i < row; i++) {
         for (let j = 0; j < col; j++) {
             answer[i][j] = arr1[i].reduce((sum, arr1Value, rowIndex) => {
-                console.log(sum, arr1Value, rowIndex);
+                console.log(sum, arr1Value, rowIndex, j);
                 return sum + (arr1Value * arr2[rowIndex][j]);
             }, 0)
         }
