@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>약수의 합</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 약수의 합</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 약수의 합
+            </p>
+
+            <hr>
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                정수 n을 입력받아 n의 약수를 모두 더한 값을 리턴하는 함수, solution을 완성해주세요.
+            </p>
+
+            <hr>
+            <i>제한 사항</i>
+            <p class="t_box">
+                n은 0 이상 3000이하인 정수입니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>n</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">12</td>
+                        <td class="ce">28</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">5</td>
+                        <td class="ce">6</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p>입출력 예 #1<br>
+                12의 약수는 1, 2, 3, 4, 6, 12입니다. 이를 모두 더하면 28입니다.</p>
+
+            <p>입출력 예 #2<br>
+                5의 약수는 1, 5입니다. 이를 모두 더하면 6입니다.</p>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(n) {
+    let answer = 0;
+    for(let i = 1; i <= n; i++){
+        if(n%i === 0) answer += i;
+    }
+    return answer
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 1~n까지 for문으로 돌아보면서 n을 나누게 할 수 있는 수는 약수니까 더해주면 되겠죠?<br>
+
+                <br>
+                총평 : .
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12928">https://school.programmers.co.kr/learn/courses/30/lessons/12928</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
