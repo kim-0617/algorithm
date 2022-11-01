@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최대공약수와 최소공배수</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 최대공약수와 최소공배수</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 최대공약수와 최소공배수
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                정수를 담고 있는 배열 arr의 평균값을 return하는 함수, solution을 완성해보세요.
+            </p>
+
+            <hr>
+            <i>제한사항</i>
+            <p class="t_box">
+                arr은 길이 1 이상, 100 이하인 배열입니다.
+                arr의 원소는 -10,000 이상 10,000 이하인 정수입니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>arr</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">[1,2,3,4]</td>
+                        <td class="ce">2.5</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">[5,5]</td>
+                        <td class="ce">5</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(arr) {
+    return arr.reduce((prev, cur) => {
+        return prev += cur / arr.length;
+    },0);
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. reduce 이용해서 평균 구해줍니다.<br>
+
+                <br>
+                총평 : 각각의 연산에 arr.length를 나눠주건 전체 값에 나눠주건 상관없습니다.
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12944">https://school.programmers.co.kr/learn/courses/30/lessons/12944</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
