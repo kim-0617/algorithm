@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자릿수 더하기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 자릿수 더하기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 자릿수 더하기
+            </p>
+
+            <hr />
+            <p class="t_desc2">
+                자연수 N이 주어지면, N의 각 자릿수의 합을 구해서 return 하는 solution 함수를 만들어 주세요.<br>
+                예를들어 N = 123이면 1 + 2 + 3 = 6을 return 하면 됩니다.
+            </p>
+
+            <hr>
+            <i>제한사항</i>
+            <p class="t_box">
+                N의 범위 : 100,000,000 이하의 자연수
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>N</th>
+                        <th>answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">123</td>
+                        <td class="ce">6</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">987</td>
+                        <td class="ce">24</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p>입출력 예 #1<br>
+                문제의 예시와 같습니다.</p>
+
+            <p>입출력 예 #2<br>
+                9 + 8 + 7 = 24이므로 24를 return 하면 됩니다.</p>
+
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(n){
+    // 문자열 '123'.split('') => ['1', '2', '3'].reduce => 끝
+    return String(n).split('').reduce((prev, cur) => {
+        return prev += Number(cur);
+    }, 0);
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 숫자에 String 씌워서 문자열로 만든 후, split('') 해줘서 배열로 만듭니다<br>
+                2. reduce로 합 구해주면 되겠죠?<br>
+
+                총평 : .
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12931">https://school.programmers.co.kr/learn/courses/30/lessons/12931</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
