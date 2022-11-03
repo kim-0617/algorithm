@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>햄버거 만들기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 햄버거 만들기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 햄버거 만들기
+            </p>
+
+            <hr>
+
+            <i>문제 설명</i>
+            <p class="t_desc">
+                햄버거 가게에서 일을 하는 상수는 햄버거를 포장하는 일을 합니다. 함께 일을 하는 다른 직원들이 햄버거에 들어갈 재료를 조리해 주면 조리된 순서대로 상수의 앞에
+                아래서부터 위로 쌓이게 되고, 상수는 순서에 맞게 쌓여서 완성된 햄버거를 따로 옮겨 포장을 하게 됩니다. 상수가 일하는 가게는 정해진 순서(아래서부터, 빵 – 야채
+                – 고기 - 빵)로 쌓인 햄버거만 포장을 합니다. 상수는 손이 굉장히 빠르기 때문에 상수가 포장하는 동안 속 재료가 추가적으로 들어오는 일은 없으며, 재료의 높이는
+                무시하여 재료가 높이 쌓여서 일이 힘들어지는 경우는 없습니다.
+            </p>
+
+            <p class="t_desc">
+                예를 들어, 상수의 앞에 쌓이는 재료의 순서가 [야채, 빵, 빵, 야채, 고기, 빵, 야채, 고기, 빵]일 때, 상수는 여섯 번째 재료가 쌓였을 때, 세 번째 재료부터
+                여섯 번째 재료를 이용하여 햄버거를 포장하고, 아홉 번째 재료가 쌓였을 때, 두 번째 재료와 일곱 번째 재료부터 아홉 번째 재료를 이용하여 햄버거를 포장합니다. 즉,
+                2개의 햄버거를 포장하게 됩니다.
+            </p>
+
+            <p class="t_desc2">
+                상수에게 전해지는 재료의 정보를 나타내는 정수 배열 ingredient가 주어졌을 때, 상수가 포장하는 햄버거의 개수를 return 하도록
+                solution 함수를 완성하시오.
+            </p>
+
+            <hr>
+            <i>제한사항</i>
+            <p class="t_box">
+                1 ≤ ingredient의 길이 ≤ 1,000,000
+                ingredient의 원소는 1, 2, 3 중 하나의 값이며, 순서대로 빵, 야채, 고기를 의미합니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>ingredient</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">[2, 1, 1, 2, 3, 1, 2, 3, 1]</td>
+                        <td class="ce">2</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">[1, 3, 2, 1, 2, 1, 3, 1, 2]</td>
+                        <td class="ce">0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p><strong>입출력 예 #1</strong></p>
+            문제 예시와 같습니다.
+
+            <p><strong>입출력 예 #2</strong></p>
+            상수가 포장할 수 있는 햄버거가 없습니다.
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(ingredient) {
+    // 1 : 빵
+    // 2 : 야채
+    // 3 : 고기
+    // 빵 -> 야채 -> 고기 -> 빵 순서 (1,2,3,1)
+
+    const stack = [];
+    let answer = 0;
+    
+    for(let i = 0; i < ingredient.length; i++) {
+        stack.push(String(ingredient[i]));
+        
+        if(stack.length >= 4) {
+            if(stack.at(-4) + stack.at(-3) + stack.at(-2) + stack.at(-1) === '1231') {
+                stack.length = stack.length - 4;
+                answer++;
+            }
+        }
+    }
+    return answer;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 재료들을 순회해줄게요. 하면서 재료들을 stack에 push 해줍니다.<br>
+                2. stack이 4보다 커지면 뒤에부터 4자리가 1231인지 검사해줍니다.<br>
+                3. 1231이면 뒤에서 4개 날립니다.<br>
+                4. 최종적으로 answer을 return<br>
+
+                <br>
+                총평 : 어우 정말 쉽지 않았네요. arr.length를 조절해주면 array가 변한다는 사실을 아셨나요?
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/133502">https://school.programmers.co.kr/learn/courses/30/lessons/133502</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
