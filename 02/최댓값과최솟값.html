@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최댓값과 최솟값</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 최댓값과 최솟값</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 최댓값과 최솟값
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                문자열 s에는 공백으로 구분된 숫자들이 저장되어 있습니다. str에 나타나는 숫자 중 최소값과 최대값을 찾아 이를 "(최소값) (최대값)"형태의 문자열을 반환하는
+                함수, solution을 완성하세요.<br>
+                예를들어 s가 "1 2 3 4"라면 "1 4"를 리턴하고, "-1 -2 -3 -4"라면 "-4 -1"을 리턴하면 됩니다.
+            </p>
+
+            <hr>
+            <i>제한 조건</i>
+            <p class="t_box">s에는 둘 이상의 정수가 공백으로 구분되어 있습니다.</p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th style="text-align: center">return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">"1 2 3 4"</td>
+                        <td style="text-align: center">"1 4"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">"-1 -2 -3 -4"</td>
+                        <td style="text-align: center">"-4 -1"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">"-1 -1"</td>
+                        <td style="text-align: center">"-1 -1"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(s) {
+    s = s.split(' ');
+    const max = Math.max.apply(null, s); // 최대값 구하기
+    const min = Math.min.apply(null, s); // 최소값 구하기
+
+    return `${min} ${max}`;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. Math.max으로 최댓값 구해주고<br>
+                2. Math.min으로 최솟값 구해주고 조건에 맞게 return 해주면 되겠죠?<br>
+                <br>
+                총평 : 시작은 가볍게
+            </p>
+            출처 :
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12939">https://school.programmers.co.kr/learn/courses/30/lessons/12939</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
