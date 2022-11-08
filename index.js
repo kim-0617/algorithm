@@ -182,22 +182,38 @@
 // let b = [3,2,5,7,8];
 // console.log(solution(a,b));
 
-function solution(arr1, arr2) {
-    const [row, col] = [arr1.length, arr2[0].length];
-    // console.log(row, col); // 3,3
-    let answer = new Array(row);
-    for (let i = 0; i < row; i++) answer[i] = new Array(col);
+// function solution(arr1, arr2) {
+//     const [row, col] = [arr1.length, arr2[0].length];
+//     // console.log(row, col); // 3,3
+//     let answer = new Array(row);
+//     for (let i = 0; i < row; i++) answer[i] = new Array(col);
 
-    //arr1의 열의 개수 = arr2의 행의 개수, arr1의 i번째 행과 arr2의 j번째 열의 원소들을 곱한 것들의 합이 answer[i][j] 값
-    for (let i = 0; i < row; i++) {
-        for (let j = 0; j < col; j++) {
-            answer[i][j] = arr1[i].reduce((sum, arr1Value, rowIndex) => {
-                console.log(sum, arr1Value, rowIndex, j);
-                return sum + (arr1Value * arr2[rowIndex][j]);
-            }, 0)
+//     //arr1의 열의 개수 = arr2의 행의 개수, arr1의 i번째 행과 arr2의 j번째 열의 원소들을 곱한 것들의 합이 answer[i][j] 값
+//     for (let i = 0; i < row; i++) {
+//         for (let j = 0; j < col; j++) {
+//             answer[i][j] = arr1[i].reduce((sum, arr1Value, rowIndex) => {
+//                 console.log(sum, arr1Value, rowIndex, j);
+//                 return sum + (arr1Value * arr2[rowIndex][j]);
+//             }, 0)
+//         }
+//     }
+//     return answer;
+// }
+
+// solution([[2, 3, 2], [4, 2, 4], [3, 1, 4]], [[5, 4, 3], [2, 4, 1], [3, 1, 1]]);
+
+function solution(s) {
+    s = s.toLowerCase(); // 첫글자 빼곤 전부 소문자
+    let str = s.split(' '); // 공백으로 나누고
+
+    const regex = /[a-z]/i;
+    str.forEach((word, index) => {
+        if (regex.test(word[0])) { // 첫글자가 알파벳이면 
+            word = word[0].toUpperCase() + word.slice(1); // 대문자로 변환해서
         }
-    }
-    return answer;
+        str[index] = word; // 다시변환
+    });
+    return str.join(' '); // 공백으로 합침
 }
 
-solution([[2, 3, 2], [4, 2, 4], [3, 1, 4]], [[5, 4, 3], [2, 4, 1], [3, 1, 1]]);
+console.log(solution("3people unFollowed me"));
