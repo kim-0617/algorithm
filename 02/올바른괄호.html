@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>올바른 괄호</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 올바른 괄호</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 스택 / 큐 > 올바른 괄호
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc">
+                괄호가 바르게 짝지어졌다는 것은 '(' 문자로 열렸으면 반드시 짝지어서 ')' 문자로 닫혀야 한다는 뜻입니다. 예를 들어
+            </p>
+            
+            <p class="t_desc">
+                "()()" 또는 "(())()" 는 올바른 괄호입니다.
+                ")()(" 또는 "(()(" 는 올바르지 않은 괄호입니다.
+            </p>
+
+            <p class="t_desc2">
+                '(' 또는 ')' 로만 이루어진 문자열 s가 주어졌을 때, 문자열 s가 올바른 괄호이면 true를 return 하고, 올바르지 않은 괄호이면 false를 return
+                하는 solution
+                함수를 완성해 주세요.
+            </p>
+
+            <hr>
+            <i>제한사항</i>
+            <p class="t_box">
+                문자열 s의 길이 : 100,000 이하의 자연수
+                문자열 s는 '(' 또는 ')' 로만 이루어져 있습니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th>answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">"()()"</td>
+                        <td class="ce">true</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">"(())()"</td>
+                        <td class="ce">true</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">")()("</td>
+                        <td class="ce">false</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">"(()("</td>
+                        <td class="ce">false</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p class="t_desc">
+                입출력 예 #1,2,3,4<br>
+                문제의 예시와 같습니다.
+            </p>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(s){
+    // 말도 안되게 오래걸림
+    // s = s.split('');
+    // let i = 0;
+    // while(s.length !== 0) {
+    // // 첫번째 문자가 )이면 올바른 괄호를 만들 수 없다. || 없애다가 문자열 중에 ) 가 다 없어져도 그것은 올바른 괄호가 아니다.
+    // if(s[0] === ')' || !s.includes(')')) return false;
+    // if(s[i] === s[i+1]) { // 사실상 ( 가 연속으로 나오면 pass
+    // i++;
+    // }
+    // else { // 현재값과 다음값이 다르면 즉, () 이면
+    // s.splice(i,2); // 두개 없애고 처음부터 다시
+    // i = 0;
+    // }
+    // }
+    // return s.length === 0 ? true : false; // 길이가 0이면 올바른 괄호 (사실상 여기까지 왔다는 것은 s가 빈배열이기 때문에 무조건 true를 return 해도 상관없음)
+
+    // 오히려 이부분이 있으니까 효율성이 안되네요? 난 미리 거를건 거르고 시작해서 효율성을 높이고자 했는데 시간이 더걸려버리네요? 하..
+    // let first = 0, second = 0; // 괄호 갯수 구하기
+    // s = s.replace(/\(\)/g, '');
+    // s.split('').reduce((prev, curr) => {
+    // if(curr === '(') first++;
+    // else if(curr === ')') second++;
+    // }, 0);
+    // if(first !== second || s[0] === ')') return false; // 괄호 짝이 안맞거나, )로 시작하면
+
+    const stack = [];
+    for(let i = 0; i < s.length; i++) { // 스택이 비었는데 현재값이 ) 이면 올바른 괄호가 될 수 없음 ) 로 어케시작함 
+        if(stack.length===0 && s[i]===')' ) {
+        return false; 
+        } 
+        else { 
+            if(stack.at(-1)==='(' && s[i]===')' ) { // 스택의 마지막 값이 ( 이고 현재 값이 ) 이면 push 말고 pop
+                stack.pop(); 
+            } 
+            else { 
+                stack.push(s[i]); // 그 외의 경우에는 스택에 넣어준다. 
+            } 
+        } 
+    } 
+    return stack.length===0 ? true : false; // 모든 과정을 거치고 스택이 비었으면 올바른괄호 
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 소문자로 만들어 줍니다. 공백으로 나눠서 배열로 만들어 줄게요<br>
+                2. 정규식 하나 만들건데 첫글자가 앞글자가 알파벳이 맞는가 판별할데 사용하겠습니다<br>
+                3. 배열로 만들어준거 순회해서 첫글자가 알파벳이면 대문자로 바꿔주고 값을 바꿔줄게요<br>
+                4. 공백으로 나눴던거 그대로 합치면 되겠죠?<br>
+                <br>
+                총평 : 무난한 문제네요.
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12951#">https://school.programmers.co.kr/learn/courses/30/lessons/12951#</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
