@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최댓값과 최솟값</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 최댓값과 최솟값</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 최댓값과 최솟값
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc">0과 1로 이루어진 어떤 문자열 x에 대한 이진 변환을 다음과 같이 정의합니다.</p>
+
+            <ol>
+                <li>x의 모든 0을 제거합니다.</li>
+                <li>x의 길이를 c라고 하면, x를 "c를 2진법으로 표현한 문자열"로 바꿉니다.</li>
+            </ol>
+
+            <p class="t_desc">
+                예를 들어, x = "0111010"이라면, x에 이진 변환을 가하면
+                x = "0111010" -&gt; "1111" -&gt; "100" 이
+                됩니다.
+            </p>
+
+            <p class="t_desc2">
+                0과 1로 이루어진 문자열 s가 매개변수로 주어집니다. s가 "1"이 될 때까지 계속해서 s에 이진 변환을 가했을 때, 이진 변환의 횟수와 변환 과정에서 제거된 모든
+                0의 개수를 각각
+                배열에 담아 return 하도록 solution 함수를 완성해주세요.
+            </p>
+
+            <hr>
+            <i>제한사항</i>
+            <p class="t_box">
+                s의 길이는 1 이상 150,000 이하입니다.
+                s에는 '1'이 최소 하나 이상 포함되어 있습니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">"110010101001"</td>
+                        <td class="ce">[3,8]</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">"01110"</td>
+                        <td class="ce">[3,3]</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">"1111111"</td>
+                        <td class="ce">[4,1]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+
+            <p>입출력 예 #1</p>
+
+            <ul>
+                <li>"110010101001"이 "1"이 될 때까지 이진 변환을 가하는 과정은 다음과 같습니다.</li>
+            </ul>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>회차</th>
+                        <th>이진 변환 이전</th>
+                        <th>제거할 0의 개수</th>
+                        <th>0 제거 후 길이</th>
+                        <th>이진 변환 결과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">1</td>
+                        <td class="ce">"110010101001"</td>
+                        <td class="ce">6</td>
+                        <td class="ce">6</td>
+                        <td class="ce">"110"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">2</td>
+                        <td class="ce">"110"</td>
+                        <td class="ce">1</td>
+                        <td class="ce">2</td>
+                        <td class="ce">"10"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">3</td>
+                        <td class="ce">"10"</td>
+                        <td class="ce">1</td>
+                        <td class="ce">1</td>
+                        <td class="ce">"1"</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul>
+                <li>3번의 이진 변환을 하는 동안 8개의 0을 제거했으므로, [3,8]을 return 해야 합니다.</li>
+            </ul>
+
+            <p>입출력 예 #2</p>
+
+            <ul>
+                <li>"01110"이 "1"이 될 때까지 이진 변환을 가하는 과정은 다음과 같습니다.</li>
+            </ul>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>회차</th>
+                        <th>이진 변환 이전</th>
+                        <th>제거할 0의 개수</th>
+                        <th>0 제거 후 길이</th>
+                        <th>이진 변환 결과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">1</td>
+                        <td class="ce">"01110"</td>
+                        <td class="ce">2</td>
+                        <td class="ce">3</td>
+                        <td class="ce">"11"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">2</td>
+                        <td class="ce">"11"</td>
+                        <td class="ce">0</td>
+                        <td class="ce">2</td>
+                        <td class="ce">"10"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">3</td>
+                        <td class="ce">"10"</td>
+                        <td class="ce">1</td>
+                        <td class="ce">1</td>
+                        <td class="ce">"1"</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul>
+                <li>3번의 이진 변환을 하는 동안 3개의 0을 제거했으므로, [3,3]을 return 해야 합니다.</li>
+            </ul>
+
+            <p>입출력 예 #3</p>
+
+            <ul>
+                <li>"1111111"이 "1"이 될 때까지 이진 변환을 가하는 과정은 다음과 같습니다.</li>
+            </ul>
+
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>회차</th>
+                        <th>이진 변환 이전</th>
+                        <th>제거할 0의 개수</th>
+                        <th>0 제거 후 길이</th>
+                        <th>이진 변환 결과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce" class="ce">1</td>
+                        <td class="ce" class="ce">"1111111"</td>
+                        <td class="ce" class="ce">0</td>
+                        <td class="ce" class="ce">7</td>
+                        <td class="ce" class="ce">"111"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce" class="ce">2</td>
+                        <td class="ce" class="ce">"111"</td>
+                        <td class="ce" class="ce">0</td>
+                        <td class="ce" class="ce">3</td>
+                        <td class="ce" class="ce">"11"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce" class="ce">3</td>
+                        <td class="ce" class="ce">"11"</td>
+                        <td class="ce" class="ce">0</td>
+                        <td class="ce" class="ce">2</td>
+                        <td class="ce" class="ce">"10"</td>
+                    </tr>
+                    <tr>
+                        <td class="ce" class="ce">4</td>
+                        <td class="ce" class="ce">"10"</td>
+                        <td class="ce" class="ce">1</td>
+                        <td class="ce" class="ce">1</td>
+                        <td class="ce" class="ce">"1"</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul>
+                <li>4번의 이진 변환을 하는 동안 1개의 0을 제거했으므로, [4,1]을 return 해야 합니다.</li>
+            </ul>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+<pre><code class="language-js">function solution(s) {
+    let count = 0;
+    let zeroCount = 0;
+    let newString;
+
+    while(Number(s) !== 1) {
+        newString = s.replace(/0/g, '');
+        zeroCount += (s.length - newString.length);
+        newString = (newString.length).toString(2);
+        s = newString;
+        count++;
+    }
+    return [count, zeroCount];
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. <br>
+                2. <br>
+                3. <br>
+                4. <br>
+                <br>
+                총평 :
+            </p>
+            출처 :
+            <a href=""></a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
