@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피보나치 수</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 피보나치 수</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 피보나치 수
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc">피보나치 수는 F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 가 적용되는 수 입니다. </p>
+
+            <p class="t_desc">예를들어 </p>
+
+            <ul>
+                <li>F(2) = F(0) + F(1) = 0 + 1 = 1</li>
+                <li>F(3) = F(1) + F(2) = 1 + 1 = 2</li>
+                <li>F(4) = F(2) + F(3) = 1 + 2 = 3</li>
+                <li>F(5) = F(3) + F(4) = 2 + 3 = 5</li>
+            </ul>
+
+            <p class="t_desc">와 같이 이어집니다.</p>
+
+            <p class="t_desc2">
+                2 이상의 n이 입력되었을 때, n번째 피보나치 수를 1234567으로 나눈 나머지를 리턴하는 함수, solution을 완성해 주세요.
+            </p>
+
+            <hr>
+            <i>제한 사항</i>
+            <p class="t_box">
+                n은 2 이상 100,000 이하인 자연수입니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>n</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">3</td>
+                        <td class="ce">2</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">5</td>
+                        <td class="ce">5</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p>피보나치수는 0번째부터 0, 1, 1, 2, 3, 5, ... 와 같이 이어집니다.</p>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(n) {
+    // 재귀로 하면 안되고
+    // for문으로 하나씩 쌓아가는 것을 동적 계획법이라고 합니다.
+    const fibo = [0, 1];
+    
+    for(let i = 2; i <= n; i++) {
+        fibo.push((fibo[i-1] + fibo[i-2]) % 1234567);
+    }
+    return fibo[n];
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. F(0) = 0, F(1) = 1 넣어주고 2부터 전 값 + 전전 값 push 해줄게요<br>
+                2. 1234567로 나눈 나머지 구해야 되는데 이게 결과값에 나누는것과 과정중에 나누는게 또 달라요 숫자가 커지면<br>
+                3. 문제에 적힌대로 나머지를 구해서 return 해 줍니다. 계산중에 나머지를 구해서 push합니다.<br>
+                <br>
+                총평 : fibo[i-1], fibo[i-2] 각각 1234567 % 해줘도 되고, 더한 값에 % 해줘도 되지만, return fibo[n]에는 하면 안됩니다.
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12945">https://school.programmers.co.kr/learn/courses/30/lessons/12945</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
