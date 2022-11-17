@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최댓값과 최솟값</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 최댓값과 최솟값</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 최댓값과 최솟값
+            </p>
+
+            <hr />
+            <p class="t_desc2">
+                짝지어 제거하기는, 알파벳 소문자로 이루어진 문자열을 가지고 시작합니다. 먼저 문자열에서 같은 알파벳이 2개 붙어 있는 짝을 찾습니다. 그다음, 그 둘을 제거한 뒤, 앞뒤로 문자열을 이어
+                붙입니다. 이
+                과정을 반복해서 문자열을 모두 제거한다면 짝지어 제거하기가 종료됩니다. 문자열 S가 주어졌을 때, 짝지어 제거하기를 성공적으로 수행할 수 있는지 반환하는 함수를 완성해 주세요. 성공적으로
+                수행할 수
+                있으면 1을, 아닐 경우 0을 리턴해주면 됩니다.
+            </p>
+
+            <p class="t_desc">예를 들어, 문자열 S = baabaa 라면</p>
+
+            <p class="t_desc">b <em>aa</em> baa → <em>bb</em> aa → <em>aa</em> →</p>
+
+            <p class="t_desc">의 순서로 문자열을 모두 제거할 수 있으므로 1을 반환합니다.</p>
+
+            <hr>
+            <i>제한사항</i>
+            <p class="t_box">
+                문자열의 길이 : 1,000,000이하의 자연수
+                문자열은 모두 소문자로 이루어져 있습니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">baabaa</td>
+                        <td class="ce">1</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">cdcd</td>
+                        <td class="ce">0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+
+            <p>입출력 예 #1<br>
+                위의 예시와 같습니다.<br>
+                입출력 예 #2<br>
+
+                <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(s) {
+    const stack = [];
+    
+    for(let i = 0; i < s.length; i++) {
+        if(stack.at(-1) === s[i]) {
+            stack.pop();
+        }
+        else {
+            stack.push(s[i])
+        }
+    }
+    return stack.length === 0 ? 1 : 0;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. stack 선언해 줍니다. 여기에 s의 문자 하나하나를 push 할겁니다.<br>
+                2. 할건데, 이전원소와 다음원소가 같으면 제거해야겠죠? b -> a 제거 -> a 제거<br>
+                3. 그렇게 되면 b 남게되고 다음원소 b니까 또 지워지겠죠?<br>
+                4. 그렇게해서 판별하면 되겠죠?<br>
+                <br>
+                총평 : 무난한 문제였죠?
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12973?language=javascript">https://school.programmers.co.kr/learn/courses/30/lessons/12973?language=javascript</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
