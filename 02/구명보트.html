@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구명보트</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 구명보트</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 탐욕법(Greedy) > 구명보트
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc">무인도에 갇힌 사람들을 구명보트를 이용하여 구출하려고 합니다. 구명보트는 작아서 한 번에 최대 <strong>2명</strong>씩 밖에 탈 수 없고, 무게
+                제한도
+                있습니다.</p>
+
+            <p class="t_desc">예를 들어, 사람들의 몸무게가 [70kg, 50kg, 80kg, 50kg]이고 구명보트의 무게 제한이 100kg이라면 2번째 사람과 4번째 사람은 같이 탈 수
+                있지만
+                1번째 사람과 3번째
+                사람의 무게의 합은 150kg이므로 구명보트의 무게 제한을 초과하여 같이 탈 수 없습니다.</p>
+
+            <p class="t_desc">구명보트를 최대한 적게 사용하여 모든 사람을 구출하려고 합니다.</p>
+
+            <p class="t_desc2">
+                사람들의 몸무게를 담은 배열 people과 구명보트의 무게 제한 limit가 매개변수로 주어질 때, 모든 사람을 구출하기 위해 필요한 구명보트 개수의 최솟값을
+                return 하도록
+                solution 함수를 작성해주세요.
+            </p>
+
+            <hr>
+            <i>제한사항</i>
+            <ul>
+                <li>무인도에 갇힌 사람은 1명 이상 50,000명 이하입니다.</li>
+                <li>각 사람의 몸무게는 40kg 이상 240kg 이하입니다.</li>
+                <li>구명보트의 무게 제한은 40kg 이상 240kg 이하입니다.</li>
+                <li>구명보트의 무게 제한은 항상 사람들의 몸무게 중 최댓값보다 크게 주어지므로 사람들을 구출할 수 없는 경우는 없습니다.</li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>people</th>
+                        <th>limit</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">[70, 50, 80, 50]</td>
+                        <td class="ce">100</td>
+                        <td class="ce">3</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">[70, 80, 50]</td>
+                        <td class="ce">100</td>
+                        <td class="ce">3</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(people, limit) {
+    let answer = 0;
+    people.sort((a, b) => b - a); // 내림차순 정렬
+    let left = 0; // 제일 큰 인덱스
+    let right = people.length - 1; // 제일 작은 인덱스
+
+    while(left < right) { // 사실상 left가 right에 도달할 때 까지 let sum=people[left] + people[right]; // 제일 무거운사람 + 제일 가벼운 사람 if(sum>
+        limit) { // 둘다 못태우면
+        left++; // 제일 무거운 사람만 태우고
+        }
+        else { // 둘타 태울 수 있으면
+        left++; // 둘다 태웁니다.
+        right--;
+        }
+        answer++; // 어쨌든 태웠으니까 answer 증가
+    }
+    if(left === right) answer++; // 다 태워서 나오면 상관없는데 못태우는 사람 한명 나오면 그 경우 추가
+    return answer;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 역순으로 정렬합니다. left는 무거운 사람을 가리키고 right는 가벼운 사람을 가리킵니다. <br>
+                2. 무거운 사람 먼저 태울겁니다. 그런데 제일 가벼운 사람을 껴도 limit에 걸리지 않는다면 같이 태우면 되겠죠?<br>
+                3. 안되면 무거운사람만 태우고 answer 증가시킵니다. <br>
+                4. 만약 while문을 다 돌았을 때, [80,70,50], 100 이라면 80 -> 70 -> 50 순서대로 태울텐데<br>
+                5. 80태우고 70태웠을때 left 2, right 2로 while문을 탈출하기 때문에 마지막에 50을 태우기 위해 하나 더 증가시킵니다. <br>
+                <br>
+                총평 : 방법에 꼭 한가지만 있는게 아니다. 삭제하지 않고 처리할 수 있으면 최선이다.
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/42885">https://school.programmers.co.kr/learn/courses/30/lessons/42885</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
