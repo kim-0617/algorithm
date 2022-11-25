@@ -86,21 +86,25 @@
             <hr />
             <h3 class="t_tit2">코드</h3>
             <div class="t_code">
-                <pre><code class="language-js">
+<pre><code class="language-js">function solution(n){
+    let answer = 0;
+    let bi = n.toString(2);
+    answer = String(bi).split('').filter(x => x === '1').length;
+    return answer;
+}
 </pre>
             </div>
             <h3 class="t_tit">리뷰</h3>
             <p class="t_desc">
                 순서는 다음과 같다 <br>
-                1. <br>
-                2. <br>
-                3. <br>
-                4. <br>
+                1. 건전지 사용량을 return 하면되는데, 최소로 사용해야겠죠?<br>
+                2. 근데 이게 n을 2진수로 변환했을 때, 1의 수가 건전지 사용량과 맞아 떨어지더라구요<br>
+                3. 그러므로 toString(2) 해서 1의 갯수를 return 해주면 되겠죠?<br>
                 <br>
-                총평 :
+                총평 : 종이에 끄적여 보다가 발견했습니다. 유레카!
             </p>
             출처 :
-            <a href=""></a>
+            <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12980">https://school.programmers.co.kr/learn/courses/30/lessons/12980</a>
             </p>
         </div>
     </main>

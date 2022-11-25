@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멀리 뛰기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 멀리 뛰기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 멀리 뛰기
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc2">
+                효진이는 멀리 뛰기를 연습하고 있습니다. 효진이는 한번에 1칸, 또는 2칸을 뛸 수 있습니다. 칸이 총 4개 있을 때, 효진이는<br>
+                (1칸, 1칸, 1칸, 1칸)<br>
+                (1칸, 2칸, 1칸)<br>
+                (1칸, 1칸, 2칸)<br>
+                (2칸, 1칸, 1칸)<br>
+                (2칸, 2칸)<br>
+                의 5가지 방법으로 맨 끝 칸에 도달할 수 있습니다. 멀리뛰기에 사용될 칸의 수 n이 주어질 때, 효진이가 끝에 도달하는 방법이 몇 가지인지 알아내, 여기에 1234567를 나눈 나머지를
+                리턴하는 함수, solution을 완성하세요. 예를 들어 4가 입력된다면, 5를 return하면 됩니다.</p>
+
+            <hr>
+            <i>제한 사항</i>
+            <p class="t_box">
+                n은 1 이상, 2000 이하인 정수입니다.
+            </p>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>n</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">4</td>
+                        <td class="ce">5</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">3</td>
+                        <td class="ce">3</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+
+            <p>입출력 예 #1<br>
+                위에서 설명한 내용과 같습니다.</p>
+
+            <p>입출력 예 #2<br>
+                (2칸, 1칸)<br>
+                (1칸, 2칸)<br>
+                (1칸, 1칸, 1칸)<br>
+                총 3가지 방법으로 멀리 뛸 수 있습니다.</p>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p class="t_desc">
+                입출력 예 #1,2,3,4<br>
+                문제의 예시와 같습니다.
+            </p>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(n) {
+    const arr = [1, 2];
+    for(let i = 2; i < n; i++) {
+        arr.push((arr[i-1] + arr[i-2]) % 1234567);
+    }
+    return arr[n-1];
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 1칸을 뛰려면 방법 1가지, 2칸을 뛰려면 방법2가지, 3칸을 뛰려면? 방법이 3가지에요<br>
+                2. 그렇다면 4칸을 뛰려면? 5가지죠? 규칙이 있죠? n = (n - 2) + (n - 1)<br>
+                3. 이런거는 저번에 보여드린 동적계획법으로 풀면 되겠죠?<br>
+                4. (n - 2) + (n - 1) 여기에 1234567을 나눈 나머지를 저장해주고 배열에 n -1 번째 요소를 꺼내면 되겠죠?<br>
+                <br>
+                총평 : 저번과 같은 느낌의 문제죠?
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12914">https://school.programmers.co.kr/learn/courses/30/lessons/12914</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
