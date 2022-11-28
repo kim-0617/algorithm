@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[1차] 캐시</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : [1차] 캐시</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT > [1차] 캐시
+
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <h2>캐시</h2>
+            <p class="t_desc">
+                지도개발팀에서 근무하는 제이지는 지도에서 도시 이름을 검색하면 해당 도시와 관련된 맛집 게시물들을 데이터베이스에서 읽어 보여주는 서비스를 개발하고 있다.<br>
+                이 프로그램의 테스팅 업무를 담당하고 있는 어피치는 서비스를 오픈하기 전 각 로직에 대한 성능 측정을 수행하였는데, 제이지가 작성한 부분 중 데이터베이스에서 게시물을 가져오는 부분의
+                실행시간이 너무 오래 걸린다는 것을 알게 되었다.<br>
+                어피치는 제이지에게 해당 로직을 개선하라고 닦달하기 시작하였고, 제이지는 DB 캐시를 적용하여 성능 개선을 시도하고 있지만 캐시 크기를 얼마로 해야 효율적인지 몰라 난감한 상황이다.
+            </p>
+            <p class="t_desc2">어피치에게 시달리는 제이지를 도와, DB 캐시를 적용할 때 캐시 크기에 따른 실행시간 측정 프로그램을 작성하시오.</p>
+
+            <hr>
+            <i>입력 형식</i>
+            <ul>
+                <li>캐시 크기(cacheSize)와 도시이름 배열(cities)을 입력받는다.</li>
+                <li>cacheSize는 정수이며, 범위는 0 ≦ cacheSize ≦ 30 이다.</li>
+                <li>cities는 도시 이름으로 이뤄진 문자열 배열로, 최대 도시 수는 100,000개이다.</li>
+                <li>각 도시 이름은 공백, 숫자, 특수문자 등이 없는 영문자로 구성되며, 대소문자 구분을 하지 않는다. 도시 이름은 최대 20자로 이루어져 있다.</li>
+            </ul>
+
+            <hr>
+            <i>출력 형식</i>
+            <ul>
+                <li>입력된 도시이름 배열을 순서대로 처리할 때, "총 실행시간"을 출력한다.</li>
+            </ul>
+
+            <hr>
+            <i>조건</i>
+            <ul>
+                <li>캐시 교체 알고리즘은 LRU(Least Recently Used)를 사용한다.</li>
+                <li>cache hit일 경우 실행시간은 1이다.</li>
+                <li>cache miss일 경우 실행시간은 5이다.</li>
+            </ul>
+
+            <hr>
+            <i>입출력 예제</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>캐시크기(cacheSize)</th>
+                        <th>도시이름(cities)</th>
+                        <th>실행시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">3</td>
+                        <td class="ce">["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul",
+                            "NewYork", "LA"]
+                        </td>
+                        <td class="ce">50</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">3</td>
+                        <td class="ce">["Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul"]
+                        </td>
+                        <td class="ce">21</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">2</td>
+                        <td class="ce">["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome",
+                            "Paris",
+                            "Jeju", "NewYork", "Rome"]</td>
+                        <td class="ce">60</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">5</td>
+                        <td class="ce">["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome",
+                            "Paris",
+                            "Jeju", "NewYork", "Rome"]</td>
+                        <td class="ce">52</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">2</td>
+                        <td class="ce">["Jeju", "Pangyo", "NewYork", "newyork"]</td>
+                        <td class="ce">16</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">0</td>
+                        <td class="ce">["Jeju", "Pangyo", "Seoul", "NewYork", "LA"]</td>
+                        <td class="ce">25</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(cacheSize, cities) {
+    if(cacheSize === 0) return cities.length * 5; // 이거때문이었음 캐쉬 0일 때 처리
+    let answer = 0;
+    const stack = [];
+    cities = cities.map(c => c.toLowerCase())
+    let i = 0;
+    while(i !== cities.length) {
+        // 여유 있는데 hit인 경우
+        if (stack.length < cacheSize && stack.includes(cities[i])) {
+            answer++;
+            stack.push(stack.splice(stack.indexOf(cities[i]), 1)[0]); 
+        }
+        // 여유 없는데 hit인 경우 => 위에랑 이거 두 경우 차이없어서 그냥 하면 됨
+        else if(stack.includes(cities[i])) {
+            answer++;
+            stack.push(stack.splice(stack.indexOf(cities[i]), 1)[0]); 
+        }
+        // miss 인데 꽉 찬 경우
+        else if (stack.length >= cacheSize) {
+            stack.shift();
+            stack.push(cities[i])
+            answer += 5;
+        }
+        // miss 인데 빈 경우
+        else {
+            stack.push(cities[i])
+            answer += 5;
+        }
+        i++;
+    }
+    return answer;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 먼저 캐쉬 크기가 0일때는 그냥 5곱해서 return 해줄게요<br>
+                2. 경우는 다음과 같습니다. 1. 여유있는데 hit, 2. 꽉찼는데 miss, 3. 비었는데 miss<br>
+                3. 1번의 경우는 최근 썼던 걸 맨앞으로 당기고 answer++ 해줍니다.<br>
+                4. 2번의 경우는 맨 앞에거 지우고 push하면 됩니다. 그리고 answer+=5<br>
+                5. 3번의 경우는 그냥 push 하고 answer+=5 하면 되겠죠?<br>
+                <br>
+                총평 : 적힌대로만 하면 됩니다.
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/17680">https://school.programmers.co.kr/learn/courses/30/lessons/17680</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>

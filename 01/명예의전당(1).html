@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>명예의 전당 (1)</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 명예의 전당 (1)</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 명예의 전당 (1)
+            </p>
+
+            <hr>
+            <i>문제 설명</i>
+            <p class="t_desc">
+                "명예의 전당"이라는 TV 프로그램에서는 매일 1명의 가수가 노래를 부르고, 시청자들의 문자 투표수로 가수에게 점수를 부여합니다. 매일 출연한 가수의 점수가 지금까지 출연 가수들의 점수
+                중
+                상위 k번째 이내이면 해당 가수의 점수를 명예의 전당이라는 목록에 올려 기념합니다.&nbsp;즉 프로그램 시작 이후 초기에 k일까지는 모든 출연 가수의 점수가 명예의 전당에 오르게
+                됩니다. k일 다음부터는 출연 가수의 점수가 기존의 명예의 전당 목록의 k번째 순위의 가수 점수보다 더 높으면, 출연 가수의 점수가 명예의 전당에 오르게 되고 기존의 k번째 순위의 점수는
+                명예의 전당에서 내려오게 됩니다.
+            </p>
+
+            <p class="t_desc">
+                이 프로그램에서는 매일 "명예의 전당"의 최하위 점수를 발표합니다. 예를 들어, k = 3이고, 7일 동안 진행된 가수의 점수가 [10, 100, 20, 150,
+                1, 100, 200]이라면, 명예의 전당에서 발표된 점수는 아래의 그림과 같이 [10, 10, 10, 20, 20, 100, 100]입니다.
+            </p>
+
+            <p class="t_desc">
+                <img src="https://grepp-programmers.s3.ap-northeast-2.amazonaws.com/files/production/b0893853-7471-47c0-b7e5-1e8b46002810/%EA%B7%B8%EB%A6%BC1.png"
+                    title="" alt="그림1.png">
+            </p>
+
+            <p class="t_desc2">명예의 전당 목록의 점수의 개수 k, 1일부터 마지막 날까지 출연한 가수들의 점수인 score가 주어졌을 때, 매일 발표된 명예의 전당의
+                최하위 점수를 return하는 solution 함수를 완성해주세요.</p>
+
+            <hr>
+            <i>제한사항</i>
+            <ul>
+                <li>3 ≤ k ≤ 100</li>
+                <li>7 ≤ score의 길이 ≤ 1,000
+
+                    <ul>
+                        <li>0 ≤ score[i] ≤ 2,000</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>k</th>
+                        <th>score</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">3</td>
+                        <td class="ce">[10, 100, 20, 150, 1, 100, 200]</td>
+                        <td class="ce">[10, 10, 10, 20, 20, 100, 100]</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">4</td>
+                        <td class="ce">[0, 300, 40, 300, 20, 70, 150, 50, 500, 1000]</td>
+                        <td class="ce">[0, 0, 0, 0, 20, 40, 70, 70, 150, 300]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p><strong>입출력 예 #1</strong></p>
+
+            <ul>
+                <li>문제의 예시와 같습니다.</li>
+            </ul>
+
+            <p><strong>입출력 예 #2</strong></p>
+
+            <ul>
+                <li>아래와 같이, [0, 0, 0, 0, 20, 40, 70, 70, 150, 300]을 return합니다.
+                    <img src="https://grepp-programmers.s3.ap-northeast-2.amazonaws.com/files/production/5175c32d-44d7-4b13-be47-360bbe6a553c/%EA%B7%B8%EB%A6%BC2.png"
+                        title="" alt="그림2.png">
+                </li>
+            </ul>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(k, score) {
+    let answer = [];
+    const stack = [];
+    for(let i = 0; i < score.length; i++) {
+        if(stack.length >= k) { // 스택에 여유가 없으면
+            if(stack.at(-1) <= score[i]) { // 현재 값이 스택에 가장 작은값보다 크면
+                stack.pop(); // 작은값 없애고
+                stack.push(score[i]); // 현재값 넣고
+                answer.push(stack.sort((a,b) => b-a).at(-1)); // 정렬해서 가장 작은수 뱉습니다.
+            }
+            else {
+                answer.push(stack.sort((a,b) => b-a).at(-1)); // 스택도 꽉찼고 값도 안바뀔거면 그냥 지금 현재에서 작은값 return
+            }
+        }
+        else { // 스택에 여유가 있으면
+            stack.push(score[i]); /// push 하고
+            answer.push(stack.sort((a,b) => b-a).at(-1)); // 정렬해서 가장 작은수 뱉습니다.
+        }
+    }
+    return answer;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 스택에 여유가 있는가 없는가 입니다.<br>
+                2. 스택이 비었다면 push 하고 가장 작은 수를 answer에 push 하면 되겠죠?<br>
+                3. 스택이 꽉찼다면 두가지 경우죠? 점수가 높아서 명예에 전당에 들어오거나 낮아서 못들어오거나<br>
+                4. 높다면 바꿔치기 해주고, 낮다면 넘어가면 됩니다<br>
+                <br>
+                총평 : 600명 정도 때 풀었네요. 새 문제가 나온걸 늦게 알았습니다..
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/138477">https://school.programmers.co.kr/learn/courses/30/lessons/138477</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
