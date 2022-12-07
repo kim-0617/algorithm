@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>images</title>
+
+    <style>
+        * {
+            margin: 0 !important;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            src: url("https://assets.codepen.io/2479807/GrandSlang-Roman.otf");
+            font-family: "Grand Slang";
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            height: 100vh;
+            overflow-x: hidden;
+            font-family: "Grand Slang";
+            font-weight: 400;
+            font-size: normal;
+            background-color: white;
+        }
+
+        h1 {
+            font-weight: 400;
+            font-size: 40px;
+        }
+
+        .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            color: #000;
+        }
+
+        .image-grid {
+            pointer-events: none;
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            top: -5%;
+            left: -5%;
+            display: grid;
+            grid-template-columns: repeat(50, 2%);
+            grid-template-rows: repeat(50, 2%);
+        }
+
+        .image-grid__item {
+            opacity: 1;
+            position: relative;
+        }
+
+        .image-grid img {
+            will-change: transform;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+        }
+
+        .pos-1 {
+            grid-area: 10/1/36/8;
+        }
+
+        .pos-2 {
+            grid-area: 1/21/17/30;
+        }
+
+        .pos-3 {
+            grid-area: 1/36/14/42;
+        }
+
+        .pos-4 {
+            grid-area: 10/10/32/17;
+        }
+
+        .pos-5 {
+            grid-area: 20/35/35/45;
+        }
+
+        .pos-6 {
+            grid-area: 20/46/28/51;
+        }
+
+        .pos-7 {
+            grid-area: 43/1/51/10;
+        }
+
+        .pos-8 {
+            grid-area: 38/14/51/19;
+        }
+
+        .pos-9 {
+            grid-area: 40/26/51/32;
+        }
+
+        .pos-10 {
+            grid-area: 37/39/48/47;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-grid">
+        <div class="title">
+            <h1>Images</h1>
+        </div>
+        <div class="image-grid__item pos-1">
+            <img src="https://assets.codepen.io/2479807/img-1.jpg" alt="">
+        </div>
+        <div class="image-grid__item pos-2">
+            <img src="https://assets.codepen.io/2479807/img-2.jpg" alt="">
+        </div>
+        <div class="image-grid__item pos-3">
+            <img src="https://assets.codepen.io/2479807/img-3.jpg" alt="">
+        </div>
+        <div class="image-grid__item pos-4">
+            <img src="https://assets.codepen.io/2479807/img-4.jpg" alt="">
+        </div>
+        <div class="image-grid__item pos-5">
+            <img src="https://assets.codepen.io/2479807/img-5.jpg" alt="">
+        </div>
+        <div class="image-grid__item pos-6">
+            <img src="https://assets.codepen.io/2479807/img-6.jpg" alt="">
+        </div>
+        <div class="image-grid__item pos-7">
+            <img src="https://assets.codepen.io/2479807/img-7.jpg" alt="">
+        </div>
+        <div class="image-grid__item pos-8">
+            <img src="https://assets.codepen.io/2479807/img-8.jpg" alt="">
+        </div>
+        <div class="image-grid__item pos-9">
+            <img src="https://assets.codepen.io/2479807/img-9.jpg" alt="">
+        </div>
+        <div class="image-grid__item pos-10">
+            <img src="https://assets.codepen.io/2479807/img-10.jpg" alt="">
+        </div>
+    </div>
+</body>
+<script src="./asset/js/gsap.min.js"></script>
+<script>
+    const images = [...document.querySelectorAll("img")];
+
+    const lerp = (a, b, n) => (1 - n) * a + n * b;
+    const map = (x, a, b, c, d) => ((x - a) * (d - c)) / (b - a) + c;
+
+    const getMousePosition = e => {
+        let posX = e.clientX;
+        let posY = e.clientY;
+
+        return {
+            x: posX,
+            y: posY
+        };
+    };
+
+    let mousePos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    window.addEventListener("mousemove", e => (mousePos = getMousePosition(e)));
+
+    gsap.fromTo('img', {
+        scale: 1.2,
+        autoAlpha: 0,
+        ease: 'power3.inOut',
+    }, {
+        scale: 1,
+        autoAlpha: 1,
+        stagger: 0.1,
+        duration: 2.5,
+    })
+
+    images.forEach(img => {
+        let values = { x: 0, y: 0 };
+        const xStart = gsap.utils.random(16, 64);
+        const yStart = gsap.utils.random(-16, 64);
+
+        const render = () => {
+            values.x = lerp(
+                values.x,
+                map(mousePos.x, 0, window.innerWidth, -xStart, xStart),
+                0.07
+            );
+
+            values.y = lerp(
+                values.y,
+                map(mousePos.y, 0, window.innerHeight, -yStart, yStart),
+                0.07
+            );
+            gsap.set(img, { x: values.x, y: values.y });
+
+            requestAnimationFrame(render);
+        };
+        render();
+    });
+</script>
+
+</html>
