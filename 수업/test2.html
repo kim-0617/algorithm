@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test2</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            background-color: black;
+            color: white;
+            font-family: "Roboto", sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container .line {
+            width: 70%;
+            height: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container .line span {
+            position: absolute;
+            font-size: 3rem;
+            line-height: 4.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <div class="line">
+                <span>Hello!</span>
+            </div>
+            <div class="line">
+                <span>This is a</span>
+            </div>
+            <div class="line">
+                <span>text reveal animation.</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+    <script>
+        const tl = gsap.timeline();
+
+        tl.from(".line span", 1.8, {
+            y: 140,
+            ease: "power4.out",
+            delay: 1,
+            skewY: 7,
+            stagger: {
+                amount: 0.3
+            }
+        })
+    </script>
+</body>
+
+</html>
