@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>text</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #161616;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            height: 200vh;
+            width: 100%;
+        }
+
+        .container .text {
+            font-size: 200px;
+            font-family: "Montserrat";
+        }
+
+        .text p {
+            background: linear-gradient(to right,
+                    rgb(255, 255, 255) 50%,
+                    rgb(37, 37, 37) 50%);
+            background-size: 200% 100%;
+            background-position-x: 100%;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+
+            margin-bottom: -250px;
+            margin-left: 50px;
+        }
+
+        .info {
+            display: flex;
+            justify-content: center;
+        }
+
+        .info a {
+            color: white;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text">
+            <p>Efecto</p>
+            <p>Scroll Fill</p>
+            <p>Gsap JavaScript</p>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.7.4/smooth-scrollbar.js"></script>
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+    const bodyScrollBar = Scrollbar.init(document.body, {
+        damping: 0.1,
+        delegateTo: document,
+        alwaysShowTracks: true,
+        speed: 0.2,
+    });
+    ScrollTrigger.scrollerProxy("body", {
+        scrollTop(value) {
+            if (arguments.length) {
+                bodyScrollBar.scrollTop = value;
+            }
+            return bodyScrollBar.scrollTop;
+        },
+    });
+    bodyScrollBar.addListener(ScrollTrigger.update);
+    ScrollTrigger.defaults({
+        scroller: document.body,
+    });
+    gsap.to(".text p", {
+        backgroundPositionX: "0%",
+        stagger: 1,
+        scrollTrigger: {
+            trigger: ".text p",
+            scrub: 1,
+            start: "top center",
+            end: "bottom top",
+        },
+    });
+</script>
+
+</html>
