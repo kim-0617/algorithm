@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프린터</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 프린터</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 스택/큐 > 프린터
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc">
+                일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를
+                먼저 인쇄하는 프린터를
+                개발했습니다. 이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.
+            </p>
+            <div class="highlight">
+                <pre class="language-js"><code>1. 인쇄 대기목록의 가장 앞에 있는 문서(J)를 대기목록에서 꺼냅니다.
+2. 나머지 인쇄 대기목록에서 J보다 중요도가 높은 문서가 한 개라도 존재하면 J를 대기목록의 가장 마지막에 넣습니다.
+3. 그렇지 않으면 J를 인쇄합니다.
+</code></pre>
+            </div>
+            <p class="t_desc">예를 들어, 4개의 문서(A, B, C, D)가 순서대로 인쇄 대기목록에 있고 중요도가 2 1 3 2 라면 C D A B 순으로 인쇄하게 됩니다.</p>
+
+            <p class="t_desc">내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 알고 싶습니다. 위의 예에서 C는 1번째로, A는 3번째로 인쇄됩니다.</p>
+
+            <p class="t_desc2">현재 대기목록에 있는 문서의 중요도가 순서대로 담긴 배열 priorities와 내가 인쇄를 요청한 문서가 현재 대기목록의 어떤 위치에 있는지를 알려주는
+                location이 매개변수로 주어질
+                때, 내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 return 하도록 solution 함수를 작성해주세요.</p>
+
+            <hr>
+            <i>제한사항</i>
+            <ul>
+                <li>현재 대기목록에는 1개 이상 100개 이하의 문서가 있습니다.</li>
+                <li>인쇄 작업의 중요도는 1~9로 표현하며 숫자가 클수록 중요하다는 뜻입니다.</li>
+                <li>location은 0 이상 (현재 대기목록에 있는 작업 수 - 1) 이하의 값을 가지며 대기목록의 가장 앞에 있으면 0, 두 번째에 있으면 1로 표현합니다.
+                </li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>priorities</th>
+                        <th>location</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">[2, 1, 3, 2]</td>
+                        <td class="ce">2</td>
+                        <td class="ce">1</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">[1, 1, 9, 1, 1, 1]</td>
+                        <td class="ce">0</td>
+                        <td class="ce">5</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p>예제 #1</p>
+
+            <p>문제에 나온 예와 같습니다.</p>
+
+            <p>예제 #2</p>
+
+            <p>6개의 문서(A, B, C, D, E, F)가 인쇄 대기목록에 있고 중요도가 1 1 9 1 1 1 이므로 C D E F A B 순으로 인쇄합니다. </p>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(priorities, location) {
+    let answer = 0; // return 할 정답
+    
+    const stack = []; // 인쇄되는 순서배열 [인덱스, 해당하는 priorities]
+    
+    // max_val = 리스트에서 가장 큰 값
+    // max_index = max_val의 index
+    let [max_val, max_index] = [Math.max(...priorities), priorities.indexOf(Math.max(...priorities))];
+    
+    let i = 0;
+    while(priorities.filter(x => x !== -1).length) { // priorities가 전부 -1이 될 때 까지
+        if(priorities[i] === max_val) { // 미리 위에서 정해놓은 max_val과 현재값이 같다면 스택에 넣습니다. 제일 먼저 인쇄되어야 하니까요
+            stack.push([max_index, priorities[i]]);
+            priorities[i] = -1; // 다 썼으면 -1로 최댓값으로 지정되지 않게 해줍니다. 이거 생각하는게 힘들었네요
+            [max_val, max_index] = [Math.max(...priorities), priorities.indexOf(Math.max(...priorities), i)]; // 젤 큰값 넣었으면 다시 젤 큰 값을 찾습니다. 앞에 큰 값이 있어도 여기서 -1이 뜨겠죠? max_val은 앞에있는데 indexOf를 지금 뒤에 있는 거를 찾고 있으니까요
+            
+            if(max_index === -1) { // 이건 예외처리 => 만약 2 1 3 2 에서 3넣고 2었는데 max_val 찾는데 젤 끝이라서 -1이 나올거라서 처음부터 찾아줍니다.
+               [max_val, max_index] = [Math.max(...priorities), priorities.indexOf(Math.max(...priorities))];
+           }
+        }  
+        i++;
+        if(i === priorities.length) i = 0;  // 1번을 예로들었을 때 4면 0으로 초기화
+    }
+    
+    console.log(stack)
+    stack.forEach((s, idx) => { // 원하는거 찾았으면 return 하도록 합시다
+       if(s[0] == location)  {
+           answer = idx;
+           return false;
+       }
+    });
+    return answer + 1;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 먼저 max_val과 index를 구하고 while문을 돕니다. 전부 -1이면 다 인쇄한 겁니다.<br>
+                2. max_val을 만났을 때, 인쇄하고(-1) 다시 제일 큰값을 찾습니다. 만약 못찾았다면 (-1) 처음부터 찾아서 설정해 줍니다.<br>
+                3. 그리고 properties.length를 넘는 순간 다시 초기화 해주면서 작업을 반복합니다.<br>
+                4. 모든 인쇄순서 작업이 끝났다면, location에 해당하는 번호가 stack에서 몇번인지 찾아주면 되겠죠?<br>
+                <br>
+                총평 : 뭔가 properties 배열을 돌 때 인쇄한 것을 삭제해야 한다는 편견에 사로잡혀 있었습니다..
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">https://school.programmers.co.kr/learn/courses/30/lessons/42587</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
