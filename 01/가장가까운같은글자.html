@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가장 가까운 같은 글자</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 가장 가까운 같은 글자</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 가장 가까운 같은 글자
+            </p>
+
+            <hr>
+            <i>문제 설명</i>
+            <p class="t_desc">
+                문자열 s가&nbsp;주어졌을 때, s의 각 위치마다 자신보다 앞에 나왔으면서, 자신과 가장 가까운 곳에 있는 같은
+                글자가 어디 있는지 알고
+                싶습니다.<br>
+                예를 들어, s="banana"라고 할 때,&nbsp; 각 글자들을 왼쪽부터 오른쪽으로 읽어 나가면서&nbsp;다음과 같이 진행할 수
+                있습니다.
+            </p>
+
+            <ul>
+                <li>b는 처음 나왔기 때문에 자신의 앞에 같은 글자가 없습니다. 이는 -1로 표현합니다.</li>
+                <li>a는 처음 나왔기 때문에 자신의 앞에 같은 글자가 없습니다. 이는 -1로 표현합니다.</li>
+                <li>n은 처음 나왔기 때문에 자신의 앞에 같은 글자가 없습니다. 이는 -1로 표현합니다.</li>
+                <li>a는 자신보다 두 칸 앞에 a가 있습니다. 이는 2로 표현합니다.</li>
+                <li>n도&nbsp;자신보다 두 칸 앞에 n이 있습니다. 이는 2로 표현합니다.</li>
+                <li>a는 자신보다 두 칸, 네 칸 앞에 a가 있습니다. 이 중 가까운 것은 두 칸 앞이고, 이는 2로 표현합니다.</li>
+            </ul>
+
+            <p class="t_desc">따라서 최종 결과물은 [-1, -1, -1, 2, 2, 2]가 됩니다.</p>
+
+            <p class="t_desc2">문자열 s이 주어질 때, 위와 같이 정의된 연산을 수행하는 함수 solution을 완성해주세요.</p>
+
+            <hr>
+            <i>제한사항</i>
+
+            <ul>
+                <li>1 ≤ s의 길이 ≤ 10,000
+
+                    <ul>
+                        <li>s은 영어 소문자로만 이루어져 있습니다.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">"banana"</td>
+                        <td class="ce">[-1, -1, -1, 2, 2, 2]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p>입출력 예 #1<br>
+                지문과 같습니다.</p>
+
+            <hr>
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(s) {
+    const basic = Array.from(Array(s.length), x => -1);
+    for(let i = 0; i < s.length; i++) {
+        let count = s.indexOf(s[i])
+        if(count !== i) {
+            for(let j = 0; j < i; j++) {
+                count = s.indexOf(s[i], j);
+                if(count === i) {
+                    count = s.indexOf(s[i], j -1);
+                    break;
+                }
+            }
+            basic[i] = i - count;
+        }
+    }
+    return basic;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 반환할 배열을 만듭니다. 원소의 갯수만큼 -1이 담겨있겠죠?<br>
+                2. count는 본인을 배열에서 찾습니다. 그런데 만약 count가 현재 인덱스가 아니다? 그러면<br>
+                3. 내 앞에 같은 누군가가 있는거겠죠? 그런데 이게 2번 이상나올 수 있으니까 반복문을 타줬습니다.<br>
+                4. 0번째부터 본인 인덱스 전까지 indexOf를 돌릴건데 만약 본인을 찾았다면 본인 전까지가 본인과 같은 문자가 있는 인덱스 입니다.<br>
+                5. 예를들어 banana면 2번째 for문을 안돌면 마지막 a는 첫번째 a에 걸리게 되어서 4가 되는데 원하는바는 2잖아요?<br>
+                6. 그래서 indexOf('a', [0,1,2,3 ....]) 이렇게 해나가는데 4가 되는순간 본인을 찾아버리겠죠?<br>
+                7. 그러면 j의 -1 한 값인 3부터 찾으면 원하는 a를 찾아낼 수 있고 거기서부터의 거리를 잴 수 있겠죠?<br>
+                <br>
+                총평 : 점수를 별로 안주네요 ㅠㅠ
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/142086">https://school.programmers.co.kr/learn/courses/30/lessons/142086</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
