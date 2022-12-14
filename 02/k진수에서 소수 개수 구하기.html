@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>k진수에서 소수 개수 구하기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : k진수에서 소수 개수 구하기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 2022 KAKAO BLIND RECRUITMENT > k진수에서 소수 개수 구하기
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc">
+                양의 정수 n 이 주어집니다. 이 숫자를 k 진수로 바꿨을 때, 변환된 수 안에 아래 조건에 맞는 소수(Prime number)가 몇
+                개인지 알아보려 합니다.
+            </p>
+
+            <ul>
+                <li>0P0 처럼 소수 양쪽에 0이 있는 경우</li>
+                <li>P0 처럼 소수 오른쪽에만 0이 있고 왼쪽에는 아무것도 없는 경우</li>
+                <li>0P 처럼 소수 왼쪽에만 0이 있고 오른쪽에는 아무것도 없는 경우</li>
+                <li>P 처럼 소수 양쪽에 아무것도 없는 경우</li>
+                <li>단, P 는 각 자릿수에 0을 포함하지 않는 소수입니다.
+
+                    <ul>
+                        <li>예를 들어, 101은 P 가 될 수 없습니다.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p class="t_desc">
+                예를 들어, 437674을 3진수로 바꾸면 211 02 0101011 입니다. 여기서 찾을 수 있는 조건에 맞는
+                소수는 왼쪽부터 순서대로
+                211, 2, 11이 있으며, 총 3개입니다. (211, 2, 11을 k 진법으로 보았을 때가 아닌, 10진법으로 보았을 때 소수여야 한다는 점에
+                주의합니다.) 211은
+                P0 형태에서 찾을 수 있으며, 2는 0P0 에서, 11은 0P 에서 찾을 수 있습니다.
+            </p>
+
+            <p class="t_desc2">
+                정수 n 과 k 가 매개변수로 주어집니다. n 을 k 진수로 바꿨을 때, 변환된 수 안에서 찾을 수 있는
+                <strong>위 조건에 맞는 소수</strong>의 개수를 return 하도록 solution 함수를 완성해 주세요.
+            </p>
+
+            <hr>
+            <i>제한사항</i>
+            <ul>
+                <li>1 ≤ n ≤ 1,000,000</li>
+                <li>3 ≤ k ≤ 10</li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>n</th>
+                        <th>k</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">437674</td>
+                        <td class="ce">3</td>
+                        <td class="ce">3</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">110011</td>
+                        <td class="ce">10</td>
+                        <td class="ce">2</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+
+            <h5>입출력 예 설명</h5>
+
+            <p><strong>입출력 예 #1</strong></p>
+
+            <p>문제 예시와 같습니다. </p>
+
+            <p><strong>입출력 예 #2</strong></p>
+
+            <p>110011을 10진수로 바꾸면 110011입니다. 여기서 찾을 수 있는 조건에 맞는 소수는 11, 11 2개입니다. 이와 같이, 중복되는 소수를 발견하더라도 모두 따로 세어야
+                합니다.</p>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(n, k) {
+    function isPrime(num) {
+      if(num <= 1) {
+        return false;
+      }
+      
+      if(num === 2) {
+        return true;
+      }
+        
+      if( num % 2 === 0) { 
+        return num === 2 ? true : false;
+      }
+        
+      const sqrt = parseInt(Math.sqrt(num));
+      for(let divider = 3; divider <= sqrt; divider += 2) {
+        if(num % divider === 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+    
+    // 1. k진법 변환
+    let nString = n.toString(k);
+    
+    // 2. 소수 찾기
+    let answer = nString.split('0').filter(x => parseInt(x) > 1);
+    return answer.map(x => isPrime(parseInt(x))).filter(y => y === true).length
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 먼저 k 진법으로 변환을 해봐야 겠죠?<br>
+                2. 그 다음엔 0으로 끊습니다.<br>
+                3. 그중에 소수만 찾아서 개수 return 해주면 되겠죠?<br>
+                <br>
+                총평 : 소수, 약수 이런거 구하는게 문제네요
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/92335">https://school.programmers.co.kr/learn/courses/30/lessons/92335</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
