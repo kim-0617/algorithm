@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>크기가 작은 부분 문자열</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1단계 : 크기가 작은 부분 문자열</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 크기가 작은 부분 문자열
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc">두 문자열 s와 skip, 그리고 자연수 index가 주어질 때, 다음 규칙에 따라 문자열을
+                만들려 합니다. 암호의 규칙은 다음과 같습니다.</p>
+
+            <ul>
+                <li>문자열 s의 각 알파벳을 index만큼 뒤의 알파벳으로 바꿔줍니다.</li>
+                <li>index만큼의 뒤의 알파벳이 z를 넘어갈 경우 다시 a로 돌아갑니다.</li>
+                <li>skip에 있는 알파벳은 제외하고 건너뜁니다.</li>
+            </ul>
+
+            <p class="t_desc">예를 들어 s = "aukks", skip = "wbqd", index = 5일 때, a에서
+                5만큼 뒤에 있는 알파벳은 f지만 [b, c, d, e, f]에서 'b'와 'd'는 skip에 포함되므로 세지 않습니다. 따라서 'b',
+                'd'를 제외하고 'a'에서 5만큼 뒤에 있는 알파벳은 [c, e, f, g, h] 순서에 의해 'h'가 됩니다. 나머지 "ukks" 또한 위 규칙대로 바꾸면
+                "appy"가 되며 결과는 "happy"가 됩니다.</p>
+
+            <p class="t_desc2">두 문자열 s와 skip, 그리고 자연수 index가 매개변수로 주어질 때 위 규칙대로
+                s를 변환한 결과를 return하도록 solution 함수를 완성해주세요.</p>
+
+            <hr>
+            <i>제한사항</i>
+
+            <ul>
+                <li>5 ≤ s의 길이 ≤ 50</li>
+                <li>1 ≤ skip의 길이 ≤ 10</li>
+                <li>s와 skip은 알파벳 소문자로만 이루어져 있습니다.
+
+                    <ul>
+                        <li>skip에 포함되는 알파벳은 s에 포함되지 않습니다.</li>
+                    </ul>
+                </li>
+                <li>1 ≤ index ≤ 20</li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>s</th>
+                        <th>skip</th>
+                        <th>index</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">"aukks"</td>
+                        <td class="ce">"wbqd"</td>
+                        <td class="ce">5</td>
+                        <td class="ce">"happy"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+
+            <p class="t_desc">입출력 예 #1<br>
+                본문 내용과 일치합니다.</p>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(s, skip, index) {
+    // 알파벳을 나열해서 스킵에 해당하는 알파벳을 없애버리고, s문자열 인덱스 하나하나 값에다 index를 더하면 정답
+    const alpha = 'abcdefghijklmnopqrstuvwxyz'.split('').filter(x => !skip.includes(x)).join('');
+    let answer = "";
+    
+    for(let i = 0; i < s.length; i++) {
+        answer += alpha[(alpha.indexOf(s[i]) + index) % alpha.length];
+    }
+    
+    return answer;
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. a-z까지 문자열을 선언해줍니다.<br>
+                2. s를 순회하면서 skip에 있는 문자열을 건너 뛰는 것 보다 아예 s에서 skip의 문자열을 제거하는 방법이 좀 더 편하겠죠?<br>
+                3. s를 순회하면서 index 만큼 더해줍니다. 반복이 되어야 하기 때문에 skip을 제거한 s의 길이만큼으로 나눈 나머지가 인덱스가 되도록 해줍니다.<br>
+                <br>
+                총평 : charcodeat을 사용해볼까 했지만 그 반대로 바꿔주는 메서드가 없어서 이 방법을 떠올렸습니다.
+            </p>
+            출처 : <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/155652">https://school.programmers.co.kr/learn/courses/30/lessons/155652</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
