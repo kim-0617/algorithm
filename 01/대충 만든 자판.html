@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대충 만든 자판</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 대충 만든 자판</h2>
+            <p class="t_desc" class="t_desc">
+                코딩테스트 연습 > 연습문제 > 대충 만든 자판
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+
+            <p class="t_desc">휴대폰의 자판은 컴퓨터 키보드 자판과는 다르게 하나의 키에 여러 개의 문자가 할당될 수 있습니다. 키 하나에 여러 문자가 할당된 경우,
+                동일한 키를 연속해서 빠르게
+                누르면 할당된 순서대로 문자가 바뀝니다. </p>
+
+            <p class="t_desc">예를 들어, 1번 키에 "A", "B", "C" 순서대로 문자가 할당되어 있다면 1번 키를 한 번 누르면 "A", 두 번 누르면 "B", 세
+                번 누르면 "C"가 되는
+                식입니다. </p>
+
+            <p class="t_desc">같은 규칙을 적용해 아무렇게나 만든 휴대폰 자판이 있습니다. 이 휴대폰 자판은 키의 개수가 1개부터 최대 100개까지 있을 수 있으며, 특정
+                키를 눌렀을 때 입력되는
+                문자들도 무작위로 배열되어 있습니다. 또, 같은 문자가 자판 전체에 여러 번 할당된 경우도 있고, 키 하나에 같은 문자가 여러 번 할당된 경우도 있습니다. 심지어
+                아예 할당되지 않은 경우도 있습니다. 따라서 몇몇 문자열은 작성할 수 없을 수도 있습니다. </p>
+
+            <p class="t_desc">이 휴대폰 자판을 이용해 특정 문자열을 작성할 때, 키를 최소 몇 번 눌러야 그 문자열을 작성할 수 있는지 알아보고자 합니다. </p>
+
+            <p class="t_desc2">1번 키부터 차례대로 할당된 문자들이 순서대로 담긴 문자열배열 keymap과 입력하려는 문자열들이 담긴 문자열 배열
+                targets가 주어질 때, 각 문자열을 작성하기 위해 키를 최소 몇 번씩 눌러야 하는지 순서대로 배열에 담아 return 하는
+                solution 함수를 완성해 주세요.
+            </p>
+
+            <p class="t_desc">단, 목표 문자열을 작성할 수 없을 때는 -1을 저장합니다.</p>
+
+            <hr>
+            <i>제한사항</i>
+            <ul>
+                <li>1 ≤ keymap의 길이 ≤ 100
+
+                    <ul>
+                        <li>1 ≤ keymap의 원소의 길이 ≤ 100</li>
+                        <li>keymap[i]는 i + 1번 키를 눌렀을 때 순서대로 바뀌는 문자를 의미합니다.
+
+                            <ul>
+                                <li>예를 들어 keymap[0] = "ABACD" 인 경우 1번 키를 한 번 누르면 A, 두 번 누르면 B,
+                                    세 번 누르면 A 가 됩니다.</li>
+                            </ul>
+                        </li>
+                        <li>keymap의 원소의 길이는 서로 다를 수 있습니다.</li>
+                        <li>keymap의 원소는 알파벳 대문자로만 이루어져 있습니다.</li>
+                    </ul>
+                </li>
+                <li>1 ≤ targets의 길이 ≤ 100
+
+                    <ul>
+                        <li>1 ≤ targets의 원소의 길이 ≤ 100</li>
+                        <li>targets의 원소는 알파벳 대문자로만 이루어져 있습니다.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>keymap</th>
+                        <th>targets</th>
+                        <th>result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">["ABACD", "BCEFD"]</td>
+                        <td class="ce">["ABCD","AABB"]</td>
+                        <td class="ce">[9, 4]</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">["AA"]</td>
+                        <td class="ce">["B"]</td>
+                        <td class="ce">[-1]</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">["AGZ", "BSSS"]</td>
+                        <td class="ce">["ASA","BGZ"]</td>
+                        <td class="ce">[4, 6]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+
+            <p class="t_desc">입출력 예 #1 </p>
+            <ul>
+                <li>"ABCD"의 경우, </li>
+                <li>1번 키 한 번 → A </li>
+                <li>2번 키 한 번 → B </li>
+                <li>2번 키 두 번 → C </li>
+                <li>1번 키 다섯 번 → D </li>
+                <li>따라서 총합인 9를 첫 번째 인덱스에 저장합니다. </li>
+                <li>"AABB"의 경우, </li>
+                <li>1번 키 한 번 → A </li>
+                <li>1번 키 한 번 → A </li>
+                <li>2번 키 한 번 → B </li>
+                <li>2번 키 한 번 → B </li>
+                <li>따라서 총합인 4를 두 번째 인덱스에 저장합니다. </li>
+                <li>결과적으로 [9,4]를 return 합니다. </li>
+            </ul>
+
+            <p class="t_desc">입출력 예 #2 </p>
+
+            <ul>
+                <li>"B"의 경우, 'B'가 어디에도 존재하지 않기 때문에 -1을 첫 번째 인덱스에 저장합니다. </li>
+                <li>결과적으로 [-1]을 return 합니다. </li>
+            </ul>
+
+            <p class="t_desc">입출력 예 #3 </p>
+
+            <ul>
+                <li>"ASA"의 경우, </li>
+                <li>1번 키 한 번 → A </li>
+                <li>2번 키 두 번 → S </li>
+                <li>1번 키 한 번 → A </li>
+                <li>따라서 총합인 4를 첫 번째 인덱스에 저장합니다. </li>
+                <li>"BGZ"의 경우, </li>
+                <li>2번 키 한 번 → B </li>
+                <li>1번 키 두 번 → G </li>
+                <li>1번 키 세 번 → Z </li>
+                <li>따라서 총합인 6을 두 번째 인덱스에 저장합니다. </li>
+                <li>결과적으로 [4, 6]을 return 합니다.</li>
+            </ul>
+
+
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(keymap, targets) {
+  const answer = []; // 정답으로 return할 array
+
+  /**
+   * targets의 target 알파벳 하나하나를 검사할겁니다 keymap이 갖고 있는지 없는지
+   * 그런데 다른 자판들이 갖고 있을 수 도 있잖아요? 우리는 최소의 경우를 찾아야 하기때문에
+   * targets의 target의 알파벳 하나가 keymap의 모든 원소들 (0번키, 1번키 ...)에 검사를 받아야 합니다.
+   * 그렇게 하기위해서 최소값을 구할때 큰값을 설정해놓고 더 작은값이 나왔을 때 바꿔치기 하면 되겠죠?
+   * 만약 못찾으면 위에서 설정한 9999가 들어있을 테니 그렇다면 절대 타겟을 만들 수 가 없으니 바로 -1 넣어줍니다.
+   * 그렇지 않다면 tmp에 담긴 숫자들은 타겟을 만들기 위해 최소 눌러야 하는 횟수 들 이기 때문에 합을 구해서 answer에 넣어줍니다!
+   */
+
+  targets.forEach((target) => {
+    const tmp = [];
+    target.split("").forEach((t) => {
+      let lessPush = 9999;
+      keymap.forEach((key) => {
+        let hasThere = key.indexOf(t);
+        if (hasThere !== -1) {
+          lessPush = hasThere + 1 < lessPush ? hasThere + 1 : lessPush;
+        }
+      });
+      tmp.push(lessPush);
+    });
+
+    if (tmp.includes(9999)) answer.push(-1);
+    else answer.push(tmp.reduce((prev, curr) => (prev += curr)));
+  });
+
+  return answer;
+}
+</code></pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc" class="t_desc">
+                순서는 다음과 같다 <br>
+                1. targets의 target 알파벳 하나하나를 검사할겁니다 keymap이 갖고 있는지 없는지 <br>
+                2. 그런데 다른 자판들이 갖고 있을 수 도 있잖아요? 우리는 최소의 경우를 찾아야 하기때문에 <br>
+                3. targets의 target의 알파벳 하나가 keymap의 모든 원소들 (0번키, 1번키 ...)에 검사를 받아야 합니다. <br>
+                4. 그렇게 하기위해서 최소값을 구할때 큰값을 설정해놓고 더 작은값이 나왔을 때 바꿔치기 하면 되겠죠? <br>
+                5. 만약 못찾으면 위에서 설정한 9999가 들어있을 테니 그렇다면 절대 타겟을 만들 수 가 없으니 바로 -1 넣어줍니다. <br>
+                6. 그렇지 않다면 tmp에 담긴 숫자들은 타겟을 만들기 위해 최소 눌러야 하는 횟수 들 이기 때문에 합을 구해서 answer에 넣어줍니다! <br>
+                총평 : 첨에 삽질을 많이해서 오래걸렸네요. <br>
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/160586">https://school.programmers.co.kr/learn/courses/30/lessons/160586</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
