@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카펫</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 카펫</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 완전탐색 > 카펫
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc">Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 노란색으로 칠해져 있고 테두리 1줄은 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다.</p>
+
+            <p class="t_desc"><img
+                    src="https://grepp-programmers.s3.ap-northeast-2.amazonaws.com/files/production/b1ebb809-f333-4df2-bc81-02682900dc2d/carpet.png"
+                    title="" alt="carpet.png"></p>
+
+            <p class="t_desc">Leo는 집으로 돌아와서 아까 본 카펫의 노란색과 갈색으로 색칠된 격자의 개수는 기억했지만, 전체 카펫의 크기는 기억하지 못했습니다.</p>
+
+            <p class="t_desc2">Leo가 본 카펫에서 갈색 격자의 수 brown, 노란색 격자의 수 yellow가 매개변수로 주어질 때 카펫의 가로, 세로 크기를 순서대로
+                배열에 담아 return
+                하도록 solution 함수를 작성해주세요.</p>
+
+            <hr>
+            <i>제한사항</i>
+
+            <ul>
+                <li>갈색 격자의 수 brown은 8 이상 5,000 이하인 자연수입니다.</li>
+                <li>노란색 격자의 수 yellow는 1 이상 2,000,000 이하인 자연수입니다.</li>
+                <li>카펫의 가로 길이는 세로 길이와 같거나, 세로 길이보다 깁니다.</li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>brown</th>
+                        <th>yellow</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">10</td>
+                        <td class="ce">2</td>
+                        <td class="ce">[4, 3]</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">8</td>
+                        <td class="ce">1</td>
+                        <td class="ce">[3, 3]</td>
+                    </tr>
+                    <tr>
+                        <td class="ce">24</td>
+                        <td class="ce">24</td>
+                        <td class="ce">[8, 6]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(brown, yellow) {
+    // 총 구할 면적
+    const total_area = brown + yellow;
+    
+    // return 할 배열
+    const answer = [];
+    
+    // 예시 1번을 토대로 말씀드리겠습니다.
+    // 왜 반복문을 거꾸로 타느냐 하면은 카펫의 가로길이가 더 길어야 하기 때문입니다. (width) 값이요
+    
+    for(let width = total_area; width > 0; width--) {
+        // width는 12, 11, 10 .... 이렇게 나오는데
+        // 나누어 지지않으면 height 값이 존재하지 않겠죠? 소수점은 아닐거잖아요?
+        if(total_area % width) continue;
+        
+        // 이 밑으로 들어오는 width값은 total_area(12)의 약수 값, 12, 6, 4, 3, 2, 1 순서대로 들어오겠죠?
+        
+        // 그래서 width값이 결정되면 height 값은 total_area = width * height라서 height를 구해줍니다.
+        const height = total_area / width; 
+        
+        const total_yellow = (width - 2) * (height - 2); // 그림으로 설명하겠습니다.
+        const total_brown = total_area - total_yellow;
+        
+        // 그래서 임의로 구한 total_yellow와 total_brown값이 Leo가 기억한 갯수와 같다면 그게 정답이겠죠?
+        if(total_yellow === yellow && total_brown === brown) {
+            answer.push(width);
+            answer.push(height);
+            break;
+        }
+    }
+    
+    return answer;
+}
+</code></pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                주석과 이미지로 설명을 대체합니다.
+                <img src="" alt="desc">
+                <br>
+                총평 :
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/42842">https://school.programmers.co.kr/learn/courses/30/lessons/42842</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
