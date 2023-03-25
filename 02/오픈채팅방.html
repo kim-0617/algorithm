@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오픈채팅방</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 오픈채팅방</h2>
+            <p class="t_desc" class="t_desc">
+                코딩테스트 연습 > 2019 KAKAO BLIND RECRUITMENT > 오픈채팅방
+            </p>
+
+            <hr />
+            <div class="markdown solarized-dark">
+                <h2>오픈채팅방</h2>
+
+                <p class="t_desc">카카오톡 오픈채팅방에서는 친구가 아닌 사람들과 대화를 할 수 있는데, 본래 닉네임이 아닌 가상의 닉네임을 사용하여 채팅방에 들어갈 수 있다.</p>
+
+                <p class="t_desc">신입사원인 김크루는 카카오톡 오픈 채팅방을 개설한 사람을 위해, 다양한 사람들이 들어오고, 나가는 것을 지켜볼 수 있는 관리자창을 만들기로 했다. 채팅방에
+                    누군가 들어오면 다음
+                    메시지가 출력된다.</p>
+
+                <p class="t_desc">"[닉네임]님이 들어왔습니다."</p>
+
+                <p class="t_desc">채팅방에서 누군가 나가면 다음 메시지가 출력된다.</p>
+
+                <p class="t_desc">"[닉네임]님이 나갔습니다."</p>
+
+                <p class="t_desc">채팅방에서 닉네임을 변경하는 방법은 다음과 같이 두 가지이다.</p>
+
+                <ul>
+                    <li>채팅방을 나간 후, 새로운 닉네임으로 다시 들어간다.</li>
+                    <li>채팅방에서 닉네임을 변경한다.</li>
+                </ul>
+
+                <p class="t_desc">닉네임을 변경할 때는 기존에 채팅방에 출력되어 있던 메시지의 닉네임도 전부 변경된다. </p>
+
+                <p class="t_desc">예를 들어, 채팅방에 "Muzi"와 "Prodo"라는 닉네임을 사용하는 사람이 순서대로 들어오면 채팅방에는 다음과 같이 메시지가 출력된다.</p>
+
+                <p class="t_desc">"Muzi님이 들어왔습니다."<br>
+                    "Prodo님이 들어왔습니다."</p>
+
+                <p class="t_desc">채팅방에 있던 사람이 나가면 채팅방에는 다음과 같이 메시지가 남는다.</p>
+
+                <p class="t_desc">"Muzi님이 들어왔습니다."<br>
+                    "Prodo님이 들어왔습니다."<br>
+                    "Muzi님이 나갔습니다."</p>
+
+                <p class="t_desc">Muzi가 나간후 다시 들어올 때, Prodo 라는 닉네임으로 들어올 경우 기존에 채팅방에 남아있던 Muzi도 Prodo로 다음과 같이 변경된다.</p>
+
+                <p class="t_desc">"Prodo님이 들어왔습니다."<br>
+                    "Prodo님이 들어왔습니다."<br>
+                    "Prodo님이 나갔습니다."<br>
+                    "Prodo님이 들어왔습니다."</p>
+
+                <p class="t_desc">채팅방은 중복 닉네임을 허용하기 때문에, 현재 채팅방에는 Prodo라는 닉네임을 사용하는 사람이 두 명이 있다. 이제, 채팅방에 두 번째로 들어왔던
+                    Prodo가 Ryan으로 닉네임을
+                    변경하면 채팅방 메시지는 다음과 같이 변경된다.</p>
+
+                <p class="t_desc">"Prodo님이 들어왔습니다."<br>
+                    "Ryan님이 들어왔습니다."<br>
+                    "Prodo님이 나갔습니다."<br>
+                    "Prodo님이 들어왔습니다."</p>
+
+                <p class="t_desc2">채팅방에 들어오고 나가거나, 닉네임을 변경한 기록이 담긴 문자열 배열 record가 매개변수로 주어질 때, 모든 기록이 처리된 후, 최종적으로 방을
+                    개설한
+                    사람이 보게 되는 메시지를
+                    문자열 배열 형태로 return 하도록 solution 함수를 완성하라.</p>
+
+                <hr>
+                <i>제한사항</i>
+                <ul>
+                    <li>record는 다음과 같은 문자열이 담긴 배열이며, 길이는 1 이상 100,000 이하이다.</li>
+                    <li>다음은 record에 담긴 문자열에 대한 설명이다.
+
+                        <ul>
+                            <li>모든 유저는 [유저 아이디]로 구분한다.</li>
+                            <li>[유저 아이디] 사용자가 [닉네임]으로 채팅방에 입장 - "Enter [유저 아이디] [닉네임]" (ex. "Enter uid1234 Muzi")</li>
+                            <li>[유저 아이디] 사용자가 채팅방에서 퇴장 - "Leave [유저 아이디]" (ex. "Leave uid1234")</li>
+                            <li>[유저 아이디] 사용자가 닉네임을 [닉네임]으로 변경 - "Change [유저 아이디] [닉네임]" (ex. "Change uid1234 Muzi")</li>
+                            <li>첫 단어는 Enter, Leave, Change 중 하나이다.</li>
+                            <li>각 단어는 공백으로 구분되어 있으며, 알파벳 대문자, 소문자, 숫자로만 이루어져있다.</li>
+                            <li>유저 아이디와 닉네임은 알파벳 대문자, 소문자를 구별한다.</li>
+                            <li>유저 아이디와 닉네임의 길이는 1 이상 10 이하이다.</li>
+                            <li>채팅방에서 나간 유저가 닉네임을 변경하는 등 잘못 된 입력은 주어지지 않는다.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <hr>
+                <i>입출력 예</i>
+                <table class="t_table">
+                    <thead>
+                        <tr>
+                            <th>record</th>
+                            <th>result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ce">["Enter uid1234 Muzi", "Enter uid4567 Prodo","Leave uid1234","Enter uid1234
+                                Prodo","Change uid4567 Ryan"]
+                            </td>
+                            <td class="ce">["Prodo님이 들어왔습니다.", "Ryan님이 들어왔습니다.", "Prodo님이 나갔습니다.", "Prodo님이 들어왔습니다."]
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+                <i>입출력 예 설명</i>
+
+                <p class="t_desc">입출력 예 #1<br>
+                    문제의 설명과 같다.</p>
+            </div>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(record) {
+    const answer = [];
+    const id = {};
+    
+    // 포인트 : Enter건 Change건 고유한 id값이기 때문에 누적됩니다. 무슨말인지 알죠?
+    record.forEach(r => {
+        const info = r.split(' ');
+       if(info[0] !== "Leave")  {
+           id[info[1]] = info[2];
+       }
+    });
+    
+    // 자이제 변경된 닉네임은 신경쓰지 않아도 됩니다. 문제에 적힌대로 하면 되겠죠?
+    for(let i = 0; i < record.length; i++) {
+        const info = record[i].split(' ');
+        if(info[0] === "Enter") {
+            answer.push(`${id[info[1]]}님이 들어왔습니다.`);
+        }
+        else if(info[0] === "Leave") {
+            answer.push(`${id[info[1]]}님이 나갔습니다.`);
+        }
+    }
+    return answer;
+}
+</code></pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc" class="t_desc">
+                순서는 다음과 같다 <br>
+                1. change를 고려하지 않기위해 id객체를 만들고 uid : 닉네임 형식으로 저장합니다.<br>
+                2. id객체를 완성했다면 레코드를 순회합니다.<br>
+                3. enter라면 answer배열에 정해진 텍스트를, leave라면 answer배열에 정해진 텍스트를 각각 담아주면 되겠죠?<br>
+                4. 다 돌았다면 answer배열을 return 해줍니다.<br>
+                <br>
+                총평 : 포인트는 record에서 최종적인 닉네임이 무엇인가 입니다. change까지 경우의 수를 고려하려면 복잡해지니까 record를 보고 id를 누적시키면 아이디가 바뀌었다면
+                바뀐아이디가 저장될겁니다. <br>
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/42888">https://school.programmers.co.kr/learn/courses/30/lessons/42888</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
