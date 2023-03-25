@@ -1,4 +1,3 @@
 # algorithm
 
-### card game
-https://kim-0617.github.io/algorithm/game/card/card.html   
+## 프로그래머스 문제풀이
