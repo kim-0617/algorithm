@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스킬트리</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 스킬트리</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > Summer/Winter Coding(~2018) > 스킬트리
+            </p>
+
+            <hr />
+            <i>문제 설명</i>
+            <p class="t_desc">선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다.</p>
+            <p class="t_desc">예를 들어 선행 스킬 순서가 스파크 → 라이트닝 볼트 → 썬더일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고, 라이트닝 볼트를
+                배우려면
+                먼저 스파크를 배워야 합니다.</p>
+            <p class="t_desc">위 순서에 없는 다른 스킬(힐링 등)은 순서에 상관없이 배울 수 있습니다. 따라서 스파크 → 힐링 → 라이트닝 볼트 → 썬더와 같은
+                스킬트리는
+                가능하지만, 썬더 → 스파크나 라이트닝 볼트 → 스파크 → 힐링 → 썬더와 같은 스킬트리는 불가능합니다.</p>
+            <p class="t_desc2">선행 스킬 순서 skill과 유저들이 만든 스킬트리를 담은
+                배열 skill_trees가
+                매개변수로 주어질 때, 가능한 스킬트리 개수를 return 하는 solution 함수를 작성해주세요.</p>
+
+            <hr>
+            <i>제한 조건</i>
+            <ul>
+                <li>스킬은 알파벳 대문자로 표기하며, 모든 문자열은 알파벳 대문자로만 이루어져 있습니다.</li>
+                <li>스킬 순서와 스킬트리는 문자열로 표기합니다.
+
+                    <ul>
+                        <li>예를 들어, C → B → D 라면 "CBD"로 표기합니다</li>
+                    </ul>
+                </li>
+                <li>선행 스킬 순서 skill의 길이는 1 이상 26 이하이며, 스킬은 중복해 주어지지 않습니다.</li>
+                <li>skill_trees는 길이 1 이상 20 이하인 배열입니다.</li>
+                <li>skill_trees의 원소는 스킬을 나타내는 문자열입니다.
+
+                    <ul>
+                        <li>skill_trees의 원소는 길이가 2 이상 26 이하인 문자열이며, 스킬이 중복해 주어지지 않습니다.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>skill</th>
+                        <th>skill_trees</th>
+                        <th>return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">"CBD"</td>
+                        <td class="ce">["BACDE", "CBADF", "AECB", "BDA"]</td>
+                        <td class="ce">2</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <ul>
+                <li>"BACDE": B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가능한 스킬트립니다.</li>
+                <li>"CBADF": 가능한 스킬트리입니다.</li>
+                <li>"AECB": 가능한 스킬트리입니다.</li>
+                <li>"BDA": B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가능한 스킬트리입니다.</li>
+            </ul>
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(skill, skill_trees) {
+    // 순서
+    // 1. 스킬트리에 없는건 무시 => 제거해준다
+    // 2. 두가지 경우가 생김
+    // 3. 스킬트리의 길이와 같을경우 => 스킬과 스킬트리가 같다
+    // 4. 길이가 다르다? => 더 작은놈 (스킬트리) 반복문돌면서 하나하나 비교
+    let answer = 0;
+    
+    for(let i = 0; i < skill_trees.length; i++) {
+        let newString = skill_trees[i].split('').filter(item => skill.includes(item)).join('')
+        
+        if(newString.length === skill.length) {
+            if(newString === skill) answer++;
+        } else {
+            let flag = true;
+            for(let j = 0; j < newString.length; j++) {
+                if(skill[j] !== newString[j])  {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) answer++;
+        }
+    }
+    
+    return answer;
+}
+</code></pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. 스킬트리에 없는건 제거해줄게요, 중요한건 스킬배열에 있는 순서에 맞게만 찍으면 나머지 스킬이 어디에 배치되던 상관없기 때문입니다.<br>
+                2. 여기서 두가지 경우의 수가 생기는데 제거하고 나니까 완전히 스킬이랑 똑같아지는 경우,<br>
+                3. 스킬트리보다 적어지는 경우, 많아지는 경우는 없겠죠? 중복이 없으니까요 CBD면 C,B,D 이외의 스킬은 다 제거 했으니 더 적으면 적었지 많을 수 없습니다.<br>
+                4. 첫번째 경우에 length 같고, 문자열 그자체도 같고 하면 제대로된 스킬트리겠죠?<br>
+                5. 두번째 경우는 더 작은 스킬트리에서 반복문을 돌면서 skill 배열과 짝을 비교해줍니다. 0번째면 0번째끼리<br>
+                6. 비교가 하나라도 틀리면 제대로된 스킬트리가 아닙니다. 순서가 틀렸다는거죠?<br>
+                <br>
+                총평 : 의외로 바로 생각이나서 빨리 풀었네요. 스킬트리에 없는 스킬들은 지우고 생각한다는게 포인트였던 것 같습니다.
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/49993">https://school.programmers.co.kr/learn/courses/30/lessons/49993</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
