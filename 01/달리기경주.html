@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달리기 경주/title>
+        <link rel="stylesheet" href="asset/css/dracula.css">
+        <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">1 단계 : 달리기 경주/h2>
+                <p class="t_desc" class="t_desc" class="t_desc">
+                    코딩테스트 연습 > 연습문제 > 바탕화면 정리
+                </p>
+
+                <hr />
+                <i>문제 설명</i>
+                <p class="t_desc">얀에서는 매년 달리기 경주가 열립니다. 해설진들은 선수들이 자기 바로 앞의 선수를 추월할 때 추월한 선수의 이름을 부릅니다. 예를 들어 1등부터 3등까지
+                    "mumu",
+                    "soe", "poe" 선수들이 순서대로 달리고 있을 때, 해설진이 "soe"선수를 불렀다면 2등인 "soe" 선수가 1등인 "mumu" 선수를 추월했다는 것입니다.
+                    즉 "soe" 선수가 1등, "mumu" 선수가 2등으로 바뀝니다.</p>
+
+                <p class="t_desc2">선수들의 이름이 1등부터 현재 등수 순서대로 담긴 문자열 배열 players와 해설진이 부른 이름을 담은 문자열 배열
+                    callings가 매개변수로 주어질 때, 경주가 끝났을 때 선수들의 이름을 1등부터 등수 순서대로 배열에 담아 return 하는
+                    solution 함수를 완성해주세요.</p>
+
+                <hr>
+                <i>제한사항</i>
+                <ul>
+                    <li>5 ≤ players의 길이 ≤ 50,000
+                        <ul>
+                            <li>players[i]는 i번째 선수의 이름을 의미합니다.</li>
+                            <li>players의 원소들은 알파벳 소문자로만 이루어져 있습니다.</li>
+                            <li>players에는 중복된 값이 들어가 있지 않습니다.</li>
+                            <li>3 ≤ players[i]의 길이 ≤ 10</li>
+                        </ul>
+                    </li>
+                    <li>2 ≤ callings의 길이 ≤ 1,000,000
+                        <ul>
+                            <li>callings는 players의 원소들로만 이루어져 있습니다.</li>
+                            <li>경주 진행중 1등인 선수의 이름은 불리지 않습니다.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <hr>
+                <i>입출력 예</i>
+                <table class="t_table">
+                    <thead>
+                        <tr>
+                            <th>players</th>
+                            <th>callings</th>
+                            <th>result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ce">["mumu", "soe", "poe", "kai", "mine"]</td>
+                            <td class="ce">["kai", "kai", "mine", "mine"]</td>
+                            <td class="ce">["mumu", "kai", "mine", "soe", "poe"]</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+                <i>입출력 예 설명</i>
+
+                <p class="t_desc">입출력 예 #1</p>
+
+                <p class="t_desc">4등인 "kai" 선수가 2번 추월하여 2등이 되고 앞서 3등, 2등인 "poe", "soe" 선수는 4등, 3등이 됩니다. 5등인 "mine" 선수가
+                    2번 추월하여
+                    4등, 3등인 "poe", "soe" 선수가 5등, 4등이 되고 경주가 끝납니다. 1등부터 배열에 담으면 ["mumu", "kai", "mine", "soe",
+                    "poe"]이 됩니다.</p>
+
+                <hr />
+                <h3 class="t_tit2">코드</h3>
+                <div class="t_code">
+                    <pre><code class="language-js">function solution(players, callings) {
+    // 1. indexOf 실패
+    // 2. splice 실패
+    // 3. 객체로 풀어보라는 힌트를 얻고 객체를 한개만 운용하여 풀기 실패
+    // 4. 사람이름 - 등수 => 등수 - 사람이름을 연결시켜주는 두개의 객체의 필요성을 느낌
+    
+    // 	{ mumu: 0, soe: 1, poe: 2, kai: 3, mine: 4 }
+    let p = 0;
+    const playerMap = players.reduce((prev, curr) => {
+        prev[curr] = p;
+        p++;
+        return prev;
+    }, {});
+    
+    // { '0': 'mumu', '1': 'soe', '2': 'poe', '3': 'kai', '4': 'mine' }
+    let o = 0;
+    const orderMap = players.reduce((prev, curr) => {
+        prev[o] = curr;
+        o++;
+        return prev;
+    }, {});
+
+    // curPos : 현재 goodPlayer의 위치 (불린사람의 위치)
+    // prevPos : 곧 추월당할 사람의 위치 (badPlayer)
+    // goodPlayer : 추월할 사람 (callings에 있는사람)
+    // badPlayer : goodPlayer 바로 앞에 추월당할 사람
+    
+    // 계속해서 두객체를 운용하면서 등수를 업데이트 시켜줘야한다.
+    callings.forEach((goodPlayer, index) => {
+        let curPos = playerMap[goodPlayer];
+        let prevPos = String(curPos - 1);
+        let badPlayer = orderMap[prevPos];
+        
+        // change1 => orederMap 업데이트 서로바꿔주고
+        orderMap[prevPos] = goodPlayer;
+        orderMap[curPos] = badPlayer;
+        
+        // change2 => playerMap도 바꿔줍니다.
+        playerMap[goodPlayer] = prevPos;
+        playerMap[badPlayer] = curPos;
+    });
+    
+    // 최종 결과물 return
+    return Object.values(orderMap);
+}
+</code></pre>
+                </div>
+
+                <h3 class="t_tit">리뷰</h3>
+                <p class="t_desc" class="t_desc" class="t_desc">
+                    1. 플레이어 : 등수, 등수 : 플레이어 객체 2개를 만들어 줄게요. 객체 하나로는 힘들 것 같아서요<br>
+                    2. callings를 순회하면서 위의 객체 2개를 계속해서 업데이트 시켜줍니다.<br>
+                    3. callings의 원소 하나하나는 이름이 불린, 즉 추월할 플레이입니다.<br>
+                    4. 추월할 플레이어의 현재등수는 playerMap을 활용하여 구하고, 추월당할 사람의 등수는 -1 해주면 되겠죠<br>
+                    5. 추월당할 플레이어를 구하기위해 객체 2개가 필요하다고 생각합니다. 추월당할 플레이어는 앞서 구한 추월당할 사람의 등수를 orderMap에 넣어서 알 수 있죠<br>
+                    6. 그래서 등수를 통해 orderMap을 업데이트하고, 이름을 통해 playerMap을 업데이트 해줍니다.<br>
+                    7. 순회를 마치고 orderMap을 확인해보면 0~n 등수까지가 예쁘게 정렬되있는걸 볼 수 있습니다.<br>
+                    총평 : 처음엔 쉽게 풀리는가 싶더니 시간초과가 나서 그 후 부터는 힘든 시간이었습니다 😥<br>
+                </p>
+                출처 :
+                <a
+                    href="https://school.programmers.co.kr/learn/courses/30/lessons/178871">https://school.programmers.co.kr/learn/courses/30/lessons/178871</a>
+                </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
