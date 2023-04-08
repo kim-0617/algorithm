@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>땅따먹기</title>
+    <link rel="stylesheet" href="asset/css/dracula.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+    <main id="main">
+        <div class="document">
+            <h2 class="t_tit">2 단계 : 땅따먹기</h2>
+            <p class="t_desc">
+                코딩테스트 연습 > 연습문제 > 땅따먹기
+            </p>
+
+            <hr />
+            <p class="t_desc">땅따먹기 게임을 하려고 합니다. 땅따먹기 게임의 땅(land)은 총 N행 4열로 이루어져 있고, 모든 칸에는 점수가 쓰여 있습니다. 1행부터 땅을 밟으며
+                한 행씩 내려올 때, 각
+                행의 4칸 중 한 칸만 밟으면서 내려와야 합니다. <strong>단, 땅따먹기 게임에는 한 행씩 내려올 때, 같은 열을 연속해서 밟을 수 없는 특수 규칙이
+                    있습니다.</strong> </p>
+
+            <p class="t_desc">예를 들면, </p>
+
+            <p class="t_desc">| 1 | 2 | 3 | 5 |</p>
+
+            <p class="t_desc">| 5 | 6 | 7 | 8 |</p>
+
+            <p class="t_desc">| 4 | 3 | 2 | 1 |</p>
+
+            <p class="t_desc">로 땅이 주어졌다면, 1행에서 네번째 칸 (5)를 밟았으면, 2행의 네번째 칸 (8)은 밟을 수 없습니다. </p>
+
+            <p class="t_desc2">마지막 행까지 모두 내려왔을 때, 얻을 수 있는 점수의 최대값을 return하는 solution 함수를 완성해 주세요. 위 예의 경우, 1행의 네번째 칸
+                (5), 2행의 세번째 칸
+                (7), 3행의 첫번째 칸 (4) 땅을 밟아 16점이 최고점이 되므로 16을 return 하면 됩니다.
+            </p>
+
+            <hr>
+            <i>제한사항</i>
+            <ul>
+                <li>행의 개수 N : 100,000 이하의 자연수</li>
+                <li>열의 개수는 4개이고, 땅(land)은 2차원 배열로 주어집니다.</li>
+                <li>점수 : 100 이하의 자연수</li>
+            </ul>
+
+            <hr>
+            <i>입출력 예</i>
+            <table class="t_table">
+                <thead>
+                    <tr>
+                        <th>land</th>
+                        <th>answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ce">[[1,2,3,5],[5,6,7,8],[4,3,2,1]]</td>
+                        <td class="ce">16</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+            <i>입출력 예 설명</i>
+            <p class="t_desc">입출력 예 #1<br>
+                문제의 예시와 같습니다.</p>
+
+
+            <hr />
+            <h3 class="t_tit2">코드</h3>
+            <div class="t_code">
+                <pre><code class="language-js">function solution(land) {
+    for(let i = 1; i < land.length; i++) {
+        let maxVal = Math.max(...land[i - 1]);
+        let maxValIndex = land[i - 1].indexOf(maxVal);
+        land[i - 1][maxValIndex] = -1;
+        let secondMaxVal = Math.max(...land[i - 1]);
+        
+        for(let j = 0; j < land[i].length; j++) {
+            if(j !== maxValIndex) {
+                land[i][j] += maxVal;
+            } else {
+                land[i][j] += secondMaxVal;
+            }
+        }
+    }
+    return Math.max(...land.at(-1));
+}
+</pre>
+            </div>
+            <h3 class="t_tit">리뷰</h3>
+            <p class="t_desc">
+                순서는 다음과 같다 <br>
+                1. land배열을 순회하는데, 이때 제일큰값과 그다음 큰값이 필요합니다. 합을 누적시켜서 답을 찾을겁니다.<br>
+                2. 첫번째 행은 이전행이 없으니까 건너뛰고 i = 1부터 시작하는데, [5,6,7,8]이고 이전행이 [1,2,3,5]죠<br>
+                3. 그럼 이전행의 큰값은 5고 3번째 인덱스를 제외하고 더해주면 [10,11,12,x] => 이게 최선이죠 더 커질수가없죠?<br>
+                4. 3번째인덱스에는 두번째 큰값 (최선) 을 더해줘서 [10,11,12,11] 이 완성되죠? 이렇게 쭉 해줍니다.<br>
+                5. 그럼 완성된 land배열의 마지막 완성된 최종점수값 행이 있잖아요? 그 행의 최댓값을 return해주면 되겠죠?<br>
+                6. 합을 누적시키는 방식이고 최종적으로 쌓인 값은 무조건 최선, 최대의 값이 누적되어 있을겁니다.<br>
+                <br>
+                총평 : 원래 for문으로 land의 한 행마다 큰값을 구하고 다음 행에서 큰 값 라인 피해서 answer에 더하고 더해서 return 했는데, <br>
+                테스트 케이스는 맞아도 제출해서 한개도 맞지가 않더군요. 그래서 질문하기 탭에서 살펴보다가 동적계획법 글을 봤는데 그걸 참고해서 풀었습니다.
+            </p>
+            출처 :
+            <a
+                href="https://school.programmers.co.kr/learn/courses/30/lessons/12913?language=javascript#">https://school.programmers.co.kr/learn/courses/30/lessons/12913?language=javascript#</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="asset/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
