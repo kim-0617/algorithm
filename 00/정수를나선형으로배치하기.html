@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>정수를 나선형으로 배치하기</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">0 단계 : 정수를 나선형으로 배치하기</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 연습문제 > 정수를 나선형으로 배치하기
+      </p>
+
+      <hr />
+      <p class="t_desc2">양의 정수 n이 매개변수로 주어집니다. n × n 배열에 1부터 n<sup>2</sup> 까지 정수를
+        인덱스 [0][0]부터 시계방향 나선형으로 배치한 이차원 배열을 return 하는 solution 함수를 작성해 주세요.</p>
+
+      <hr>
+      <i>제한사항</i>
+
+      <ul>
+        <li>1 ≤ n ≤ 30</li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>n</th>
+            <th>result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">4</td>
+            <td class="ce">[[1, 2, 3, 4], [12, 13, 14, 5], [11, 16, 15, 6], [10, 9, 8, 7]]</td>
+          </tr>
+          <tr>
+            <td class="ce">5</td>
+            <td class="ce">[[1, 2, 3, 4, 5], [16, 17, 18, 19, 6], [15, 24, 25, 20, 7], [14, 23, 22, 21, 8], [13, 12,
+              11, 10, 9]]
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+      <i>입출력 예 설명</i>
+      <p class="t_desc">입출력 예 #1</p>
+      <ul>
+        <li>
+          <p class="t_desc">예제 1번의 n의 값은 4로 4 × 4 배열에 다음과 같이 1부터 16까지 숫자를 채울 수 있습니다.</p>
+          <table class="t_table">
+            <thead>
+              <tr>
+                <th>행 \ 열</th>
+                <th>0</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ce">0</td>
+                <td class="ce">1</td>
+                <td class="ce">2</td>
+                <td class="ce">3</td>
+                <td class="ce">4</td>
+              </tr>
+              <tr>
+                <td class="ce">1</td>
+                <td class="ce">12</td>
+                <td class="ce">13</td>
+                <td class="ce">14</td>
+                <td class="ce">5</td>
+              </tr>
+              <tr>
+                <td class="ce">2</td>
+                <td class="ce">11</td>
+                <td class="ce">16</td>
+                <td class="ce">15</td>
+                <td class="ce">6</td>
+              </tr>
+              <tr>
+                <td class="ce">3</td>
+                <td class="ce">10</td>
+                <td class="ce">9</td>
+                <td class="ce">8</td>
+                <td class="ce">7</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>따라서 [[1, 2, 3, 4], [12, 13, 14, 5], [11, 16, 15, 6], [10, 9, 8, 7]]를 return 합니다.</p>
+        </li>
+      </ul>
+      <br><br>
+      <p class="t_desc">입출력 예 #2</p>
+      <ul>
+        <li>
+          <p class="t_desc">예제 2번의 n의 값은 5로 5 × 5 배열에 다음과 같이 1부터 25까지 숫자를 채울 수 있습니다.</p>
+          <table class="t_table">
+            <thead>
+              <tr>
+                <th>행 \ 열</th>
+                <th>0</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ce">0</td>
+                <td class="ce">1</td>
+                <td class="ce">2</td>
+                <td class="ce">3</td>
+                <td class="ce">4</td>
+                <td class="ce">5</td>
+              </tr>
+              <tr>
+                <td class="ce">1</td>
+                <td class="ce">16</td>
+                <td class="ce">17</td>
+                <td class="ce">18</td>
+                <td class="ce">19</td>
+                <td class="ce">6</td>
+              </tr>
+              <tr>
+                <td class="ce">2</td>
+                <td class="ce">15</td>
+                <td class="ce">24</td>
+                <td class="ce">25</td>
+                <td class="ce">20</td>
+                <td class="ce">7</td>
+              </tr>
+              <tr>
+                <td class="ce">3</td>
+                <td class="ce">14</td>
+                <td class="ce">23</td>
+                <td class="ce">22</td>
+                <td class="ce">21</td>
+                <td class="ce">8</td>
+              </tr>
+              <tr>
+                <td class="ce">4</td>
+                <td class="ce">13</td>
+                <td class="ce">12</td>
+                <td class="ce">11</td>
+                <td class="ce">10</td>
+                <td class="ce">9</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>따라서 [[1, 2, 3, 4, 5], [16, 17, 18, 19, 6], [15, 24, 25, 20, 7], [14, 23, 22, 21, 8], [13, 12, 11, 10,
+            9]]를 return 합니다.</p>
+        </li>
+      </ul>
+
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(n) {
+    const baseRow = Array(n).fill(0);
+    // [ [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
+    let result = [...Array.from({length : n}, _ =>[...baseRow])];
+    
+    const direction = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+    const repeatTime = n * 2 - 1;
+    
+    let dirIndex;
+    let loop = n;
+    const mappingArray = [];
+    for(let i = 0; i < repeatTime; i++) {
+        dirIndex = i % 4;
+        
+        mappingArray.push([loop, dirIndex]);
+        
+        if(dirIndex % 2 === 0) {
+            loop--;
+        }
+    }
+
+    let value = 1, row = 0, col = -1;
+    for(let i = 0; i < mappingArray.length; i++) {
+        for(let j = 0; j < mappingArray[i][0]; j++) {
+            row += direction[mappingArray[i][1]][0];
+            col += direction[mappingArray[i][1]][1];
+            result[row][col] = value++;
+        }
+    }
+    
+    return result;
+}
+</code></pre>
+      </div>
+
+      <h3 class="t_tit">리뷰</h3>
+      <p style="line-height: 2; margin-bottom: 10px; font-size: 16px;">
+        1. return 할 배열 result를 만들어줍니다.<br>
+        2. 다음과 같은 순서로 행,열 인덱스를 결정합니다.<br>
+        3. 첫번째, 오른쪽방향의 열의 증가. 두번째, 밑쪽방향의 행의증가. 세번째, 왼쪽방향의 열의감소. 네번째, 오른쪽 방향의 행의 감소<br>
+        4. 이걸 나타낸 것이 const direction = [[0, 1], [1, 0], [0, -1], [-1, 0]]; 입니다.<br>
+        5. n이 4일경우 4번채우고 3번채우고 3번채우고 2번채우고 2번채우고 1번채우고 1번채웁니다. 이것이 loop 입니다.<br>
+        6. 즉 n * 2 - 1 번 direction을 바꾸면서 배열을 채웁니다.<br>
+        7. loop이 4일때 direction의 index는 0, 3일때 1, 3일때 2, 2일때 3, 2일때 0 .. .이렇게 반복됩니다.<br>
+        8. [4,0], [3,1], [3,2], [2,3], [2,0], [1,1], [1,2] 이런식으로요<br>
+        9. 채우는건 4->3->3->2->2->1->1 이렇게 변화하고 그에맞게 direction의 인덱스가 0,1,2,3,0,1,2 ... 이렇게 변화할 거란 것이죠.<br>
+        10. 이 loop과 해당하는 direction을 담은 배열이 mappingArray 입니다.<br>
+        11. 4,3,3,2,2,1이 총 n = 4 일때, 16번이죠? 이 mappingArray를 돌면서 mappingArray[i][0]번 만큼 반복하면서 result를 채워줄게요<br>
+        12. 포인트라 생각하는 것은 row=0으로 시작하지만 첫번째 채우기 때 col이 변하기 때문에 -1로 값을 셋팅하고 row,col을 direction의 인덱스에 해당하는 증감치로 계산해준 뒤,<br>
+        13. result에 해당하는 숫자를 채워줘야 한다는 것 입니다.<br>
+        14. 과정이 마무리 되면 result를 return 해주면 됩니다.<br> <br>
+        총평 : 기초 트레이닝이 다소 어렵네요.<br>
+      </p>
+      <br>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/181832">https://school.programmers.co.kr/learn/courses/30/lessons/181832</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>

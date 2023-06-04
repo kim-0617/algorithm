@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>배열 만들기2</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">0 단계 : 배열 만들기2</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 연습문제 > 배열 만들기2
+      </p>
+
+      <hr />
+      <p class="t_desc2">정수 <code>l</code>과 <code>r</code>이 주어졌을 때, <code>l</code> 이상 <code>r</code>이하의 정수 중에서 숫자 "0"과
+        "5"로만 이루어진 모든
+        정수를 오름차순으로 저장한 배열을 return 하는 solution 함수를 완성해 주세요.</p>
+
+      <p class="t_desc">만약 그러한 정수가 없다면, -1이 담긴 배열을 return 합니다.</p>
+
+      <hr>
+      <i>제한사항</i>
+      <ul>
+        <li>1 ≤ <code>l</code> ≤ <code>r</code> ≤ 1,000,000</li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>l</th>
+            <th>r</th>
+            <th>result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">5</td>
+            <td class="ce">555</td>
+            <td class="ce">[5, 50, 55, 500, 505, 550, 555]</td>
+          </tr>
+          <tr>
+            <td class="ce">10</td>
+            <td class="ce">20</td>
+            <td class="ce">[-1]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+      <i>입출력 예 설명</i>
+      <p class="t_desc">입출력 예 #1</p>
+
+      <ul>
+        <li>5 이상 555 이하의 0과 5로만 이루어진 정수는 작은 수부터 5, 50, 55, 500, 505, 550, 555가 있습니다. 따라서 [5, 50, 55, 500, 505, 550,
+          555]를 return 합니다.</li>
+      </ul>
+
+      <br><br>
+      <p class="t_desc">입출력 예 #2</p>
+
+      <ul>
+        <li>10 이상 20 이하이면서 0과 5로만 이루어진 정수는 없습니다. 따라서 [-1]을 return 합니다.</li>
+      </ul>
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(l, r) {
+    // l~r까지의 배열을 Array.from()을 통해 만들고, filter를 통해서 숫자 하나하나를 문자열로 만든 것의 
+    // replace를 했을 때 length === 0 이여야만 0,5로만 이루어진 수라고 할 수 있겠습니다.
+    const ret = Array.from({length : r - l + 1}, (_, index) => index + l).filter(item => {
+        return String(item).replace(/['0','5']/gi, '').length === 0;
+    });
+    
+     // 그런 숫자가 없으면 [-1], 아니면 위에서 구한 배열 return
+    return ret.length === 0 ? [-1] : ret;
+}
+</code></pre>
+      </div>
+
+      <h3 class="t_tit">리뷰</h3>
+      <p class="t_desc">
+        1. l~r사이의 모든 숫자를 포함하는 배열을 만들고, filter를 수행하는데,<br>
+        2. 조건은 예를들어 52라고 했을 때, String(52)의 0 or 5를 제거하는 replace를 수행했을 때, 2가 남게 될겁니다.<br>
+        3. 즉 length는 0이 아니게되고 이것은 조건에 맞는 숫자가 아니겠죠? 이런식으로 filter를 걸러서 최종적으로 남는 숫자들만 return 해줍니다.<br>
+
+        <br>
+        총평 : 푸는 방법은 여러가지일 것 같아요.<br>
+      </p>
+
+      <br>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/181921">https://school.programmers.co.kr/learn/courses/30/lessons/181921</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>

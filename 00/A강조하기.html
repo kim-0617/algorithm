@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A 강조하기</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">0 단계 : A 강조하기</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 연습문제 > A 강조하기
+      </p>
+
+      <hr />
+      <p class="t_desc2">문자열 <code>myString</code>이 주어집니다. <code>myString</code>에서 알파벳 "a"가 등장하면 전부 "A"로 변환하고, "A"가 아닌
+        모든 대문자 알파벳은 소문자
+        알파벳으로 변환하여 return 하는 solution 함수를 완성하세요.</p>
+
+      <hr>
+      <i>제한사항</i>
+
+      <ul>
+        <li>1 ≤ <code>myString</code>의 길이 ≤ 20
+
+          <ul>
+            <li><code>myString</code>은 알파벳으로 이루어진 문자열입니다.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>myString</th>
+            <th>result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">"abstract algebra"</td>
+            <td class="ce">"AbstrAct AlgebrA"</td>
+          </tr>
+          <tr>
+            <td class="ce">"PrOgRaMmErS"</td>
+            <td class="ce">"progrAmmers"</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+      <i>입출력 예 설명</i>
+
+      <p class="t_desc">입출력 예 #1</p>
+      <ul>
+        <li>0번, 5번, 9번, 15번 인덱스의 "a"는 소문자이므로 전부 대문자로 고쳐줍니다.</li>
+        <li>다른 문자들은 전부 "a"가 아닌 소문자이므로 바꾸지 않습니다.</li>
+        <li>따라서 "AbstrAct AlgebrA"를 return 합니다.</li>
+      </ul>
+
+      <br><br>
+      <p class="t_desc">입출력 예 #2</p>
+      <ul>
+        <li>0번, 2번, 4번, 6번, 8번, 10번 인덱스의 문자들은 "A"가 아닌 대문자이므로 전부 소문자로 고쳐줍니다.</li>
+        <li>5번 인덱스의 "a"는 소문자이므로 대문자로 고쳐줍니다.</li>
+        <li>다른 문자들은 전부 "a"가 아닌 소문자이므로 바꾸지 않습니다.</li>
+        <li>따라서 "progrAmmers"를 return 합니다.</li>
+      </ul>
+
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(myString) {
+    return myString.toLowerCase().replaceAll('a', 'A');
+}
+</code></pre>
+      </div>
+
+      <h3 class="t_tit">리뷰</h3>
+      <p class="t_desc">
+        1. 문자열을 전부 소문자로 변환하고 a => A로 변환해주면 되겠죠?<br>
+
+        <br><br>
+        총평 : 음, 이게 아마 점수를 1점보다 많이 줘서 제가 이걸 블로그에 올릴려 했나보네요.<br>
+      </p>
+      <br>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/181874">https://school.programmers.co.kr/learn/courses/30/lessons/181874</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>날짜 비교하기</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">0 단계 : 날짜 비교하기</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 연습문제 > 날짜 비교하기
+      </p>
+
+      <hr />
+      <p class="t_desc">정수 배열 <code>date1</code>과 <code>date2</code>가 주어집니다. 두 배열은 각각 날짜를 나타내며
+        <code>[year, month, day]</code> 꼴로
+        주어집니다. 각 배열에서 <code>year</code>는 연도를, <code>month</code>는 월을, <code>day</code>는 날짜를 나타냅니다.
+      </p>
+
+      <p class="t_desc2">만약 <code>date1</code>이 <code>date2</code>보다 앞서는 날짜라면 1을, 아니면 0을 return 하는 solution 함수를 완성해 주세요.
+      </p>
+
+      <hr>
+      <i>제한사항</i>
+      <ul>
+        <li><code>date1</code>의 길이 = <code>date2</code>의 길이 = 3
+
+          <ul>
+            <li>0 ≤ <code>year</code> ≤ 10,000</li>
+            <li>1 ≤ <code>month</code> ≤ 12</li>
+            <li><code>day</code>는 <code>month</code>에 따라 가능한 날짜로 주어집니다.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>date1</th>
+            <th>date2</th>
+            <th>result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">[2021, 12, 28]</td>
+            <td class="ce">[2021, 12, 29]</td>
+            <td class="ce">1</td>
+          </tr>
+          <tr>
+            <td class="ce">[1024, 10, 24]</td>
+            <td class="ce">[1024, 10, 24]</td>
+            <td class="ce">0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+      <i>입출력 예 설명</i>
+      <p class="t_desc">입출력 예 #1</p>
+
+      <ul>
+        <li><code>date1</code>이 <code>date2</code>보다 하루 앞서기 때문에 1을 return 합니다.</li>
+      </ul>
+
+      <br><br>
+      <p class="t_desc">입출력 예 #2</p>
+      <ul>
+        <li><code>date1</code>과 <code>date2</code>는 날짜가 서로 같으므로 <code>date1</code>이 더 앞서는 날짜가 아닙니다. 따라서 0을 return 합니다.
+        </li>
+      </ul>
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(date1, date2) {
+    return new Date(date1[0], date1[1], date1[2]) < new Date(date2[0], date2[1], date2[2]) ? 1 : 0;
+}
+</code></pre>
+      </div>
+
+      <h3 class="t_tit">리뷰</h3>
+      <p class="t_desc">
+        1. new Date() 인자로 year, month, day를 주면 날짜 비교가 가능해집니다.<br>
+
+        <br>
+        총평 : 음, 이것도 점수를 1점보다 많이줘서 블로그에 올리려고 했던 것 같네요.<br>
+      </p>
+
+      <br>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/181838">https://school.programmers.co.kr/learn/courses/30/lessons/181838</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>
