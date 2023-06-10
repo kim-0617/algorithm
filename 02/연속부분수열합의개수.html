@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연속 부분 수열 합의 개수</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">2 단계 : 연속 부분 수열 합의 개수</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 연습문제 > 연속 부분 수열 합의 개수
+      </p>
+
+      <hr />
+      <p class="t_desc">철호는 수열을 가지고 놀기 좋아합니다. 어느 날 철호는 어떤 자연수로 이루어진 원형 수열의 연속하는 부분 수열의 합으로 만들 수 있는 수가 모두 몇 가지인지 알아보고
+        싶어졌습니다. 원형 수열이란
+        일반적인 수열에서 처음과 끝이 연결된 형태의 수열을 말합니다. 예를 들어 수열 [7, 9, 1, 1, 4] 로 원형 수열을 만들면 다음과 같습니다.<br>
+        <img
+          src="https://grepp-programmers.s3.ap-northeast-2.amazonaws.com/files/production/f207cd37-34dc-4cbd-96bb-83435bd6efd4/%EA%B7%B8%EB%A6%BC.png"
+          title="" alt="그림.png"><br>
+        원형 수열은 처음과 끝이 연결되어 끊기는 부분이 없기 때문에 연속하는 부분 수열도 일반적인 수열보다 많아집니다.<br>
+        원형 수열의 모든 원소 <code>elements</code>가 순서대로 주어질 때, 원형 수열의 연속 부분 수열 합으로 만들 수 있는 수의 개수를 return 하도록 solution 함수를
+        완성해주세요.
+      </p>
+
+      <hr>
+      <i>제한사항</i>
+      <ul>
+        <li>3 ≤ <code>elements</code>의 길이 ≤ 1,000</li>
+        <li>1 ≤ <code>elements</code>의 원소 ≤ 1,000</li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>elements</th>
+            <th>result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">[7,9,1,1,4]</td>
+            <td class="ce">18</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+      <i>입출력 예 설명</i>
+      <p class="t_desc">입출력 예 #1<br>
+        길이가 1인 연속 부분 수열로부터 [1, 4, 7, 9] 네 가지의 합이 나올 수 있습니다.<br>
+        길이가 2인 연속 부분 수열로부터 [2, 5, 10, 11, 16] 다섯 가지의 합이 나올 수 있습니다.<br>
+        길이가 3인 연속 부분 수열로부터 [6, 11, 12, 17, 20] 다섯 가지의 합이 나올 수 있습니다.<br>
+        길이가 4인 연속 부분 수열로부터 [13, 15, 18, 21] 네 가지의 합이 나올 수 있습니다.<br>
+        길이가 5인 연속 부분 수열로부터 [22] 한 가지의 합이 나올 수 있습니다.<br>
+        이들 중 중복되는 값을 제외하면 다음과 같은 18가지의 수들을 얻습니다.<br>
+        [1, 2, 4, 5, 6, 7, 9, 10, 11, 12, 13, 15, 16, 17, 18, 20, 21, 22]
+      </p>
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(elements) {
+    // return할 값
+    const answer = [];
+    
+    // 원형을 만들기위해 [7, 9, 1, 1, 4] + [7, 9, 1, 1]
+    const addPart = elements.slice(0, elements.length - 1); // [7, 9, 1, 1]
+    const realArray = elements.slice(); // 복사 후
+    realArray.push(...addPart); // push
+
+    // elements의 길이가 5이기 때문에 5번 반복할거고 i가 slice하는 기준이 될 겁니다.
+    for(let i = 1; i <= elements.length; i++) {
+        // 부분합을 모두 push 할겁니다. 중복신경쓰지 않고
+        let tmp = []; // 1 ~ elements.length 까지의 각각의 부분합을 담을 배열
+        for(let j = 0; j < realArray.length; j++) {
+            // 예를들어 [7, 9, 1, 1, 4, 7, 9, 1, 1] 일 때, j === 1 이고, i === 3이면 3개씩 끊는다는 뜻이고,
+            // [1,1, undefined]이기 때문에, [1,1] 이렇게 push가 되는걸 막기위해서 i+j (slice의 끝인덱스)가 
+            // [7, 9, 1, 1, 4, 7, 9, 1, 1]의 길이 이하일 때만 push 합니다.
+            
+            if(i + j <= realArray.length) {
+                // pushItem은 silce한 배열의 합입니다.
+                const pushItem = realArray.slice(j, j + i).reduce((prev, curr) => prev += curr);
+                if(!tmp.includes(pushItem)) { // 길이가 i인 연속부분수열의 합에서 중복을 제거
+                 tmp.push(pushItem);   
+                }
+            }
+        }
+        answer.push(tmp);
+    }
+    
+    // 모든 합에서 중복을 제거
+    return [...new Set(answer.flat())].length;
+}
+</pre>
+      </div>
+
+      <h3 class="t_tit">리뷰</h3>
+      <p class="t_desc">
+        순서는 다음과 같다 <br>
+        1. 길이가 1인 연속 부분수열은 [1] [1] [4] [7] [9] 하고 중복을 제거해서 1,4,7,9가 나왔겠죠?<br>
+        2. 길이가 3인 연속 부분수열은 [7, 9, 1] [9, 1, 1] [1, 1, 4] [1, 4, 7] [4, 7, 9] 하고 중복을 제거해서 17,11,6,12,20이 나왔겠죠?<br>
+        3. 이런식으로 계산을 해서 slice를 1,2,3 ... elements.length 까지 해주고, reduce를 사용해서 합을 구해서 중복을 제거하고 return 하면 된다고 생각했습니다.<br>
+        4. 그래서 원형인 수열을 표현하기 위해 예제를 통해 설명하면, 4를 기준으로 7,9,1,1이 반복되는 형태의 배열을 만들었습니다.<br>
+        5. 그리고 길이가 i인 연속 부분수열의 합을 tmp에 저장하고 (중복제거) 최종적으로 answer에 push합니다.<br>
+        6. 최종적으로는 answer에 elements.length 만큼 원소가 있을 텐데 이것은 모두 합이므로 set의 인자로 answer.flat()한걸 넘겨줍니다.<br>
+
+        총평 : 길이가 1000개정도면 크지는 않다고 생각해서 if문 조건을 안넣었더니 core dumped 나고, 시간초과 나서 조건을 좀 걸어주고 단축시키니까 통과됐습니다😥
+      </p>
+
+      <br>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/131701">https://school.programmers.co.kr/learn/courses/30/lessons/131701</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>
