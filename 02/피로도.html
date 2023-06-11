@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>피로도</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">2 단계 : 피로도</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 완전탐색 > 피로도
+      </p>
+
+      <hr />
+      <p class="t_desc">XX게임에는 피로도 시스템(0 이상의 정수로 표현합니다)이 있으며, 일정 피로도를 사용해서 던전을 탐험할 수 있습니다. 이때, 각 던전마다 탐험을 시작하기 위해 필요한
+        "최소 필요 피로도"와 던전
+        탐험을 마쳤을 때 소모되는 "소모 피로도"가 있습니다. "최소 필요 피로도"는 해당 던전을 탐험하기 위해 가지고 있어야 하는 최소한의 피로도를 나타내며, "소모 피로도"는 던전을 탐험한 후 소모되는
+        피로도를 나타냅니다. 예를 들어 "최소 필요 피로도"가 80, "소모 피로도"가 20인 던전을 탐험하기 위해서는 유저의 현재 남은 피로도는 80 이상 이어야 하며, 던전을 탐험한 후에는 피로도
+        20이 소모됩니다.</p>
+
+      <p class="t_desc2">이 게임에는 하루에 한 번씩 탐험할 수 있는 던전이 여러개 있는데, 한 유저가 오늘 이 던전들을 최대한 많이 탐험하려 합니다. 유저의 현재 피로도 k와 각 던전별 "최소
+        필요 피로도", "소모
+        피로도"가 담긴 2차원 배열 dungeons 가 매개변수로 주어질 때, 유저가 탐험할수 있는 최대 던전 수를 return 하도록 solution 함수를 완성해주세요.</p>
+
+      <hr>
+      <i>제한사항</i>
+      <ul>
+        <li>k는 1 이상 5,000 이하인 자연수입니다.</li>
+        <li>dungeons의 세로(행) 길이(즉, 던전의 개수)는 1 이상 8 이하입니다.
+
+          <ul>
+            <li>dungeons의 가로(열) 길이는 2 입니다.</li>
+            <li>dungeons의 각 행은 각 던전의 ["최소 필요 피로도", "소모 피로도"] 입니다.</li>
+            <li>"최소 필요 피로도"는 항상 "소모 피로도"보다 크거나 같습니다.</li>
+            <li>"최소 필요 피로도"와 "소모 피로도"는 1 이상 1,000 이하인 자연수입니다.</li>
+            <li>서로 다른 던전의 ["최소 필요 피로도", "소모 피로도"]가 서로 같을 수 있습니다. </li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>k</th>
+            <th>dungeons</th>
+            <th>result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">80</td>
+            <td class="ce">[[80,20],[50,40],[30,10]]</td>
+            <td class="ce">3</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+      <i>입출력 예 설명</i>
+      <p class="t_desc">현재 피로도는 80입니다.</p>
+      <p class="t_desc">만약, 첫 번째 → 두 번째 → 세 번째 던전 순서로 탐험한다면</p>
+      <ul>
+        <li>현재 피로도는 80이며, 첫 번째 던전을 돌기위해 필요한 "최소 필요 피로도" 또한 80이므로, 첫 번째 던전을 탐험할 수 있습니다. 첫 번째 던전의 "소모 피로도"는 20이므로, 던전을
+          탐험한 후 남은 피로도는 60입니다.</li>
+        <li>남은 피로도는 60이며, 두 번째 던전을 돌기위해 필요한 "최소 필요 피로도"는 50이므로, 두 번째 던전을 탐험할 수 있습니다. 두 번째 던전의 "소모 피로도"는 40이므로, 던전을 탐험한
+          후 남은 피로도는 20입니다.</li>
+        <li>남은 피로도는 20이며, 세 번째 던전을 돌기위해 필요한 "최소 필요 피로도"는 30입니다. 따라서 세 번째 던전은 탐험할 수 없습니다.</li>
+      </ul>
+
+      <p class="t_desc">만약, 첫 번째 → 세 번째 → 두 번째 던전 순서로 탐험한다면</p>
+      <ul>
+        <li>현재 피로도는 80이며, 첫 번째 던전을 돌기위해 필요한 "최소 필요 피로도" 또한 80이므로, 첫 번째 던전을 탐험할 수 있습니다. 첫 번째 던전의 "소모 피로도"는 20이므로, 던전을
+          탐험한 후 남은 피로도는 60입니다.</li>
+        <li>남은 피로도는 60이며, 세 번째 던전을 돌기위해 필요한 "최소 필요 피로도"는 30이므로, 세 번째 던전을 탐험할 수 있습니다. 세 번째 던전의 "소모 피로도"는 10이므로, 던전을 탐험한
+          후 남은 피로도는 50입니다.</li>
+        <li>남은 피로도는 50이며, 두 번째 던전을 돌기위해 필요한 "최소 필요 피로도"는 50이므로, 두 번째 던전을 탐험할 수 있습니다. 두 번째 던전의 "소모 피로도"는 40이므로, 던전을 탐험한
+          후 남은 피로도는 10입니다.</li>
+      </ul>
+
+      <p class="t_desc">따라서 이 경우 세 던전을 모두 탐험할 수 있으며, 유저가 탐험할 수 있는 최대 던전 수는 3입니다.</p>
+
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(k, dungeons) {
+    const answer = [];
+    function permute(nums) {
+      const result = [];
+
+      function backtrack(arr, current) {
+        // 순열 완성
+        if (current.length === arr.length) {
+          result.push(current.slice()); // 현재 순열을 결과 배열에 추가
+          return;
+        }
+
+        for (let i = 0; i < arr.length; i++) {
+          if (current.includes(arr[i])) {
+            continue; // 이미 선택된 숫자인 경우 건너뜀
+          }
+
+          current.push(arr[i]); // 숫자 선택
+          backtrack(nums, current); // 재귀 호출
+          current.pop(); // 선택한 숫자 제거 (백트래킹)
+        }
+      }
+
+      backtrack(nums, []);
+      return result;
+    }
+
+    // 모든 경우의수를 탐색하기 위해 순열을 생성하는 함수
+    const permutations = permute(dungeons);
+    
+    // 모든 경우의 수 마다 던전을 몇개 돌 수 있나 계산해서 answer에 push
+    permutations.forEach(item => {
+        // 순열 하나하나 처리할때마다 피로도 초기화
+        let p = k;
+        
+        let pushItem = item.reduce((prev, curr) => {
+            if(curr[0] > p) return prev; // 피로도가 최소필요피로도보다 작다면 던전을 돌 수 없음
+            else { // 던전을 돌 수 있음
+                p -= curr[1]; // 피로도 빼주고
+                return prev +=1; // 던전 한개 돌았다 표시
+            }
+        }, 0);
+        
+        answer.push(pushItem); // 최종적으로 던전 돈 수 push
+    });
+    
+    // 모든 경우의 수 중 가장 큰 수 (최대 많이 돌 수 있는 경우의 수)
+    return Math.max(...answer);
+}
+</pre>
+      </div>
+      <h3 class="t_tit">리뷰</h3>
+      <p class="t_desc">
+        순서는 다음과 같다 <br>
+        1. 생각한 풀이법은 다음과 같습니다.<br>
+        2. 모든 순서대로 던전을 돌아보면서 피로도 제한에 걸리지 않고 최대로 돌 수 있는 방법을 구하면 됩니다.<br>
+        3. 그렇게 하기위해서 배열을 인자로 받아서 가능한 모든 순서조합 (순열)을 만드는 permute() 함수를 제작합니다.<br>
+        4. 여기에 dungeons를 넣으면 가능한 모든 순서로 던전을 도는 경우의 수가 나오게 됩니다.<br>
+        5. 그 모든 경우의수를 순회하면서 문제에 조건에 맞게 던전을 돌고 최대 돌 수 있는 던전수를 answer에 각각 push 합니다.<br>
+        <br>
+        총평 : 풀이법은 쉽게 생각날 수 있는데 그걸 구현하는게 어려운 문제였던 것 같아요.
+      </p>
+      <br>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/87946">https://school.programmers.co.kr/learn/courses/30/lessons/87946</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>
