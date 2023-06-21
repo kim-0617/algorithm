@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모음사전</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">2 단계 : 모음사전</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 완전탐색 > 모음사전
+      </p>
+
+      <hr />
+      <p class="t_desc">사전에 알파벳 모음 'A', 'E', 'I', 'O', 'U'만을 사용하여 만들 수 있는, 길이 5 이하의 모든 단어가 수록되어 있습니다. 사전에서 첫 번째 단어는
+        "A"이고, 그다음은
+        "AA"이며, 마지막 단어는 "UUUUU"입니다.</p>
+
+      <p class="t_desc2">단어 하나 word가 매개변수로 주어질 때, 이 단어가 사전에서 몇 번째 단어인지 return 하도록 solution 함수를 완성해주세요.</p>
+
+      <hr>
+      <i>제한사항</i>
+      <ul>
+        <li>word의 길이는 1 이상 5 이하입니다.</li>
+        <li>word는 알파벳 대문자 'A', 'E', 'I', 'O', 'U'로만 이루어져 있습니다.</li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>word</th>
+            <th>result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce"><code>"AAAAE"</code></td>
+            <td class="ce">6</td>
+          </tr>
+          <tr>
+            <td class="ce"><code>"AAAE"</code></td>
+            <td class="ce">10</td>
+          </tr>
+          <tr>
+            <td class="ce"><code>"I"</code></td>
+            <td class="ce">1563</td>
+          </tr>
+          <tr>
+            <td class="ce"><code>"EIO"</code></td>
+            <td class="ce">1189</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+      <i>입출력 예 설명</i>
+      <p class="t_desc">입출력 예 #1</p>
+      <p class="t_desc">사전에서 첫 번째 단어는 "A"이고, 그다음은 "AA", "AAA", "AAAA", "AAAAA", "AAAAE", ... 와 같습니다. "AAAAE"는 사전에서 6번째
+        단어입니다.</p>
+      <br><br>
+      <p class="t_desc">입출력 예 #2</p>
+      <p class="t_desc">"AAAE"는 "A", "AA", "AAA", "AAAA", "AAAAA", "AAAAE", "AAAAI", "AAAAO", "AAAAU"의 다음인 10번째 단어입니다.
+      </p>
+      <br><br>
+      <p class="t_desc">입출력 예 #3</p>
+      <p class="t_desc">"I"는 1563번째 단어입니다.</p>
+      <br><br>
+      <p class="t_desc">입출력 예 #4</p>
+      <p class="t_desc">"EIO"는 1189번째 단어입니다.</p>
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(word) {
+    const dictionary = []; // 사전
+    const target = ['A', 'E', 'I', 'O', 'U']; // 사전에 등록될 문자들
+    
+    // 사전만들기
+    const makeDictionary = (level, member) => {
+     dictionary.push(member); // 맨처음 호출시 '' 들어갑니다.
+    
+     // '' 빈문자열이고 레벨은 0이죠? 이때 for문 안에서는 어떤일이 일어날까요?
+     // makeDictionary(1, '' + ('A' ~ 'U')) 호출되겠죠? dictionary에 ['', A', 'E', 'I', 'O', 'U'] push
+     // 그다음엔 makeDictionary(2, ('A' ~ 'U') + ('A' ~ 'U')) 이런식으로 호출됩니다.
+     for(let i = 0; i < target.length; i++) {
+         if(level < target.length) {
+             // member는 어떻게 변하게 될까요? A만 붙는다고 쳤을 때
+             // '' (0) 'A' (1) 'AA' (2) 'AAA' (3) 'AAAA' (4) 'AAAAA'(5 => 최대레벨) 
+             // makeDictionary(6, AAAAA + target[i]); 이렇게 호출되선 안되겠죠? 5일때 if문 안으로 들어오면 안됩니다.
+             makeDictionary(level + 1, member + target[i]);
+         }
+     }
+    }
+    
+    makeDictionary(0, ''); // 사전제작
+    return dictionary.findIndex(item => item === word); // 몇번째 단어인지 검색하기
+}
+</pre>
+      </div>
+      <h3 class="t_tit">리뷰</h3>
+      <p class="t_desc" style="line-height: 1.7;">
+        순서는 다음과 같다 <br>
+        1. 사전과 사전을 만드는 함수 makeDictionary를 정의합니다.<br>
+        2. 재귀적으로 구현할건데, 레벨을 하나씩 높여가면서 호출해줍니다. 레벨은 사전에 push될 멤버아이템의 length입니다.<br>
+        3. 처음에 레벨이 0인 빈문자열로 함수를 호출해줍니다. 그렇다면 바로 빈문자열이 push됩니다.<br>
+        4. ['A', 'E', 'I', 'O', 'U']를 순회하면서 다음 재귀를 호출하는데, makeDictionary(1, '' + ('A' ~ 'U')) dictionary에 ['', A', 'E',
+        'I', 'O', 'U'] 이런식으로 쌓입니다.<br>
+        5. 이렇게 계속적으로 호출하면 'A' 일때 다음재귀에서 'AA' 'AE' 'AI' 'AO' 'AU' 가 member이고, level이 2인 상태로 재귀를 호출합니다.<br>
+        6. 다음엔 예상되다시피 'AA' 일때는 'AAA', 'AAE' ... 이렇게 계속적으로 push되고 level을 올려서 호출합니다.<br>
+        7. 재귀에는 재귀를 멈출 수 있는 조건이 필요하겠죠? 무작정 호출을 하는게아니라 타겟문자열의 길이만큼이 최대 사전의 멤버아이템이기 때문에 레벨이 5일때는 그다음 재귀를 호출하지 않습니다.<br>
+        8. 모두 수행하고 사전에 순서대로 쌓였다면 solution 함수의 매개변수로 들어온 word가 몇번째 멤버아이템인지는 findIndex를 통해 찾아줍니다.<br>
+        <br>
+        총평 :
+      </p>
+      <br>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/84512">https://school.programmers.co.kr/learn/courses/30/lessons/84512</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>
