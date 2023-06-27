@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>다리를 지나는 트럭</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">2 단계 : 다리를 지나는 트럭</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 스택 / 큐 > 다리를 지나는 트럭
+      </p>
+
+      <hr />
+      <p class="t_desc">트럭 여러 대가 강을 가로지르는 일차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 다리에는 트럭이 최대
+        bridge_length대
+        올라갈 수 있으며, 다리는 weight 이하까지의 무게를 견딜 수 있습니다. 단, 다리에 완전히 오르지 않은 트럭의 무게는 무시합니다.</p>
+
+      <p class="t_desc">예를 들어, 트럭 2대가 올라갈 수 있고 무게를 10kg까지 견디는 다리가 있습니다. 무게가 [7, 4, 5, 6]kg인 트럭이 순서대로 최단 시간 안에 다리를 건너려면
+        다음과 같이 건너야
+        합니다.</p>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>경과 시간</th>
+            <th>다리를 지난 트럭</th>
+            <th>다리를 건너는 트럭</th>
+            <th>대기 트럭</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">0</td>
+            <td class="ce">[]</td>
+            <td class="ce">[]</td>
+            <td class="ce">[7,4,5,6]</td>
+          </tr>
+          <tr>
+            <td class="ce">1~2</td>
+            <td class="ce">[]</td>
+            <td class="ce">[7]</td>
+            <td class="ce">[4,5,6]</td>
+          </tr>
+          <tr>
+            <td class="ce">3</td>
+            <td class="ce">[7]</td>
+            <td class="ce">[4]</td>
+            <td class="ce">[5,6]</td>
+          </tr>
+          <tr>
+            <td class="ce">4</td>
+            <td class="ce">[7]</td>
+            <td class="ce">[4,5]</td>
+            <td class="ce">[6]</td>
+          </tr>
+          <tr>
+            <td class="ce">5</td>
+            <td class="ce">[7,4]</td>
+            <td class="ce">[5]</td>
+            <td class="ce">[6]</td>
+          </tr>
+          <tr>
+            <td class="ce">6~7</td>
+            <td class="ce">[7,4,5]</td>
+            <td class="ce">[6]</td>
+            <td class="ce">[]</td>
+          </tr>
+          <tr>
+            <td class="ce">8</td>
+            <td class="ce">[7,4,5,6]</td>
+            <td class="ce">[]</td>
+            <td class="ce">[]</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="t_desc">따라서, 모든 트럭이 다리를 지나려면 최소 8초가 걸립니다.</p>
+
+      <p class="t_desc2">solution 함수의 매개변수로 다리에 올라갈 수 있는 트럭 수 bridge_length, 다리가 견딜 수 있는 무게 weight, 트럭 별 무게
+        truck_weights가 주어집니다. 이때
+        모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 return 하도록 solution 함수를 완성하세요.</p>
+
+      <hr>
+      <i>제한 조건</i>
+      <ul>
+        <li>bridge_length는 1 이상 10,000 이하입니다.</li>
+        <li>weight는 1 이상 10,000 이하입니다.</li>
+        <li>truck_weights의 길이는 1 이상 10,000 이하입니다.</li>
+        <li>모든 트럭의 무게는 1 이상 weight 이하입니다.</li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>bridge_length</th>
+            <th>weight</th>
+            <th>truck_weights</th>
+            <th>return</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">2</td>
+            <td class="ce">10</td>
+            <td class="ce">[7,4,5,6]</td>
+            <td class="ce">8</td>
+          </tr>
+          <tr>
+            <td class="ce">100</td>
+            <td class="ce">100</td>
+            <td class="ce">[10]</td>
+            <td class="ce">101</td>
+          </tr>
+          <tr>
+            <td class="ce">100</td>
+            <td class="ce">100</td>
+            <td class="ce">[10,10,10,10,10,10,10,10,10,10]</td>
+            <td class="ce">110</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(bridge_length, weight, truck_weights) {
+    let bridge = []; // 다리를 건너고 있는 차들
+    let time = 0; // return 할 value
+
+    // 무한루프 돌려서,
+    while(1) {
+        // 현재다리의 합
+        const sum = bridge.reduce((prev, curr) => prev += curr[0], 0);
+        
+        // 다리를 지날 수 있음
+        if(sum + truck_weights[0] <= weight) {
+            // 다리를 건너는 시간을 계산하기 위해  시간(다리길이),
+            // 무게를 계산하기 위해 트럭의 무게를 push 합니다.
+            bridge.push([truck_weights.shift(), bridge_length]);
+        }
+        
+        // 트럭의 무게는 냅두고, 시간을 1만큼 줄이고, 그 결과가 만약에 0이라면 제거합니다.
+        bridge = bridge.map(item => [item[0], item[1] - 1]).filter(data => data[1] !== 0);
+        time++; // 시간증가
+        
+        // 다리에 현재 남아있는 차도 없고, 대기하는 트럭도 없다면 break;
+        if(bridge.length === 0 && truck_weights.length === 0) break;
+    }
+    
+    // 1을 더한이유는 1번예로들면 7에 break문에 걸려서 탈출하게 되는데 이때가 예로 나와있는 6~7구간에 해당하고
+    // 최종적으로 비었을 때는 8초가 경과한 후기 때문입니다.
+    // 2번예 에서도 100초에 break에 걸리게되고, 최종적으로 비게되는 시간은 101초가 됩니다.
+    return time + 1;
+}
+</pre>
+      </div>
+      <h3 class="t_tit">리뷰</h3>
+      <p class="t_desc">
+        순서는 다음과 같다 <br>
+        1. 다리에 있는 트럭들을 나타낼 배열 bridge와 return할 value time을 선언합니다.<br>
+        2. 무한루프를 도는데, truck_weights와 bridge가 모두 빌때까지 돌겁니다. <br>
+        3. 수행하는 동작은, 다리의 무게가 버틸 수 있도록 계산하기 위해 bridge의 총합을 구해줍니다.<br>
+        4. 현재 다리의 총합과 다리에 올라타야할 차 (truck_weights[0])의 합이 weight 이하이면 올라탈 수 있습니다.<br>
+        5. 이때 push할 원소는 [트럭의 무게, 다리의 길이] 입니다. 각각 다리의 올라타있는 무게의 총합과, 다리를 건너는 시간을 구하기 위해 필요합니다.<br>
+        6. 다리에 다 올렸으면 전진시킵니다. 이동작은 bridge원소의 다리의 길이로 push했던 부분을 1씩 빼줍니다. 근데 여기서 1빼줬을 때, 0이되면 제거해버립니다.<br>
+        7. 이런과정을 반복하면서 시간을 계속 증가시킵니다.<br>
+        8. 최종적으로 조건에 맞아서 루프를 탈출하게되면 time이 나오겠죠?<br>
+        <br>
+        총평 : 쉬운가 어려운가 좀 긴가민가하네요.
+      </p>
+      <br>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/42583">https://school.programmers.co.kr/learn/courses/30/lessons/42583</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>
