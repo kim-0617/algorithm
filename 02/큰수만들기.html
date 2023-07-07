@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>큰 수 만들기</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">2 단계 : 큰 수 만들기</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 탐욕법(Greedy) > 큰 수 만들기
+      </p>
+
+      <hr>
+      <p class="t_desc">어떤 숫자에서 k개의 수를 제거했을 때 얻을 수 있는 가장 큰 숫자를 구하려 합니다.</p>
+
+      <p class="t_desc">예를 들어, 숫자 1924에서 수 두 개를 제거하면 [19, 12, 14, 92, 94, 24] 를 만들 수 있습니다. 이 중 가장 큰 숫자는 94 입니다.</p>
+
+      <br>
+      <p class="t_desc2">문자열 형식으로 숫자 number와 제거할 수의 개수 k가 solution 함수의 매개변수로 주어집니다. number에서 k 개의 수를 제거했을 때 만들 수 있는 수
+        중 가장 큰 숫자를 문자열
+        형태로 return 하도록 solution 함수를 완성하세요.</p>
+
+      <hr>
+      <i>제한 조건</i>
+      <ul>
+        <li>number는 2자리 이상, 1,000,000자리 이하인 숫자입니다.</li>
+        <li>k는 1 이상 <code>number의 자릿수</code> 미만인 자연수입니다.</li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>number</th>
+            <th>k</th>
+            <th>return</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">"1924"</td>
+            <td class="ce">2</td>
+            <td class="ce">"94"</td>
+          </tr>
+          <tr>
+            <td class="ce">"1231234"</td>
+            <td class="ce">3</td>
+            <td class="ce">"3234"</td>
+          </tr>
+          <tr>
+            <td class="ce">"4177252841"</td>
+            <td class="ce">4</td>
+            <td class="ce">"775841"</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(number, k) {
+    function removeKDigits(numberString, k) {
+      const numberDigits = numberString.split('');
+      const stack = [];
+        
+      // ['1', '2-1', '3-1', '1', '2-1', '3', '4']
+      // 스택의 변화과정
+      // [1] => [2] => [3] => [3, 1] => [3, 2] => [3, 2, 3] => [3, 2, 3, 4]
+      for (let i = 0; i < numberDigits.length; i++) {
+        const current = parseInt(numberDigits[i]);
+
+        while (k > 0 && stack.length > 0 && parseInt(stack[stack.length - 1]) < current) {
+          stack.pop();
+          k--;
+        }
+
+        stack.push(current);
+      }
+
+     // 	"2111111", 2 일때 들어온다.
+     // 왜냐하면  parseInt(stack[stack.length - 1]) < current 이조건이 false 이므로 k 가 줄어들지 않기때문에 
+     // 그대로 "2111111"로 여기에 도달하기 때문에 k개 제거해줘야 한다.
+      while (k > 0) {
+          console.log("here")
+        stack.pop();
+        k--;
+      }
+
+      return stack.join('');
+    }
+    
+    return removeKDigits(number, k);
+}
+</pre>
+      </div>
+      <h3 class="t_tit">리뷰</h3>
+      <p class="t_desc">
+        순서는 다음과 같다 <br>
+        1. 풀이방법은 stack에 number의 원소들을 push하면서 최대 k개 만큼만 제거하는 선에서 최대큰수를 만들려고 했습니다.<br>
+        2. number를 왼쪽부터 오른쪽으로 순회하면서 stack에 push하는데, 이때 이전원소가 더 작으면 pop한 후 push합니다.<br>
+        3. 1231234일때, 1이 들어오고 (while문에 걸리지 않음)<br>
+        4. current가 2인 상황에서 current가 stack에 마지막 원소보다(1) 크기때문에 while문을 통과해서 1이 사라지고, 2가 push 됩니다.<br>
+        5. 마찬가지로 2가 사라지고 3이들어옵니다. 이때 k는 1이 되었습니다.<br>
+        6. 다음 1이들어오는 상황에서 1은 while문에 걸리지 않으므로 push됩니다. (3,1)<br>
+        7. 2가들어오면 마찬가지로 1을 밀어내고 2가 push되어 (3,2)가 됩니다. 이때 k === 0 이므로 앞으로 while문에 걸리지 않습니다.<br>
+        8. k개의 숫자를 모두 제거한 상황에서는 뒤에 원소들을 쭉 push해서 (3,2,3,4) 가 최종적으로 만들어지게 됩니다.<br>
+        <br>
+        총평 : k개만큼의 인덱스 조합을 모두 구해서 배열로 만들어서, number에서 삭제하는 방식으로 풀려고 했지만 시간이 오래 걸렸습니다. <br>
+        이럴때는 스택을 사용해서 시간복잡도를 낮춰보세요.
+      </p>
+      <br>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/42883#">https://school.programmers.co.kr/learn/courses/30/lessons/42883#</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>
