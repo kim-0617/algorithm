@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>뒤에 있는 큰 수 찾기</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">2 단계 : 뒤에 있는 큰 수 찾기</h2>
+      <p class="t_desc">
+        코딩테스트 연습 > 연습문제 > 뒤에 있는 큰 수 찾기
+      </p>
+
+      <hr />
+      <p class="t_desc">정수로 이루어진 배열 numbers가 있습니다. 배열 의 각 원소들에 대해 자신보다 뒤에 있는 숫자 중에서 자신보다 크면서 가장 가까이 있는 수를 뒷 큰수라고
+        합니다.<br>
+        정수 배열 numbers가 매개변수로 주어질 때, 모든 원소에 대한 뒷 큰수들을 차례로 담은 배열을 return 하도록 solution 함수를 완성해주세요. 단, 뒷 큰수가
+        존재하지 않는 원소는 -1을 담습니다.</p>
+
+      <hr>
+      <i>제한사항</i>
+      <ul>
+        <li>4 ≤ numbers의 길이 ≤ 1,000,000
+
+          <ul>
+            <li>1 ≤ numbers[i] ≤ 1,000,000</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+      <i>입출력 예</i>
+      <table class="t_table">
+        <thead>
+          <tr>
+            <th>numbers</th>
+            <th>result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ce">[2, 3, 3, 5]</td>
+            <td class="ce">[3, 5, 5, -1]</td>
+          </tr>
+          <tr>
+            <td class="ce">[9, 1, 5, 3, 6, 2]</td>
+            <td class="ce">[-1, 5, 6, 6, -1, -1]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+      <i>입출력 예 설명</i>
+
+      <p class="t_desc">입출력 예 #1<br>
+        2의 뒷 큰수는 3입니다. 첫 번째 3의 뒷 큰수는 5입니다. 두 번째 3 또한 마찬가지입니다. 5는 뒷 큰수가 없으므로 -1입니다. 위 수들을 차례대로 배열에 담으면 [3, 5, 5, -1]이
+        됩니다.</p>
+
+      <p class="t_desc">입출력 예 #2<br>
+        9는 뒷 큰수가 없으므로 -1입니다. 1의 뒷 큰수는 5이며, 5와 3의 뒷 큰수는 6입니다. 6과 2는 뒷 큰수가 없으므로 -1입니다. 위 수들을 차례대로 배열에 담으면 [-1, 5, 6, 6,
+        -1, -1]이 됩니다.
+      </p>
+
+      <hr />
+      <h3 class="t_tit2">코드</h3>
+      <div class="t_code">
+        <pre><code class="language-js">function solution(numbers) {
+    const stack = [];
+    const answer = Array.from({length : numbers.length}, _ =>  -1); // [-1, -1, -1, -1]
+    
+    numbers.forEach((_, index) => {
+        // 1. 스택의 원소를 뒤에서부터 비교해본다.
+        // 2. 현재 인덱스의 원소가 numbers[스택의 마지막 원소] 보다 큰지 확인하고
+        // 3. 크면 뒷큰수가 현재 인덱스의 원소가 됩니다.
+        
+        // 1. []
+        // 2. [0]
+        // 3. [1]
+        // 4. [1, 2]
+        // 5. [3]
+       while(stack.length !== 0 && numbers[stack.at(-1)] < numbers[index])  {
+           answer[stack.pop()] = numbers[index];
+       }
+        
+        stack.push(index);
+    });
+
+    return answer;
+}
+</pre>
+      </div>
+      <h3 class="t_tit">리뷰</h3>
+      <p class="t_desc">
+        순서는 다음과 같다 <br>
+        1. return 할 answer 배열을 [-1]로, length를 numbers.length 만큼 셋팅합니다.<br>
+        2. stack은 numbers 배열을 순회하면서 인덱스를 누적합니다.<br>
+        3. 처음 forEach 에서는 while문을 통과해서 stack에 0을 push합니다. (예시1번)<br>
+        4. 다음은 stack에 원소가있으니까, stack의 마지막 원소 0 => numbers[0] < numbers[1] 가 성립하기 때문에 while문 안으로 들어갑니다.<br>
+          5. 내부에서 stack.pop을 수행하고, answer의 값을 변경합니다.<br>
+          6. numbers의 index 0에 해당하는 뒷큰수는 현재 numbers[1]인 3이다 라고 하는 의미입니다.<br>
+          7. 이 과정을 반복합니다.<br>
+          <br>
+          총평 : 가장 간단하게 생각할 수 있는 findIndex로 풀면 시간초과에 걸리네요.
+      </p>
+      출처 :
+      <a
+        href="https://school.programmers.co.kr/learn/courses/30/lessons/154539">https://school.programmers.co.kr/learn/courses/30/lessons/154539</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>
