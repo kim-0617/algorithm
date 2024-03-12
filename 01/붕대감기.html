@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[PCCP 기출문제] 1번 / 붕대 감기</title>
+  <link rel="stylesheet" href="asset/css/dracula.css">
+  <link rel="stylesheet" href="asset/css/style.css">
+</head>
+
+<body>
+  <main id="main">
+    <div class="document">
+      <h2 class="t_tit">1 단계 : [PCCP 기출문제] 1번 / 붕대 감기/h2>
+        <p class="t_desc">
+          코딩테스트 연습 > PCCP 기출문제 > [PCCP 기출문제] 1번 / 붕대 감기
+        </p>
+
+        <i>문제 설명</i>
+        <p class="t_desc">어떤 게임에는 <code>붕대 감기</code>라는 기술이 있습니다.</p>
+        <hr>
+
+        <p class="t_desc"><code>붕대 감기</code>는 <code>t</code>초 동안 붕대를 감으면서 1초마다 <code>x</code>만큼의 체력을 회복합니다.
+          <code>t</code>초 연속으로
+          붕대를 감는 데 성공한다면 <code>y</code>만큼의 체력을 추가로 회복합니다. 게임 캐릭터에는 최대 체력이 존재해 현재 체력이 최대 체력보다 커지는 것은 불가능합니다.
+        </p>
+        <hr>
+
+        <p class="t_desc">기술을 쓰는 도중 몬스터에게 공격을 당하면 기술이 취소되고, 공격을 당하는 순간에는 체력을 회복할 수 없습니다. 몬스터에게 공격당해 기술이 취소당하거나 기술이 끝나면
+          그 즉시
+          <code>붕대 감기</code>를 다시 사용하며, 연속 성공 시간이 0으로 초기화됩니다.
+        </p>
+        <hr>
+
+        <p class="t_desc">몬스터의 공격을 받으면 정해진 피해량만큼 현재 체력이 줄어듭니다. 이때, 현재 체력이 0 이하가 되면 캐릭터가 죽으며 더 이상 체력을 회복할 수 없습니다.</p>
+
+        <p class="t_desc">당신은 <code>붕대감기</code> 기술의 정보, 캐릭터가 가진 최대 체력과 몬스터의 공격 패턴이 주어질 때 캐릭터가 끝까지 생존할 수 있는지 궁금합니다.</p>
+
+        <p class="t_desc"><code>붕대 감기</code> 기술의 시전 시간, 1초당 회복량, 추가 회복량을 담은 1차원 정수 배열 <code>bandage</code>와 최대 체력을
+          의미하는 정수
+          <code>health</code>, 몬스터의 공격 시간과 피해량을 담은 2차원 정수 배열 <code>attacks</code>가 매개변수로 주어집니다. 모든 공격이 끝난 직후 남은 체력을
+          return 하도록 solution 함수를 완성해 주세요. <strong>만약 몬스터의 공격을 받고 캐릭터의 체력이 0 이하가 되어 죽는다면 -1을 return 해주세요.</strong>
+        </p>
+        <hr>
+
+        <i>제한사항</i>
+        <ul>
+          <li><code>bandage</code>는 [<code>시전 시간</code>, <code>초당 회복량</code>, <code>추가 회복량</code>] 형태의 길이가 3인 정수
+            배열입니다.
+
+            <ul>
+              <li>1 ≤ <code>시전 시간</code> = <code>t</code> ≤ 50</li>
+              <li>1 ≤ <code>초당 회복량</code> = <code>x</code> ≤ 100</li>
+              <li>1 ≤ <code>추가 회복량</code> = <code>y</code> ≤ 100</li>
+            </ul>
+          </li>
+          <li>1 ≤ <code>health</code> ≤ 1,000</li>
+          <li>1 ≤ <code>attacks</code>의 길이 ≤ 100
+
+            <ul>
+              <li><code>attacks[i]</code>는 [<code>공격 시간</code>, <code>피해량</code>] 형태의 길이가 2인 정수 배열입니다.</li>
+              <li><code>attacks</code>는 <code>공격 시간</code>을 기준으로 오름차순 정렬된 상태입니다.</li>
+              <li><code>attacks</code>의 <code>공격 시간</code>은 모두 다릅니다.</li>
+              <li>1 ≤ <code>공격 시간</code> ≤ 1,000</li>
+              <li>1 ≤ <code>피해량</code> ≤ 100</li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+
+        <i>입출력 예</i>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>bandage</th>
+              <th>health</th>
+              <th>attacks</th>
+              <th>result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ce">[5, 1, 5]</td>
+              <td class="ce">30</td>
+              <td class="ce">[[2, 10], [9, 15], [10, 5], [11, 5]]</td>
+              <td class="ce">5</td>
+            </tr>
+            <tr>
+              <td class="ce">[3, 2, 7]</td>
+              <td class="ce">20</td>
+              <td class="ce">[[1, 15], [5, 16], [8, 6]]</td>
+              <td class="ce">-1</td>
+            </tr>
+            <tr>
+              <td class="ce">[4, 2, 7]</td>
+              <td class="ce">20</td>
+              <td class="ce">[[1, 15], [5, 16], [8, 6]]</td>
+              <td class="ce">-1</td>
+            </tr>
+            <tr>
+              <td class="ce">[1, 1, 1]</td>
+              <td class="ce">5</td>
+              <td class="ce">[[1, 2], [3, 2]]</td>
+              <td class="ce">3</td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+
+        <i>입출력 예 설명</i>
+        <p class="t_desc"><strong>입출력 예 #1</strong></p>
+
+        <p class="t_desc">몬스터의 마지막 공격은 11초에 이루어집니다. 0초부터 11초까지 캐릭터의 상태는 아래 표와 같습니다.</p>
+        <table class="t_table">
+          <thead>
+            <tr>
+              <th>시간</th>
+              <th>현재 체력(변화량)</th>
+              <th>연속 성공</th>
+              <th>공격</th>
+              <th>설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ce">0</td>
+              <td class="ce">30</td>
+              <td class="ce">0</td>
+              <td class="ce">X</td>
+              <td class="ce">초기 상태</td>
+            </tr>
+            <tr>
+              <td class="ce">1</td>
+              <td class="ce">30(+0)</td>
+              <td class="ce">1</td>
+              <td class="ce">X</td>
+              <td class="ce">최대 체력 이상의 체력을 가질 수 없습니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">2</td>
+              <td class="ce">20(-10)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 공격으로 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">3</td>
+              <td class="ce">21(+1)</td>
+              <td class="ce">1</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">4</td>
+              <td class="ce">22(+1)</td>
+              <td class="ce">2</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">5</td>
+              <td class="ce">23(+1)</td>
+              <td class="ce">3</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">6</td>
+              <td class="ce">24(+1)</td>
+              <td class="ce">4</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">7</td>
+              <td class="ce">30(+6)</td>
+              <td class="ce">5 → 0</td>
+              <td class="ce">X</td>
+              <td class="ce">5초 연속 성공해 체력을 5만큼 추가 회복하고 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">8</td>
+              <td class="ce">30(+0)</td>
+              <td class="ce">1</td>
+              <td class="ce">X</td>
+              <td class="ce">최대 체력 이상의 체력을 가질 수 없습니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">9</td>
+              <td class="ce">15(-15)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 공격으로 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">10</td>
+              <td class="ce">10(-5)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 공격으로 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">11</td>
+              <td class="ce">5(-5)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 마지막 공격입니다.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="t_desc">몬스터의 마지막 공격 직후 캐릭터의 체력은 5입니다. 따라서 <code>5</code>을 return 해야 합니다.</p>
+
+        <p class="t_desc"><strong>입출력 예 #2</strong></p>
+
+        <p class="t_desc">몬스터의 마지막 공격은 8초에 이루어집니다. 0초부터 8초까지 캐릭터의 상태는 아래 표와 같습니다.</p>
+        <table class="t_table">
+          <thead>
+            <tr>
+              <th>시간</th>
+              <th>현재 체력(변화량)</th>
+              <th>연속 성공</th>
+              <th>공격</th>
+              <th>설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ce">0</td>
+              <td class="ce">20</td>
+              <td class="ce">0</td>
+              <td class="ce">X</td>
+              <td class="ce">초기 상태</td>
+            </tr>
+            <tr>
+              <td class="ce">1</td>
+              <td class="ce">5(-15)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 공격으로 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">2</td>
+              <td class="ce">7(+2)</td>
+              <td class="ce">1</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">3</td>
+              <td class="ce">9(+2)</td>
+              <td class="ce">2</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">4</td>
+              <td class="ce">18(+9)</td>
+              <td class="ce">3 → 0</td>
+              <td class="ce">X</td>
+              <td class="ce">3초 연속 성공해 체력을 7만큼 추가 회복하고 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">5</td>
+              <td class="ce">2(-16)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 공격으로 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">6</td>
+              <td class="ce">4(+2)</td>
+              <td class="ce">1</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">7</td>
+              <td class="ce">6(+2)</td>
+              <td class="ce">2</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">8</td>
+              <td class="ce">0(-6)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 마지막 공격을 받아 캐릭터의 체력이 0 이하가 됩니다.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="t_desc">몬스터의 공격을 받아 캐릭터의 체력이 0 이하가 됩니다. 따라서 <code>-1</code>을 return 해야 합니다.</p>
+
+        <p class="t_desc"><strong>입출력 예 #3</strong></p>
+
+        <p class="t_desc">몬스터의 마지막 공격은 8초에 이루어집니다. 0초부터 5초까지 캐릭터의 상태는 아래 표와 같습니다.</p>
+        <table class="t_table">
+          <thead>
+            <tr>
+              <th>시간</th>
+              <th>현재 체력(변화량)</th>
+              <th>연속 성공</th>
+              <th>공격</th>
+              <th>설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ce">0</td>
+              <td class="ce">20</td>
+              <td class="ce">0</td>
+              <td class="ce">X</td>
+              <td class="ce">초기 상태</td>
+            </tr>
+            <tr>
+              <td class="ce">1</td>
+              <td class="ce">5(-15)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 공격으로 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">2</td>
+              <td class="ce">7(+2)</td>
+              <td class="ce">1</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">3</td>
+              <td class="ce">9(+2)</td>
+              <td class="ce">2</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">4</td>
+              <td class="ce">11(+2)</td>
+              <td class="ce">3</td>
+              <td class="ce">X</td>
+              <td class="ce"></td>
+            </tr>
+            <tr>
+              <td class="ce">5</td>
+              <td class="ce">-5(-16)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 공격을 받아 캐릭터의 체력이 0 이하가 됩니다.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="t_desc">몬스터의 공격을 받아 캐릭터의 체력이 0 이하가 됩니다. 따라서 <code>-1</code>을 return 해야 합니다.</p>
+
+        <p class="t_desc"><strong>입출력 예 #4</strong></p>
+
+        <p class="t_desc">몬스터의 마지막 공격은 3초에 이루어집니다. 0초부터 3초까지 캐릭터의 상태는 아래 표와 같습니다.</p>
+        <table class="t_table">
+          <thead>
+            <tr>
+              <th>시간</th>
+              <th>현재 체력(변화량)</th>
+              <th>연속 성공</th>
+              <th>공격</th>
+              <th>설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ce">0</td>
+              <td class="ce">5</td>
+              <td class="ce">0</td>
+              <td class="ce">X</td>
+              <td class="ce">초기 상태</td>
+            </tr>
+            <tr>
+              <td class="ce">1</td>
+              <td class="ce">3(-2)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 공격으로 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">2</td>
+              <td class="ce">5(+2)</td>
+              <td class="ce">1 → 0</td>
+              <td class="ce">X</td>
+              <td class="ce">1초 연속 성공해 체력을 1만큼 추가 회복하고 연속 성공이 초기화됩니다.</td>
+            </tr>
+            <tr>
+              <td class="ce">3</td>
+              <td class="ce">3(-2)</td>
+              <td class="ce">0</td>
+              <td class="ce">O</td>
+              <td class="ce">몬스터의 마지막 공격입니다.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="t_desc">몬스터의 마지막 공격 직후 캐릭터의 체력은 3입니다. 따라서 <code>3</code>을 return 해야 합니다.</p>
+        <hr />
+
+        <h3 class="t_tit2">코드</h3>
+        <div class="t_code">
+          <pre><code class="language-js">function solution(bandage, health, attacks) {
+    let hp = health; // 현재 체력
+    let continuity = 0; // 연속 성공 상태
+    const howLongToRecover = bandage[0]; // 시전시간
+    const recoverAmount = bandage[1]; // 초당 회복량
+    const additionalAmount = bandage[2]; // 추가 회복량 (연속회복 성공시)
+    
+    // 1초부터 몬스터의 마지막 공격까지
+    for(let i = 1; i <= attacks.at(-1)[0]; i++) {
+        // 현재 초에 공격이 가해졌는가
+        const isAttackTurn = attacks.find(attack => attack[0] === i);
+        if(isAttackTurn) { // 공격이 가해졌다면 회복불가 및 연속회복 초기화 및 hp 감소
+            const attackAmount = isAttackTurn[1];
+            hp -= attackAmount;
+            continuity = 0;
+            
+            if(hp <= 0) { // 0이하로 체력이 내려갔다면 끝
+                break;
+            }
+        } else { // 공격이 가해지지 않았다면
+            // 회복할 분량이 최대체력을 넘어가지 않는다면 회복분 만큼 회복
+            if(hp + recoverAmount <= health) {
+                hp += recoverAmount;
+            } else { // 회복할 분량이 최대체력을 넘어가면 현재체력을 최대체력으로 설정
+                hp = health;
+            }
+            continuity += 1; // 연속회복 수치 증가
+        }
+        
+        // 연속회복 변수가 시전시간에 도달하면 추가회복량 만큼 체력회복
+        if(continuity >= howLongToRecover) {
+            // 단 health를 넘어가지 않도록 제한
+            if(hp + additionalAmount <= health) {
+                hp += additionalAmount;
+            } else {
+                hp = health;
+            }
+            continuity = 0; // 연속회복 초기화
+        }
+    }
+    
+    return hp > 0 ? hp : -1; // hp가 0이하일 경우 -1 return
+}
+</code></pre>
+        </div>
+
+        <h3 class="t_tit">리뷰</h3>
+        <p class="t_desc">
+          1. 필요한 변수들을 선언해줍니다.<br>
+          2. 1초 ~ 몬스터의 마지막 공격초 까지의 반복문을 돌아줍니다<br>
+          3. 몬스터의 공격이 가해졌다면 hp가 줄어들고, 연속회복을 초기화 시키고, 만약 0이하로 체력이 떨어졌다면 반복문을 중단합니다.<br>
+          4. 몬스터의 공격이 없다면 회복문 만큼 hp를 회복하는데, health를 넘어설 수는 없습니다.<br>
+          5. 이때 연속회복횟수도 늘려줍니다.<br>
+          6. 최종적으로 위의 과정을 수행하고 연속회복횟수를 체크해서 추가적으로 체력을 회복할 지 결정합니다.<br>
+          7. 마지막으로 hp가 0 이하이면 -1, 0을 초과하면 hp를 return 합니다.<br>
+        </p>
+        출처 :
+        <a
+          href="https://school.programmers.co.kr/learn/courses/30/lessons/250137">https://school.programmers.co.kr/learn/courses/30/lessons/250137</a>
+        </p>
+    </div>
+  </main>
+
+  <script src="asset/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+
+</html>
